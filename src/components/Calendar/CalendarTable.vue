@@ -22,11 +22,17 @@ import * as moment from 'moment';
 
 export default {
 	name: 'CalendarTable',
+	props: {
+		date: {
+			type: Object,
+			required: true
+		}
+	},
 	computed: {
 		calendar() {
 			const calendar = [];
-			const startDay = moment().clone().startOf('month').startOf('week');
-			const endDay = moment().clone().endOf('month').endOf('week');
+			const startDay = moment(this.date).clone().startOf('month').startOf('week');
+			const endDay = moment(this.date).clone().endOf('month').endOf('week');
 
 			const date = startDay.clone().subtract(1, 'day');
 

@@ -1,7 +1,7 @@
 <template>
 	<div class="calendar">
-		<calendar-month-selector :date="date" />
-    <calendar-table />
+		<calendar-month-selector :date="date" @on-change="changeDate" />
+    <calendar-table :date="date"/>
 	</div>
 </template>
 
@@ -23,6 +23,11 @@ export default {
 	},
 	created() {
 		this.date = moment();
+	},
+	methods: {
+		changeDate(payload) {
+			this.date = payload;
+		}
 	}
 }
 </script>

@@ -26,11 +26,15 @@ export default {
 		this.month = moment(this.date);
 	},
 	methods: {
+		changeMonth(direction) {
+			this.month = moment(this.month).add(1, 'month');
+			this.$emit('on-change', this.month);
+		},
 		prevMonth() {
-			this.month = moment(this.month).subtract(1, 'month');
+			this.changeMonth(-1);
 		},
 		nextMonth() {
-			this.month = moment(this.month).add(1, 'month');
+			this.changeMonth(1);
 		}
 	}
 }
