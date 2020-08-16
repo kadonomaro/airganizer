@@ -1,6 +1,5 @@
 <template>
 	<div class="calendar">
-		CalendarComponent
 		<table class="calendar__table">
 			<tbody>
 				<tr class="calendar__week" v-for="(week, index) in calendar" :key="index">
@@ -59,7 +58,7 @@ export default {
 						})
 				})
 			}
-			console.log(calendar);
+			// console.log(calendar);
 			return calendar;
 		}
 	}
