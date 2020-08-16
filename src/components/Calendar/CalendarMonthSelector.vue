@@ -11,13 +11,19 @@ import * as moment from 'moment';
 
 export default {
 	name: 'CalendarMonthSelector',
+	props: {
+		date: {
+			type: Object,
+			required: true
+		}
+	},
 	data() {
 		return {
 			month: null
 		}
 	},
 	created() {
-		this.month = moment();
+		this.month = moment(this.date);
 	},
 	methods: {
 		prevMonth() {
