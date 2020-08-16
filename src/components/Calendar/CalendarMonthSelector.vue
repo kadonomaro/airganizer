@@ -1,7 +1,7 @@
 <template>
-	<div class="month-selector">
+	<div class="calendar-selector">
 		<button @click="prevMonth">Prev</button>
-		<span>{{ month | format('MMMM YYYY') }}</span>
+		<span class="calendar-selector__value">{{ month | format('MMMM YYYY') }}</span>
 		<button @click="nextMonth">Next</button>
 	</div>
 </template>
@@ -27,7 +27,7 @@ export default {
 	},
 	methods: {
 		changeMonth(direction) {
-			this.month = moment(this.month).add(1, 'month');
+			this.month = moment(this.month).add(direction, 'month');
 			this.$emit('on-change', this.month);
 		},
 		prevMonth() {
@@ -41,5 +41,13 @@ export default {
 </script>
 
 <style lang="scss">
-
+	.calendar-selector {
+		padding: 10px 0;
+		&__value {
+			display: inline-block;
+			padding: 0 10px;
+			min-width: 120px;
+			text-transform: capitalize;
+		}
+	}
 </style>

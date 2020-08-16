@@ -1,13 +1,15 @@
 <template>
 	<div class="calendar">
-		<calendar-month-selector :date="date" @on-change="changeDate" />
-    <calendar-table :date="date"/>
+		<div class="container">
+			<calendar-month-selector :date="date" @on-change="changeDate" />
+    	<calendar-table :date="date"/>
+		</div>
 	</div>
 </template>
 
 <script>
-import CalendarMonthSelector from '@/components/Calendar/CalendarMonthSelector.vue';
-import CalendarTable from '@/components/Calendar/CalendarTable.vue';
+import CalendarMonthSelector from './CalendarMonthSelector.vue';
+import CalendarTable from './CalendarTable.vue';
 import * as moment from 'moment';
 
 export default {

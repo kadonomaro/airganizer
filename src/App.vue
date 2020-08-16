@@ -14,7 +14,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #303030;
 }
 
 #nav {
@@ -28,5 +28,10 @@
       color: #42b983;
     }
   }
+}
+.container {
+	max-width: 1440px;
+	margin: 0 auto;
+	padding: 0 10px;
 }
 </style>
