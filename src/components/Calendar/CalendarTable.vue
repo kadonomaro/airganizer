@@ -70,6 +70,7 @@ export default {
 
 <style lang="scss">
 	.calendar-table {
+		text-align: center;
 		td, th {
 			padding: 10px 15px;
 		}
