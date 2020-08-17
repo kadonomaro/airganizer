@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import { LocalStorage } from '@/libs/LocalStorage';
 
 export default {
 	name: 'CalendarForm',
@@ -20,19 +19,14 @@ export default {
 	},
 	data() {
 		return {
-			storage: null,
 			form: {
 				title: ''
 			}
 		}
 	},
-	created() {
-		this.storage = new LocalStorage('dates');
-	},
 	methods: {
 		onSubmit() {
-			// this.storage.save(this.form.title);
-			this.storage.save({
+			console.log({
 				title: this.storageKey,
 				data: this.form.title
 			});

@@ -1,17 +1,13 @@
 <template>
 	<div class="calendar-list" v-if="day">
-		<ul>
-			<li v-for="(item, index) in list" :key="index">
-				<span>{{item.data}}</span>
-			</li>
-		</ul>
+		{{ list }}
 		<calendar-form :storageKey="day"/>
 	</div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import CalendarForm from './CalendarForm';
-import { LocalStorage } from '@/libs/LocalStorage';
 
 export default {
 	name: 'CalendarList',
@@ -24,17 +20,12 @@ export default {
 			required: true
 		}
 	},
-	data() {
-		return {
-			storage: null
-		}
-	},
-	created() {
-		this.storage = new LocalStorage('dates')
-	},
 	computed: {
+		...mapGetters([
+			'getDateByDay'
+		]),
 		list() {
-			return this.storage.load().filter(item => item.title === this.day);
+			return this.getDateByDay(this.day)
 		}
 	}
 }
