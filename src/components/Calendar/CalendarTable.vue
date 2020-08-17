@@ -9,9 +9,10 @@
 						:class="{
 							'calendar-table__day--active': day.active,
 							'calendar-table__day--disabled' : day.disabled
-							}"
+						}"
 						v-for="(day, index) in week.days"
 						:key="index"
+						@click="selectDay(day)"
 					>
 						{{ day.value | format('DD') }}
 					</td>
@@ -31,12 +32,16 @@ export default {
 			required: true
 		}
 	},
+	methods: {
+		selectDay(day) {
+			this.$emit('on-select-day', day.value.format('DD-MM-YY'))
+		}
+	},
 	computed: {
 		calendar() {
 			const calendar = [];
 			const startDay = moment(this.date).clone().startOf('month').startOf('week');
 			const endDay = moment(this.date).clone().endOf('month').endOf('week');
-
 			const date = startDay.clone().subtract(1, 'day');
 
 			while (date.isBefore(endDay, 'day')) {
@@ -48,12 +53,12 @@ export default {
 							return {
 								value,
 								active: moment().isSame(value, 'date'),
-								disabled: !moment().isSame(value, 'month')
+								disabled: !moment().isSame(value, 'month'),
+								selected: moment().isSame(value, 'date')
 							}
 						})
 				})
 			}
-			// console.log(calendar);
 			return calendar;
 		},
 		weekHeaders() {

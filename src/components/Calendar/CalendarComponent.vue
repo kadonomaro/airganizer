@@ -1,8 +1,9 @@
 <template>
 	<div class="calendar">
 		<div class="container">
-			<calendar-month-selector :date="date" @on-change="changeDate" />
-    	<calendar-table :date="date"/>
+			<calendar-month-selector :date="date" @on-change-month="changeDate" />
+    	<calendar-table :date="date" @on-select-day="selectDay"/>
+			<calendar-list :day="day"/>
 		</div>
 	</div>
 </template>
@@ -10,17 +11,20 @@
 <script>
 import CalendarMonthSelector from './CalendarMonthSelector.vue';
 import CalendarTable from './CalendarTable.vue';
+import CalendarList from './CalendarList.vue';
 import * as moment from 'moment';
 
 export default {
 	name: 'CalendarComponent',
 	components: {
 		CalendarMonthSelector,
-    CalendarTable
+		CalendarTable,
+		CalendarList
 	},
 	data() {
 		return {
-			date: null
+			date: null,
+			day: ''
 		}
 	},
 	created() {
@@ -29,6 +33,9 @@ export default {
 	methods: {
 		changeDate(payload) {
 			this.date = payload;
+		},
+		selectDay(payload) {
+			this.day = payload;
 		}
 	}
 }

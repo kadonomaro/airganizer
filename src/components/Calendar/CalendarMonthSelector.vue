@@ -28,7 +28,7 @@ export default {
 	methods: {
 		changeMonth(direction) {
 			this.month = moment(this.month).add(direction, 'month');
-			this.$emit('on-change', this.month);
+			this.$emit('on-change-month', this.month);
 		},
 		prevMonth() {
 			this.changeMonth(-1);
