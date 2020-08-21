@@ -26,8 +26,10 @@ export default {
 	},
 	methods: {
 		onSubmit() {
-			this.$store.dispatch('addData', [this.day, this.form.title]);
-			this.form.title = '';
+			if (this.form.title) {
+				this.$store.dispatch('addData', [this.day, this.form.title]);
+				this.form.title = '';
+			}
 		}
 	}
 }

@@ -29,7 +29,7 @@ export default {
 	},
 	methods: {
 		removeItem(title) {
-			console.log(title);
+			this.$store.dispatch('removeItem', [this.day, title]);
 		}
 	},
 	computed: {
