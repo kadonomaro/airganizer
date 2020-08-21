@@ -1,8 +1,11 @@
 <template>
 	<div class="calendar-list" v-if="day">
-		<ul v-if="list">
-			<li v-for="(item, index) in list.data" :key="index">
-				{{ item }}
+		<ul class="calendar-list__list" v-if="list">
+			<li class="calendar-list__item" v-for="(item, index) in list.data" :key="index">
+				<div class="calendar-item">
+					<span class="calendar-item__title">{{ item }}</span>
+					<button class="calendar-item__button" @click="removeItem(item)">X</button>
+				</div>
 			</li>
 		</ul>
 		<calendar-form :day="day"/>
@@ -24,6 +27,11 @@ export default {
 			required: true
 		}
 	},
+	methods: {
+		removeItem(title) {
+			console.log(title);
+		}
+	},
 	computed: {
 		...mapGetters([
 			'getDateByDay'
@@ -35,6 +43,30 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+	.calendar-list {
+		padding: 20px 0;
+		&__list {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		&__item {
+			margin-bottom: 5px;
+		}
+	}
 
+	.calendar-item {
+		display: flex;
+		align-items: center;
+		padding: 5px 10px;
+		background-color: #3baeda;
+		&__title {
+			display: block;
+			margin-right: auto;
+		}
+		&__button {
+			margin-left: 5px;
+		}
+	}
 </style>
