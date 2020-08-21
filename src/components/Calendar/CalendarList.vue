@@ -37,7 +37,7 @@ export default {
 			'getDateByDay'
 		]),
 		list() {
-			return this.getDateByDay(this.day)
+			return this.getDateByDay(this.day);
 		}
 	}
 }

@@ -14,7 +14,8 @@
 						:key="index"
 						@click="selectDay(day)"
 					>
-						{{ day.value | format('DD') }}
+						<calendar-day-marker :day="day.value"/>
+						<span>{{ day.value | format('DD') }}</span>
 					</td>
 				</tr>
 			</tbody>
@@ -23,9 +24,13 @@
 
 <script>
 import * as moment from 'moment';
+import CalendarDayMarker from './CalendarDayMarker';
 
 export default {
 	name: 'CalendarTable',
+	components: {
+		CalendarDayMarker
+	},
 	props: {
 		date: {
 			type: Object,
@@ -88,6 +93,7 @@ export default {
 			}
 		}
 		&__day {
+			position: relative;
 			&:hover {
 				background-color: rgba($color: #e7e7e7, $alpha: 0.7);
 				cursor: pointer;
