@@ -19,7 +19,9 @@ export default new Vuex.Store({
   },
   mutations: {
 		UPDATE_DATA(state, [key, value]) {
-			state.days[key] = { data: [value] };
+			state.days[key]
+				? state.days[key].data.push(value)
+				: state.days[key] = { data: [value] };
 		}
   },
   actions: {
@@ -30,7 +32,6 @@ export default new Vuex.Store({
 	getters: {
 		getDateByDay(state) {
 			return (day) => {
-				// return state.dates.find(date => date.day === day);
 				return state.days[day];
 			};
 		}
