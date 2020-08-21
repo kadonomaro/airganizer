@@ -12,7 +12,7 @@
 export default {
 	name: 'CalendarForm',
 	props: {
-		storageKey: {
+		day: {
 			type: String,
 			required: true
 		}
@@ -26,10 +26,7 @@ export default {
 	},
 	methods: {
 		onSubmit() {
-			console.log({
-				title: this.storageKey,
-				data: this.form.title
-			});
+			this.$store.dispatch('addData', [this.day, this.form.title]);
 			this.form.title = '';
 		}
 	}

@@ -1,7 +1,11 @@
 <template>
 	<div class="calendar-list" v-if="day">
-		{{ list }}
-		<calendar-form :storageKey="day"/>
+		<ul v-if="list">
+			<li v-for="(item, index) in list.data" :key="index">
+				{{ item }}
+			</li>
+		</ul>
+		<calendar-form :day="day"/>
 	</div>
 </template>
 
