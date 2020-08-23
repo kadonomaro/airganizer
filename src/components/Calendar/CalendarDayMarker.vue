@@ -27,21 +27,13 @@ export default {
 			required: true
 		}
 	},
-	data() {
-		return {
-			formattedDay: null
-		}
-	},
-	created() {
-		this.formattedDay = this.day.format('DD-MM-YY');
-	},
 	computed: {
 		...mapGetters([
 			'getDayTasksPriority'
 		]),
 
 		priority() {
-			return this.getDayTasksPriority(this.formattedDay);
+			return this.getDayTasksPriority(this.day.format('DD-MM-YY'));
 		}
 	}
 }
