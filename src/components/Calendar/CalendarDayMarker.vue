@@ -1,6 +1,10 @@
 <template>
-	<div class="calendar-markers" v-if="marker">
-		{{ marker }}
+	<div class="calendar-markers" v-if="markers">
+		<ul class="calendar-markers__list">
+			<li class="calendar-markers__item">
+				{{ markers }}
+			</li>
+		</ul>
 	</div>
 </template>
 
@@ -27,7 +31,7 @@ export default {
 		...mapGetters([
 			'getDateByDay'
 		]),
-		marker() {
+		markers() {
 			return this.getDateByDay(this.computedDay)?.data.length
 		}
 	}
@@ -37,12 +41,25 @@ export default {
 <style lang="scss">
 	.calendar-markers {
 		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		display: flex;
+		top: 3px;
+		left: 3px;
+		right: 3px;
+		color: #ffffff;
+		font-size: 14px;
 		&__list {
-
+			display: flex;
+			justify-content: space-between;
+			width: 100%;
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		&__item {
+			width: 15px;
+			height: 15px;
+			padding: 2px;
+			background-color: #00aa1c;
+			border-radius: 50%;
 		}
 	}
 </style>
