@@ -1,8 +1,16 @@
 <template>
 	<div class="calendar-markers" v-if="markers">
 		<ul class="calendar-markers__list">
-			<li class="calendar-markers__item" v-for="i in priority" :key="i">
-				{{ i }}
+			<li
+				class="calendar-markers__item"
+				v-for="i in priority"
+				:key="i.type"
+			>
+				<span
+					class="calendar-markers__marker"
+					:class="{'calendar-markers__marker--high': i.type === 'high'}"
+					v-if="i.count"
+				>{{ i.count }}</span>
 			</li>
 		</ul>
 	</div>
@@ -60,12 +68,16 @@ export default {
 			padding: 0;
 			list-style: none;
 		}
-		&__item {
+		&__marker {
+			display: block;
 			width: 15px;
 			height: 15px;
 			padding: 2px;
 			background-color: #00aa1c;
 			border-radius: 50%;
+		}
+		&__marker--high {
+			background-color: #c50000;
 		}
 	}
 </style>

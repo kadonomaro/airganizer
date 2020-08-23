@@ -55,10 +55,10 @@ export default new Vuex.Store({
 
 		getDayTasksPriority(state) {
 			return (day) => {
-				return {
-					low: state.days[day]?.data.filter(item => item.priority === 'low').length,
-					high: state.days[day]?.data.filter(item => item.priority === 'high').length
-				}
+				return [
+					{ type: 'low', count: state.days[day]?.data.filter(item => item.priority === 'low').length },
+					{ type: 'high', count: state.days[day]?.data.filter(item => item.priority === 'high').length }
+				]
 			}
 		}
 	}
