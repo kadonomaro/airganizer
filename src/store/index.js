@@ -21,7 +21,7 @@ export default new Vuex.Store({
 		UPDATE_DATA(state, [key, value]) {
 			state.days[key]
 				? state.days[key].data.push(value)
-				: state.days[key] = { data: [value] };
+				: state.days = { ...state.days, [key]: { data: [value] } };
 		},
 
 		REMOVE_ITEM(state, [key, title]) {
