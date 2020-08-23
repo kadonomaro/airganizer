@@ -1,8 +1,8 @@
 <template>
 	<div class="calendar-markers" v-if="markers">
 		<ul class="calendar-markers__list">
-			<li class="calendar-markers__item">
-				{{ markers }}
+			<li class="calendar-markers__item" v-for="i in priority" :key="i">
+				{{ i }}
 			</li>
 		</ul>
 	</div>
@@ -29,10 +29,16 @@ export default {
 	},
 	computed: {
 		...mapGetters([
-			'getDateByDay'
+			'getDateByDay',
+			'getDayTasksPriority'
 		]),
+
 		markers() {
-			return this.getDateByDay(this.computedDay)?.data.length
+			return this.getDateByDay(this.computedDay)?.data.length;
+		},
+
+		priority() {
+			return this.getDayTasksPriority(this.computedDay);
 		}
 	}
 }
