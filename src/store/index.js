@@ -8,51 +8,32 @@ const storage = new LocalStorage('days');
 
 export default new Vuex.Store({
   state: {
-		days: {
-			'08-08-20': {
-				data: [
-					{ id: 111, title: 'Позвонить Евгению', priority: 'low' },
-					{ id: 222, title: 'Написать Алексею', priority: 'low' }
-				]
-			},
-			'12-08-20': {
-				data: [
-					{ id: 333, title: 'Позвонить Артему', priority: 'low' },
-					{ id: 444, title: 'Сходить к Олегу', priority: 'low'},
-				]
-			},
-			'13-08-20': {
-				data: [
-					{ id: 555, title: 'Сходить в магазин', priority: 'high' },
-					{ id: 666, title: 'Поиграть с сыном', priority: 'high'}
-				]
-			},
-		}
+		days: {}
   },
 	mutations: {
 		INIT_DATA(state, data) {
 			state.days = data;
 		},
 
-		UPDATE_DATA(state, [key, value]) {
-			state.days[key]
-				? state.days[key].data.push(value)
-				: state.days = { ...state.days, [key]: { data: [value] } };
+		UPDATE_DATA(state, [day, value]) {
+			state.days[day]
+				? state.days[day].data.push(value)
+				: state.days = { ...state.days, [day]: { data: [value] } };
 			storage.save(state.days);
 		},
 
-		REMOVE_ITEM(state, [key, task]) {
-			state.days[key].data = state.days[key].data.filter(item => item.id !== task.id);
+		REMOVE_ITEM(state, [day, task]) {
+			state.days[day].data = state.days[day].data.filter(item => item.id !== task.id);
 			storage.save(state.days);
 		},
 
-		CHANGE_PRIORITY(state, [day, task]) {
+		CHANGE_TASK_PRIORITY(state, [day, task]) {
 			const current = state.days[day].data.find(item => item.id === task.id);
 			current.priority === 'high' ? current.priority = 'low' : current.priority = 'high';
 		}
   },
 	actions: {
-		initData({ commit }) {
+		fetchData({ commit }) {
 			const data = storage.load();
 			commit('INIT_DATA', data);
 		},
@@ -66,7 +47,7 @@ export default new Vuex.Store({
 		},
 
 		changePriority({ commit }, data) {
-			commit('CHANGE_PRIORITY', data);
+			commit('CHANGE_TASK_PRIORITY', data);
 		}
 	},
 	getters: {

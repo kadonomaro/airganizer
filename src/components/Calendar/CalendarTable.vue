@@ -38,7 +38,7 @@ export default {
 		}
 	},
 	created() {
-		this.$store.dispatch('initData');
+		this.$store.dispatch('fetchData');
 	},
 	methods: {
 		selectDay(day) {
