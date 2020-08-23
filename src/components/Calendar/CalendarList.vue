@@ -1,10 +1,10 @@
 <template>
 	<div class="calendar-list" v-if="day">
-		<ul class="calendar-list__list" v-if="list">
-			<li class="calendar-list__item" v-for="(item, index) in list.data" :key="index">
+		<ul class="calendar-list__list" v-if="tasks">
+			<li class="calendar-list__item" v-for="task in tasks.data" :key="task.id">
 				<div class="calendar-item">
-					<span class="calendar-item__title">{{ item }}</span>
-					<button class="calendar-item__button" @click="removeItem(item)">X</button>
+					<span class="calendar-item__title">{{ task.title }}</span>
+					<button class="calendar-item__button" @click="removeItem(task)">X</button>
 				</div>
 			</li>
 		</ul>
@@ -36,7 +36,7 @@ export default {
 		...mapGetters([
 			'getDateByDay'
 		]),
-		list() {
+		tasks() {
 			return this.getDateByDay(this.day);
 		}
 	}

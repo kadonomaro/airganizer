@@ -7,13 +7,22 @@ export default new Vuex.Store({
   state: {
 		days: {
 			'08-08-20': {
-				data: ['Позвонить Евгению', 'Написать Алексею']
+				data: [
+					{ id: 111, title: 'Позвонить Евгению', priority: 'low' },
+					{ id: 222, title: 'Написать Алексею', priority: 'low' }
+				]
 			},
 			'12-08-20': {
-				data: ['Позвонить Артему', 'Сходить к Олегу']
+				data: [
+					{ id: 333, title: 'Позвонить Артему', priority: 'low' },
+					{ id: 444, title: 'Сходить к Олегу', priority: 'low'},
+				]
 			},
 			'13-08-20': {
-				data: ['Сходить в магазин', 'Поиграть с сыном']
+				data: [
+					{ id: 555, title: 'Сходить в магазин', priority: 'low' },
+					{ id: 666, title: 'Поиграть с сыном', priority: 'high'}
+				]
 			},
 		}
   },

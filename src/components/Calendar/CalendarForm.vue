@@ -27,7 +27,12 @@ export default {
 	methods: {
 		onSubmit() {
 			if (this.form.title) {
-				this.$store.dispatch('addData', [this.day, this.form.title]);
+				const data = {
+					id: Date.now().toString(),
+					title: this.form.title,
+					priority: 'low'
+				}
+				this.$store.dispatch('addData', [this.day, data]);
 				this.form.title = '';
 			}
 		}
