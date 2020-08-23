@@ -29,8 +29,8 @@ export default {
 		}
 	},
 	methods: {
-		removeItem(title) {
-			this.$store.dispatch('removeItem', [this.day, title]);
+		removeItem(task) {
+			this.$store.dispatch('removeItem', [this.day, task]);
 		},
 
 		changePriority(task) {

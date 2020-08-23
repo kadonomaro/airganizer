@@ -41,13 +41,14 @@ export default new Vuex.Store({
 			storage.save(state.days);
 		},
 
-		REMOVE_ITEM(state, [key, title]) {
-			state.days[key].data = state.days[key].data.filter(d => d !== title);
+		REMOVE_ITEM(state, [key, task]) {
+			state.days[key].data = state.days[key].data.filter(item => item.id !== task.id);
 			storage.save(state.days);
 		},
 
 		CHANGE_PRIORITY(state, [day, task]) {
-			state.days[day].data.find(d => d.id === task.id).priority = 'high';
+			const current = state.days[day].data.find(item => item.id === task.id);
+			current.priority === 'high' ? current.priority = 'low' : current.priority = 'high';
 		}
   },
 	actions: {
