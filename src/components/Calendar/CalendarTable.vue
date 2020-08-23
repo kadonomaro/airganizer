@@ -37,6 +37,9 @@ export default {
 			required: true
 		}
 	},
+	created() {
+		this.$store.dispatch('initData');
+	},
 	methods: {
 		selectDay(day) {
 			this.$emit('on-select-day', day.value.format('DD-MM-YY'))

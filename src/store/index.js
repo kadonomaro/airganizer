@@ -1,7 +1,10 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import { LocalStorage } from '../libs/LocalStorage'
 
 Vue.use(Vuex)
+
+const storage = new LocalStorage('days');
 
 export default new Vuex.Store({
   state: {
@@ -26,18 +29,29 @@ export default new Vuex.Store({
 			},
 		}
   },
-  mutations: {
+	mutations: {
+		INIT_DATA(state, data) {
+			state.days = data;
+		},
+
 		UPDATE_DATA(state, [key, value]) {
 			state.days[key]
 				? state.days[key].data.push(value)
 				: state.days = { ...state.days, [key]: { data: [value] } };
+			storage.save(state.days);
 		},
 
 		REMOVE_ITEM(state, [key, title]) {
 			state.days[key].data = state.days[key].data.filter(d => d !== title);
+			storage.save(state.days);
 		}
   },
-  actions: {
+	actions: {
+		initData({ commit }) {
+			const data = storage.load();
+			commit('INIT_DATA', data);
+		},
+
 		addData({ commit }, data) {
 			commit('UPDATE_DATA', data);
 		},

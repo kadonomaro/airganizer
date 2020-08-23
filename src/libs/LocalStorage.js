@@ -11,9 +11,7 @@ export class LocalStorage {
 	}
 
 	save(data) {
-		const dataArr = this.load() || [];
-		dataArr.push(data);
-		localStorage.setItem(this.name, JSON.stringify(dataArr));
+		localStorage.setItem(this.name, JSON.stringify(data));
 	}
 
 	clear() {
