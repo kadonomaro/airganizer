@@ -4,6 +4,7 @@
 			<li class="calendar-list__item" v-for="task in tasks.data" :key="task.id">
 				<div class="calendar-item">
 					<span class="calendar-item__title">{{ task.title }}</span>
+					<button class="calendar-item__button" @click="changePriority(task)">V</button>
 					<button class="calendar-item__button" @click="removeItem(task)">X</button>
 				</div>
 			</li>
@@ -30,6 +31,10 @@ export default {
 	methods: {
 		removeItem(title) {
 			this.$store.dispatch('removeItem', [this.day, title]);
+		},
+
+		changePriority(task) {
+			this.$store.dispatch('changePriority', [this.day, task]);
 		}
 	},
 	computed: {

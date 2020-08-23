@@ -44,6 +44,10 @@ export default new Vuex.Store({
 		REMOVE_ITEM(state, [key, title]) {
 			state.days[key].data = state.days[key].data.filter(d => d !== title);
 			storage.save(state.days);
+		},
+
+		CHANGE_PRIORITY(state, [day, task]) {
+			state.days[day].data.find(d => d.id === task.id).priority = 'high';
 		}
   },
 	actions: {
@@ -58,6 +62,10 @@ export default new Vuex.Store({
 
 		removeItem({ commit }, item) {
 			commit('REMOVE_ITEM', item)
+		},
+
+		changePriority({ commit }, data) {
+			commit('CHANGE_PRIORITY', data);
 		}
 	},
 	getters: {
