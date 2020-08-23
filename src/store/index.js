@@ -20,7 +20,7 @@ export default new Vuex.Store({
 			},
 			'13-08-20': {
 				data: [
-					{ id: 555, title: 'Сходить в магазин', priority: 'low' },
+					{ id: 555, title: 'Сходить в магазин', priority: 'high' },
 					{ id: 666, title: 'Поиграть с сыном', priority: 'high'}
 				]
 			},

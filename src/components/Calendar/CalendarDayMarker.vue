@@ -1,16 +1,16 @@
 <template>
-	<div class="calendar-markers" v-if="markers">
+	<div class="calendar-markers">
 		<ul class="calendar-markers__list">
 			<li
 				class="calendar-markers__item"
-				v-for="i in priority"
-				:key="i.type"
+				v-for="item in priority"
+				:key="item.type"
 			>
 				<span
 					class="calendar-markers__marker"
-					:class="{'calendar-markers__marker--high': i.type === 'high'}"
-					v-if="i.count"
-				>{{ i.count }}</span>
+					:class="{'calendar-markers__marker--high': item.type === 'high'}"
+					v-if="item.count"
+				>{{ item.count }}</span>
 			</li>
 		</ul>
 	</div>
@@ -29,24 +29,19 @@ export default {
 	},
 	data() {
 		return {
-			computedDay: null
+			formattedDay: null
 		}
 	},
 	created() {
-		this.computedDay = this.day.format('DD-MM-YY');
+		this.formattedDay = this.day.format('DD-MM-YY');
 	},
 	computed: {
 		...mapGetters([
-			'getDateByDay',
 			'getDayTasksPriority'
 		]),
 
-		markers() {
-			return this.getDateByDay(this.computedDay)?.data.length;
-		},
-
 		priority() {
-			return this.getDayTasksPriority(this.computedDay);
+			return this.getDayTasksPriority(this.formattedDay);
 		}
 	}
 }
@@ -56,8 +51,8 @@ export default {
 	.calendar-markers {
 		position: absolute;
 		top: 3px;
-		left: 3px;
-		right: 3px;
+		left: 5px;
+		right: 5px;
 		color: #ffffff;
 		font-size: 14px;
 		&__list {
@@ -70,14 +65,16 @@ export default {
 		}
 		&__marker {
 			display: block;
-			width: 15px;
-			height: 15px;
+			width: 20px;
+			height: 20px;
 			padding: 2px;
+			line-height: 20px;
 			background-color: #00aa1c;
 			border-radius: 50%;
 		}
 		&__marker--high {
-			background-color: #c50000;
+			background-color: transparent;
+			background-image: url('~@/assets/icons/hot.svg');
 		}
 	}
 </style>
