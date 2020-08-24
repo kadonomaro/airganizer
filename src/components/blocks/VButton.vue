@@ -1,5 +1,7 @@
 <template>
-	<button class="app-button" :class="style" @click.prevent="clickHandler">{{text}}</button>
+	<button class="app-button" :class="style" @click="clickHandler">
+		<slot></slot>
+	</button>
 </template>
 
 <script>
@@ -7,10 +9,6 @@ export default {
 	name: 'AppButton',
 	props: {
 		icon: {
-			type: String,
-			required: false
-		},
-		text: {
 			type: String,
 			required: false
 		}
@@ -23,7 +21,8 @@ export default {
 	computed: {
 		style() {
 			return [
-				'app-button--' + this.icon
+				this.icon ? 'app-button--' + this.icon : '',
+				this.$slots.default ? 'app-button--text' : ''
 			]
 		}
 	}
@@ -35,18 +34,24 @@ export default {
 		width: 30px;
 		height: 30px;
 		padding: 10px;
-		background-color: #202020;
+		color: #303030;
+		background-color: #fdfdfd;
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: 65%;
-		border: 1px solid #4c4c4c;
-		border-radius: 8px;
+		border: 1px solid #ebebeb;
 		border-radius: 50%;
 		cursor: pointer;
 		transition: background-color 0.1s ease-in;
 		&:hover {
-			background-color: lighten($color: #202020, $amount: 10%);
+			background-color: darken($color: #fdfdfd, $amount: 5%);
 		}
+	}
+	.app-button--text {
+		width: auto;
+		height: auto;
+		padding: 8px 16px;
+		border-radius: 8px;
 	}
 	.app-button--close {
 		background-image: url('~@/assets/icons/close.svg');

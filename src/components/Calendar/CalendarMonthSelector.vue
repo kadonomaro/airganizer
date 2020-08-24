@@ -46,7 +46,16 @@ export default {
 
 <style lang="scss">
 	.calendar-selector {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		max-width: 240px;
+		margin: 0 auto;
 		padding: 10px 0;
+		color: #4f4f4f;
+		background-color: #fdfdfd;
+		border: 1px solid #ebebeb;
+		border-radius: 12px;
 		&__value {
 			display: inline-block;
 			padding: 0 10px;

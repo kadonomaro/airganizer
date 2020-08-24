@@ -59,17 +59,18 @@ export default {
 			list-style: none;
 		}
 		&__item {
-			margin-bottom: 15px;
+			margin-bottom: 5px;
 		}
 	}
 
 	.calendar-item {
 		display: flex;
 		align-items: center;
-		padding: 15px 20px;
-		background-color: #ffffff;
-		border-radius: 10px;
-		box-shadow: 0 10px 20px rgba($color: #d53636, $alpha: 0.15);
+		padding: 10px 15px;
+		color: #4f4f4f;
+		background-color: #fdfdfd;
+		border: 1px solid #ebebeb;
+		border-radius: 12px;
 		&__title {
 			display: block;
 			margin-right: auto;
