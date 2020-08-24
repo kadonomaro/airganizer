@@ -46,6 +46,9 @@ export default {
 
 <style lang="scss">
 	.calendar-form {
+		&__field {
+			min-width: 240px;
+		}
 		&__button {
 			margin-left: 5px;
 		}
