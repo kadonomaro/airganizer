@@ -22,7 +22,7 @@ export default new Vuex.Store({
 			storage.save(state.days);
 		},
 
-		REMOVE_ITEM(state, [day, task]) {
+		REMOVE_TASK(state, [day, task]) {
 			state.days[day].data = state.days[day].data.filter(item => item.id !== task.id);
 			storage.save(state.days);
 		},
@@ -43,8 +43,8 @@ export default new Vuex.Store({
 			commit('UPDATE_DATA', data);
 		},
 
-		removeItem({ commit }, item) {
-			commit('REMOVE_ITEM', item)
+		removeTask({ commit }, data) {
+			commit('REMOVE_TASK', data)
 		},
 
 		changePriority({ commit }, data) {

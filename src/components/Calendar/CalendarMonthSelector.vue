@@ -55,11 +55,11 @@ export default {
 		color: $color-text;
 		background-color: $color-background;
 		border: 1px solid $color-border;
-		border-radius: $border-radius;
+		border-radius: $border-large-radius;
 		&__value {
 			display: inline-block;
 			padding: 0 10px;
-			min-width: 120px;
+			min-width: 130px;
 			font-size: 18px;
 			font-weight: bold;
 			text-align: center;

@@ -53,7 +53,7 @@ export default {
 		width: auto;
 		height: auto;
 		padding: 8px 16px;
-		border-radius: 8px;
+		border-radius: $border-small-radius;
 	}
 	.app-button--close {
 		background-image: url('~@/assets/icons/close.svg');

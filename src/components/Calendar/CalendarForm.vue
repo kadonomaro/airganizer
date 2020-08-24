@@ -1,7 +1,7 @@
 <template>
 	<div class="calendar-form">
 		<form action="" class="calendar-form__form" @submit.prevent="onSubmit">
-			<input type="text" class="calendar-form__field input" v-model="form.title">
+			<input type="text" class="calendar-form__field input" v-model="form.title" placeholder="Введите название">
 			<v-button class="calendar-form__button">Добавить</v-button>
 		</form>
 	</div>

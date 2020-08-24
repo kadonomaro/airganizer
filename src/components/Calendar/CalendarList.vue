@@ -5,7 +5,7 @@
 				<div class="calendar-item">
 					<span class="calendar-item__title">{{ task.title }}</span>
 					<v-button class="calendar-item__button" :icon="'switch'" @on-click="changePriority(task)" />
-					<v-button class="calendar-item__button" :icon="'close'" @on-click="removeItem(task)" />
+					<v-button class="calendar-item__button" :icon="'close'" @on-click="removeTask(task)" />
 				</div>
 			</li>
 		</ul>
@@ -31,8 +31,8 @@ export default {
 		}
 	},
 	methods: {
-		removeItem(task) {
-			this.$store.dispatch('removeItem', [this.day, task]);
+		removeTask(task) {
+			this.$store.dispatch('removeTask', [this.day, task]);
 		},
 
 		changePriority(task) {
@@ -52,7 +52,7 @@ export default {
 
 <style lang="scss">
 	.calendar-list {
-		padding: 20px 0;
+		padding: 10px 0;
 		&__list {
 			margin: 0;
 			padding: 0;
@@ -70,7 +70,7 @@ export default {
 		color: $color-text;
 		background-color: $color-background;
 		border: 1px solid $color-border;
-		border-radius: $border-radius;
+		border-radius: $border-large-radius;
 		&__title {
 			display: block;
 			margin-right: auto;
