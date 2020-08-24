@@ -1,16 +1,20 @@
 <template>
 	<div class="calendar-selector">
-		<button @click="prevMonth">Prev</button>
+		<v-button :icon="'arrow-left'" @on-click="prevMonth" />
 		<span class="calendar-selector__value">{{ month | format('MMMM YYYY') }}</span>
-		<button @click="nextMonth">Next</button>
+		<v-button :icon="'arrow-right'" @on-click="nextMonth" />
 	</div>
 </template>
 
 <script>
 import * as moment from 'moment';
+import VButton from '../blocks/VButton';
 
 export default {
 	name: 'CalendarMonthSelector',
+	components: {
+		VButton
+	},
 	props: {
 		date: {
 			type: Object,
@@ -47,6 +51,7 @@ export default {
 			display: inline-block;
 			padding: 0 10px;
 			min-width: 120px;
+			text-align: center;
 			text-transform: capitalize;
 		}
 	}

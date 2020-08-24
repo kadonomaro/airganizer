@@ -38,17 +38,24 @@ export default {
 		background-color: #202020;
 		background-repeat: no-repeat;
 		background-position: center;
-		background-size: 20px;
-		border: 1px solid #4C4C4C;
+		background-size: 65%;
+		border: 1px solid #4c4c4c;
 		border-radius: 8px;
 		border-radius: 50%;
 		cursor: pointer;
+		transition: background-color 0.1s ease-in;
+		&:hover {
+			background-color: lighten($color: #202020, $amount: 10%);
+		}
 	}
 	.app-button--close {
 		background-image: url('~@/assets/icons/close.svg');
 	}
 	.app-button--add {
 		background-image: url('~@/assets/icons/add.svg');
+	}
+	.app-button--switch {
+		background-image: url('~@/assets/icons/switch.svg');
 	}
 	.app-button--arrow-left {
 		background-image: url('~@/assets/icons/arrow-left.svg');
