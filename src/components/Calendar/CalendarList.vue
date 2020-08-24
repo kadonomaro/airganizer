@@ -5,7 +5,7 @@
 				<div class="calendar-item">
 					<span class="calendar-item__title">{{ task.title }}</span>
 					<button class="calendar-item__button calendar-item__button--switch" @click="changePriority(task)"></button>
-					<button class="calendar-item__button" @click="removeItem(task)"></button>
+					<app-button :icon="'close'" @on-click="removeItem(task)" />
 				</div>
 			</li>
 		</ul>
@@ -16,11 +16,13 @@
 <script>
 import { mapGetters } from 'vuex';
 import CalendarForm from './CalendarForm';
+import AppButton from '../blocks/AppButton';
 
 export default {
 	name: 'CalendarList',
 	components: {
-		CalendarForm
+		CalendarForm,
+		AppButton
 	},
 	props: {
 		day: {
