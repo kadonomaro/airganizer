@@ -28,7 +28,7 @@ export default {
 		onSubmit() {
 			if (this.form.title) {
 				const data = {
-					id: Date.now().toString(),
+					id: (+new Date).toString(36),
 					title: this.form.title,
 					priority: 'low'
 				}

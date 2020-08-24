@@ -8,7 +8,8 @@
 					<td class="calendar-table__day"
 						:class="{
 							'calendar-table__day--active': day.active,
-							'calendar-table__day--disabled' : day.disabled
+							'calendar-table__day--disabled': day.disabled,
+							'calendar-table__day--selected': selectedDay.value === day.value
 						}"
 						v-for="(day, index) in week.days"
 						:key="index"
@@ -37,12 +38,20 @@ export default {
 			required: true
 		}
 	},
+	data() {
+		return {
+			selectedDay: {
+				value: null
+			}
+		}
+	},
 	created() {
 		this.$store.dispatch('fetchData');
 	},
 	methods: {
 		selectDay(day) {
-			this.$emit('on-select-day', day.value.format('DD-MM-YY'))
+			this.selectedDay = day;
+			this.$emit('on-select-day', day.value.format('DD-MM-YY'));
 		}
 	},
 	computed: {
@@ -61,11 +70,10 @@ export default {
 							return {
 								value,
 								active: moment().isSame(value, 'date'),
-								disabled: !moment().isSame(value, 'month'),
-								selected: moment().isSame(value, 'date')
+								disabled: !moment().isSame(value, 'month')
 							}
 						})
-				})
+				});
 			}
 			return calendar;
 		},
@@ -103,6 +111,10 @@ export default {
 		&__day--active {
 			font-weight: bold;
 			background-color: rgba($color: #f90, $alpha: 0.5);
+		}
+		&__day--selected {
+			background-color: rgba($color: #3baeda, $alpha: 0.2);
+			box-shadow: 0 0 0 2px #3baeda inset;
 		}
 		&__day--disabled {
 			color: #b1b1b1;
