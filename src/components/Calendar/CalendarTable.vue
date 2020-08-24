@@ -1,9 +1,12 @@
 <template>
+	<div class="calendar-table-wrapper">
 		<table class="calendar-table">
-			<tbody>
+			<thead>
 				<tr class="calendar-table__week calendar-table__week--head">
 					<th v-for="header in weekHeaders" :key="header">{{ header }}</th>
 				</tr>
+			</thead>
+			<tbody>
 				<tr class="calendar-table__week" v-for="(week, index) in calendar" :key="index">
 					<td class="calendar-table__day"
 						:class="{
@@ -21,6 +24,7 @@
 				</tr>
 			</tbody>
 		</table>
+	</div>
 </template>
 
 <script>
@@ -85,14 +89,20 @@ export default {
 </script>
 
 <style lang="scss">
+	.calendar-table-wrapper {
+		padding: 10px 0;
+		overflow-x: auto;
+	}
 	.calendar-table {
+		max-width: 100%;
+		width: 100%;
 		text-align: center;
+		background-color: $color-background;
+		border-collapse: collapse;
 		td, th {
 			border: 1px solid #e7e7e7;
 			padding: 10px 15px;
 		}
-		width: 100%;
-		border-collapse: collapse;
 		&__week--head {
 			color: #ffffff;
 			background-color: #3baeda;

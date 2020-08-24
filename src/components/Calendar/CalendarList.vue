@@ -67,10 +67,10 @@ export default {
 		display: flex;
 		align-items: center;
 		padding: 10px 15px;
-		color: #4f4f4f;
-		background-color: #fdfdfd;
-		border: 1px solid #ebebeb;
-		border-radius: 12px;
+		color: $color-text;
+		background-color: $color-background;
+		border: 1px solid $color-border;
+		border-radius: $border-radius;
 		&__title {
 			display: block;
 			margin-right: auto;

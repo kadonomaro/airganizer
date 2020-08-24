@@ -34,17 +34,17 @@ export default {
 		width: 30px;
 		height: 30px;
 		padding: 10px;
-		color: #303030;
-		background-color: #fdfdfd;
+		color: $color-text-dark;
+		background-color: $color-background;
 		background-repeat: no-repeat;
 		background-position: center;
 		background-size: 65%;
-		border: 1px solid #ebebeb;
+		border: 1px solid $color-border;
 		border-radius: 50%;
 		cursor: pointer;
 		transition: background-color 0.1s ease-in;
 		&:hover {
-			background-color: darken($color: #fdfdfd, $amount: 5%);
+			background-color: darken($color: $color-background, $amount: 5%);
 		}
 	}
 	.app-button--text {

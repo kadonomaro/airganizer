@@ -60,6 +60,8 @@ export default {
 			display: inline-block;
 			padding: 0 10px;
 			min-width: 120px;
+			font-size: 18px;
+			font-weight: bold;
 			text-align: center;
 			text-transform: capitalize;
 		}
