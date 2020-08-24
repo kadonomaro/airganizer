@@ -35,6 +35,8 @@ export default {
 		height: 30px;
 		padding: 10px;
 		color: $color-text-dark;
+		font-family: inherit;
+		font-size: 14px;
 		background-color: $color-background;
 		background-repeat: no-repeat;
 		background-position: center;
@@ -44,7 +46,7 @@ export default {
 		cursor: pointer;
 		transition: background-color 0.1s ease-in;
 		&:hover {
-			background-color: darken($color: $color-background, $amount: 5%);
+			background-color: $color-hover;
 		}
 	}
 	.app-button--text {

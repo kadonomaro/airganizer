@@ -91,7 +91,7 @@ export default {
 <style lang="scss">
 	.calendar-table-wrapper {
 		padding: 10px 0;
-		overflow-x: auto;
+		// overflow-x: auto;
 	}
 	.calendar-table {
 		max-width: 100%;
@@ -100,12 +100,12 @@ export default {
 		background-color: $color-background;
 		border-collapse: collapse;
 		td, th {
-			border: 1px solid #e7e7e7;
+			border: 1px solid #eff3f9;
 			padding: 10px 15px;
 		}
 		&__week--head {
 			color: #ffffff;
-			background-color: #3baeda;
+			background-color: #282C31;
 			th {
 				padding: 10px 15px;
 				border: none;
@@ -114,7 +114,7 @@ export default {
 		&__day {
 			position: relative;
 			&:hover {
-				background-color: rgba($color: #e7e7e7, $alpha: 0.7);
+				background-color: $color-hover;
 				cursor: pointer;
 			}
 		}
@@ -123,8 +123,7 @@ export default {
 			background-color: rgba($color: #f90, $alpha: 0.5);
 		}
 		&__day--selected {
-			background-color: rgba($color: #3baeda, $alpha: 0.2);
-			box-shadow: 0 0 0 2px #3baeda inset;
+			box-shadow: 0 0 0 2px $color-text inset;
 		}
 		&__day--disabled {
 			color: #b1b1b1;

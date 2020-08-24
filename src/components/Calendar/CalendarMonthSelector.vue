@@ -52,10 +52,10 @@ export default {
 		max-width: 240px;
 		margin: 0 auto;
 		padding: 10px 0;
-		color: #4f4f4f;
-		background-color: #fdfdfd;
-		border: 1px solid #ebebeb;
-		border-radius: 12px;
+		color: $color-text;
+		background-color: $color-background;
+		border: 1px solid $color-border;
+		border-radius: $border-radius;
 		&__value {
 			display: inline-block;
 			padding: 0 10px;

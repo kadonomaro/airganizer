@@ -1,8 +1,8 @@
 <template>
 	<div class="calendar-form">
 		<form action="" class="calendar-form__form" @submit.prevent="onSubmit">
-			<input type="text" class="calendar-form__field" v-model="form.title">
-			<v-button>Добавить</v-button>
+			<input type="text" class="calendar-form__field input" v-model="form.title">
+			<v-button class="calendar-form__button">Добавить</v-button>
 		</form>
 	</div>
 </template>
@@ -44,6 +44,10 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+	.calendar-form {
+		&__button {
+			margin-left: 5px;
+		}
+	}
 </style>

@@ -30,6 +30,7 @@ export default new Vuex.Store({
 		CHANGE_TASK_PRIORITY(state, [day, task]) {
 			const current = state.days[day].data.find(item => item.id === task.id);
 			current.priority === 'high' ? current.priority = 'low' : current.priority = 'high';
+			storage.save(state.days);
 		}
   },
 	actions: {
