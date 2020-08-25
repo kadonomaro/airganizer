@@ -41,6 +41,8 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+	.calendar {
+		padding: 50px 0;
+	}
 </style>

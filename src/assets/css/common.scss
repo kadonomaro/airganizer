@@ -2,3 +2,10 @@ body {
 	margin: 0;
 	background-color: $color-body-background;
 }
+
+
+.container {
+	max-width: 1440px;
+	margin: 0 auto;
+	padding: 0 10px;
+}

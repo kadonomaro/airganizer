@@ -7,7 +7,7 @@
 					<v-button
 						class="calendar-item__button"
 						:icon="'switch'"
-						:title="'Изменить тип'"
+						:title="'Изменить приоритет'"
 						@on-click="changePriority(task)"
 					/>
 					<v-button
@@ -76,7 +76,7 @@ export default {
 	.calendar-item {
 		display: flex;
 		align-items: center;
-		padding: 10px 15px;
+		padding: 6px 12px;
 		color: $color-text;
 		background-color: $color-background;
 		border: 1px solid $color-border;

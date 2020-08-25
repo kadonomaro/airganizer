@@ -1,12 +1,12 @@
 <template>
-	<button class="app-button" :class="style" @click="clickHandler">
+	<button class="button" :class="style" @click="clickHandler">
 		<slot></slot>
 	</button>
 </template>
 
 <script>
 export default {
-	name: 'AppButton',
+	name: 'VButton',
 	props: {
 		icon: {
 			type: String,
@@ -21,8 +21,8 @@ export default {
 	computed: {
 		style() {
 			return [
-				this.icon ? 'app-button--' + this.icon : '',
-				this.$slots.default ? 'app-button--text' : ''
+				this.icon ? 'button--' + this.icon : '',
+				this.$slots.default ? 'button--text' : ''
 			]
 		}
 	}
@@ -30,7 +30,7 @@ export default {
 </script>
 
 <style lang="scss">
-	.app-button {
+	.button {
 		width: 30px;
 		height: 30px;
 		padding: 10px;
@@ -40,7 +40,7 @@ export default {
 		background-color: $color-background;
 		background-repeat: no-repeat;
 		background-position: center;
-		background-size: 65%;
+		background-size: 70%;
 		border: 1px solid $color-border;
 		border-radius: 50%;
 		cursor: pointer;
@@ -49,25 +49,25 @@ export default {
 			background-color: $color-hover;
 		}
 	}
-	.app-button--text {
+	.button--text {
 		width: auto;
 		height: auto;
 		padding: 8px 16px;
 		border-radius: $border-small-radius;
 	}
-	.app-button--close {
+	.button--close {
 		background-image: url('~@/assets/icons/close.svg');
 	}
-	.app-button--add {
+	.button--add {
 		background-image: url('~@/assets/icons/add.svg');
 	}
-	.app-button--switch {
+	.button--switch {
 		background-image: url('~@/assets/icons/switch.svg');
 	}
-	.app-button--arrow-left {
+	.button--arrow-left {
 		background-image: url('~@/assets/icons/arrow-left.svg');
 	}
-	.app-button--arrow-right {
+	.button--arrow-right {
 		background-image: url('~@/assets/icons/arrow-right.svg');
 	}
 </style>

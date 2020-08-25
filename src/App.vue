@@ -1,12 +1,19 @@
 <template>
   <div id="app">
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+		<v-header />
     <router-view/>
   </div>
 </template>
+
+<script>
+import VHeader from '@/components/blocks/VHeader.vue';
+
+export default {
+	components: {
+		VHeader
+	}
+}
+</script>
 
 <style lang="scss">
 #app {
@@ -16,21 +23,4 @@
   color: $color-text-dark;
 }
 
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
-.container {
-	max-width: 1440px;
-	margin: 0 auto;
-	padding: 0 10px;
-}
 </style>
