@@ -1,5 +1,5 @@
 <template>
-	<div class="calendar-list" v-if="day">
+	<div class="calendar-list" v-if="day.value">
 		<ul class="calendar-list__list" v-if="tasks">
 			<li class="calendar-list__item" v-for="task in tasks.data" :key="task.id">
 				<div class="calendar-item" :class="{'calendar-item--important': task.priority === 'high'}">
@@ -36,17 +36,17 @@ export default {
 	},
 	props: {
 		day: {
-			type: String,
+			type: Object,
 			required: true
 		}
 	},
 	methods: {
 		removeTask(task) {
-			this.$store.dispatch('removeTask', [this.day, task]);
+			this.$store.dispatch('removeTask', [this.day.value, task]);
 		},
 
 		changePriority(task) {
-			this.$store.dispatch('changePriority', [this.day, task]);
+			this.$store.dispatch('changePriority', [this.day.value, task]);
 		}
 	},
 	computed: {
@@ -54,7 +54,7 @@ export default {
 			'getDateByDay'
 		]),
 		tasks() {
-			return this.getDateByDay(this.day);
+			return this.getDateByDay(this.day.value);
 		}
 	}
 }

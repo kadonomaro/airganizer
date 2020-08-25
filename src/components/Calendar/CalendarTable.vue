@@ -55,7 +55,10 @@ export default {
 	methods: {
 		selectDay(day) {
 			this.selectedDay = day;
-			this.$emit('on-select-day', day.value.format('DD-MM-YY'));
+			this.$emit('on-select-day', {
+				value: day.value.format('DD-MM-YY'),
+				editable: day.editable
+			});
 		}
 	},
 	computed: {
@@ -74,7 +77,8 @@ export default {
 							return {
 								value,
 								active: moment().isSame(value, 'date'),
-								disabled: !moment().isSame(value, 'month')
+								disabled: !moment().isSame(value, 'month'),
+								editable: moment().isSameOrBefore(value, 'day')
 							}
 						})
 				});

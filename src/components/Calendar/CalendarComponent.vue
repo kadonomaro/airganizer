@@ -24,7 +24,7 @@ export default {
 	data() {
 		return {
 			date: null,
-			day: ''
+			day: {}
 		}
 	},
 	created() {

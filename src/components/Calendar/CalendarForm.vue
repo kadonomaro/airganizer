@@ -1,5 +1,5 @@
 <template>
-	<div class="calendar-form">
+	<div class="calendar-form" v-if="day.editable">
 		<form action="" class="calendar-form__form" @submit.prevent="onSubmit">
 			<input type="text" class="calendar-form__field input" v-model="form.title" placeholder="Введите название">
 			<v-button class="calendar-form__button">Добавить</v-button>
@@ -17,7 +17,7 @@ export default {
 	},
 	props: {
 		day: {
-			type: String,
+			type: Object,
 			required: true
 		}
 	},
@@ -36,7 +36,7 @@ export default {
 					title: this.form.title,
 					priority: 'low'
 				}
-				this.$store.dispatch('addData', [this.day, data]);
+				this.$store.dispatch('addData', [this.day.value, data]);
 				this.form.title = '';
 			}
 		}
