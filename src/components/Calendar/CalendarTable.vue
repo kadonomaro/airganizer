@@ -113,9 +113,10 @@ export default {
 		}
 		&__day {
 			position: relative;
+			cursor: pointer;
 			&:hover {
 				background-color: $color-hover;
-				cursor: pointer;
+				box-shadow: 0 0 7px rgba(#000000, 0.1);
 			}
 		}
 		&__day--active {
@@ -124,6 +125,10 @@ export default {
 		}
 		&__day--selected {
 			box-shadow: 0 0 0 2px $color-text inset;
+			&:hover {
+				background-color: $color-hover;
+				box-shadow: 0 0 7px rgba(#000000, 0.1), 0 0 0 2px $color-text inset;
+			}
 		}
 		&__day--disabled {
 			color: #b1b1b1;
