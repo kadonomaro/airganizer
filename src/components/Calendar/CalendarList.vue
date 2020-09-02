@@ -80,6 +80,7 @@ export default {
 		align-items: center;
 		padding: 6px 12px;
 		color: $color-text;
+		font-size: 18px;
 		background-color: $color-background;
 		border: 1px solid $color-border;
 		border-radius: $border-large-radius;

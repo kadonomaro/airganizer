@@ -25,7 +25,7 @@ export default {
 
 <style lang="scss">
 #app {
-  font-family: Roboto, Helvetica, Arial, sans-serif;
+  font-family: Jost, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: $color-text-dark;

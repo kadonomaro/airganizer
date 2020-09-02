@@ -47,6 +47,7 @@ export default {
 		right: 5px;
 		color: #ffffff;
 		font-size: 14px;
+		font-weight: normal;
 		&__list {
 			display: flex;
 			justify-content: space-between;

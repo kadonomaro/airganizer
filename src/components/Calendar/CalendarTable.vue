@@ -117,6 +117,7 @@ export default {
 		}
 		&__day {
 			position: relative;
+			font-size: 18px;
 			cursor: pointer;
 			&:hover {
 				background-color: $color-hover;
