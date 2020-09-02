@@ -1,7 +1,7 @@
 <template>
 	<div class="logo">
 		<img class="logo__image" :src="logo" alt="airganizer logo" width="60">
-		<div class="logo__text">
+		<div class="logo__text" v-if="text">
 			<span class="logo__title">Airganizer</span>
 			<span class="logo__subtitle">Управление личным временем</span>
 		</div>
@@ -13,6 +13,12 @@ import logo from '@/assets/logo.png'
 
 export default {
 	name: 'VLogo',
+	props: {
+		text: {
+			type: Boolean,
+			required: false
+		}
+	},
 	data() {
 		return {
 			logo

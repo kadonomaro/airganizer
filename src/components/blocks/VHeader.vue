@@ -1,7 +1,7 @@
 <template>
 	<header class="header">
 		<div class="header__logo">
-			<v-logo />
+			<v-logo :text="true" />
 		</div>
 		<div class="header__nav">
 			<v-navigation />

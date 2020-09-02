@@ -1,11 +1,16 @@
 <template>
 	<div class="registration">
-		registration
+		<v-auth :type="'registration'" />
 	</div>
 </template>
 
 <script>
+import VAuth from '@/components/Auth/VAuth.vue';
+
 export default {
-	name: 'Registration'
+	name: 'Registration',
+	components: {
+		VAuth
+	}
 }
 </script>

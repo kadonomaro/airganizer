@@ -1,11 +1,16 @@
 <template>
 	<div class="login">
-		login
+		<v-auth :type="'login'" />
 	</div>
 </template>
 
 <script>
+import VAuth from '@/components/Auth/VAuth.vue';
+
 export default {
-	name: 'Login'
+	name: 'Login',
+	components: {
+		VAuth
+	}
 }
 </script>
