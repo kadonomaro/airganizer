@@ -1,16 +1,24 @@
 <template>
   <div id="app">
-		<v-header />
-    <router-view/>
+		<component :is="layout">
+			<router-view/>
+		</component>
   </div>
 </template>
 
 <script>
-import VHeader from '@/components/blocks/VHeader.vue';
+import MainLayout from '@/layouts/MainLayout.vue';
+import AuthLayout from '@/layouts/AuthLayout.vue';
 
 export default {
 	components: {
-		VHeader
+		MainLayout,
+		AuthLayout
+	},
+	computed: {
+		layout() {
+			return (this.$route.meta.layout || 'Main') + 'Layout';
+		}
 	}
 }
 </script>

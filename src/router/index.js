@@ -8,16 +8,26 @@ Vue.use(VueRouter)
   {
     path: '/',
     name: 'Home',
-    component: Home
+		component: Home,
+		meta: {
+			layout: 'Main'
+		}
+
   },
   {
     path: '/login',
-    name: 'Login',
+		name: 'Login',
+		meta: {
+			layout: 'Auth'
+		},
     component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
 	},
 	{
 		path: '/registration',
 		name: 'Registration',
+		meta: {
+			layout: 'Auth'
+		},
 		component: () => import(/* webpackChunkName: "about" */ '../views/Registration.vue')
 	}
 
