@@ -1,23 +1,24 @@
 <template>
 	<div class="calendar-list" v-if="day.value">
 		<ul class="calendar-list__list" v-if="tasks">
-			<li class="calendar-list__item" v-for="task in tasks.data" :key="task.id">
-				<div class="calendar-item" :class="{'calendar-item--important': task.priority === 'high'}">
-					<span class="calendar-item__title">{{ task.title }}</span>
-					<v-button
-						class="calendar-item__button"
-						:icon="'switch'"
-						:title="'Изменить приоритет'"
-						@on-click="changePriority(task)"
-					/>
-					<v-button
-						class="calendar-item__button"
-						:icon="'close'"
-						:title="'Удалить'"
-						@on-click="removeTask(task)"
-					/>
-				</div>
-			</li>
+				<li class="calendar-list__item" v-for="task in tasks.data" :key="task.id">
+					<div class="calendar-item" :class="{'calendar-item--important': task.priority === 'high'}">
+						<span class="calendar-item__title">{{ task.title }}</span>
+						<v-button
+							class="calendar-item__button"
+							:icon="'switch'"
+							:title="'Изменить приоритет'"
+							@on-click="changePriority(task)"
+							v-if="day.editable"
+						/>
+						<v-button
+							class="calendar-item__button"
+							:icon="'close'"
+							:title="'Удалить'"
+							@on-click="removeTask(task)"
+						/>
+					</div>
+				</li>
 		</ul>
 		<calendar-form :day="day"/>
 	</div>
@@ -70,6 +71,7 @@ export default {
 		}
 		&__item {
 			margin-bottom: 5px;
+			transition: all 0.3s ease-in;
 		}
 	}
 
@@ -101,4 +103,5 @@ export default {
 			background-image: url('~@/assets/icons/hot.svg');
 		}
 	}
+
 </style>
