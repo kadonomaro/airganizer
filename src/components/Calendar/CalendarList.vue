@@ -1,5 +1,6 @@
 <template>
 	<div class="calendar-list" v-if="day.value">
+		<span class="calendar-list__title">{{ title }}</span>
 		<ul class="calendar-list__list" v-if="tasks">
 				<li class="calendar-list__item" v-for="task in tasks.data" :key="task.id">
 					<div class="calendar-item" :class="{'calendar-item--important': task.priority === 'high'}">
@@ -25,6 +26,7 @@
 </template>
 
 <script>
+import * as moment from 'moment';
 import { mapGetters } from 'vuex';
 import CalendarForm from './CalendarForm';
 import VButton from '../blocks/VButton';
@@ -56,6 +58,9 @@ export default {
 		]),
 		tasks() {
 			return this.getDateByDay(this.day.value);
+		},
+		title() {
+			return moment(this.day.value, 'DD-MM-YYYY').format('DD MMMM YYYY');
 		}
 	}
 }
@@ -63,9 +68,17 @@ export default {
 
 <style lang="scss">
 	.calendar-list {
-		padding: 10px 0;
+		padding: 10px;
+		background-color: #ffffff;
+		&__title {
+			display: block;
+			margin-bottom: 10px;
+			font-size: 18px;
+			font-weight: bold;
+			text-align: center;
+		}
 		&__list {
-			margin: 0;
+			margin: 0 0 20px;
 			padding: 0;
 			list-style: none;
 		}
