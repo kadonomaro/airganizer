@@ -3,6 +3,7 @@ import App from './App.vue'
 import router from './router'
 import store from './store'
 import * as moment from 'moment';
+import Vuelidate from 'vuelidate';
 import '@/assets/css/style.scss';
 
 import formatFilter from '@/filters/format.filter';
@@ -13,6 +14,7 @@ moment.updateLocale('ru', {
 	}
 });
 
+Vue.use(Vuelidate);
 Vue.filter('format', formatFilter);
 
 Vue.config.productionTip = false
