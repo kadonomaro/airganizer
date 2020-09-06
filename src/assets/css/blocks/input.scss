@@ -5,4 +5,9 @@
 	font-size: 14px;
 	border: 1px solid $color-border;
 	border-radius: $border-small-radius;
+	outline: none;
+	transition: box-shadow 0.1s ease-in;
+	&:focus {
+		box-shadow: 0 0 3px rgba($color: #000000, $alpha: 0.3) inset;
+	}
 }

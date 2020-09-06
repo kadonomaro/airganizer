@@ -24,6 +24,7 @@ export default new Vuex.Store({
 
 		REMOVE_TASK(state, [day, task]) {
 			state.days[day].data = state.days[day].data.filter(item => item.id !== task.id);
+			if (!state.days[day].data.length) delete state.days[day];
 			storage.save(state.days);
 		},
 

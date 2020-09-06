@@ -56,7 +56,7 @@ export default {
 		selectDay(day) {
 			this.selectedDay = day;
 			this.$emit('on-select-day', {
-				value: day.value.format('DD-MM-YY'),
+				value: day.value.format('DD-MM-YYYY'),
 				editable: day.editable
 			});
 		}

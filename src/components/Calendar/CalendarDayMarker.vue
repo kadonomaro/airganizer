@@ -33,7 +33,7 @@ export default {
 		]),
 
 		priority() {
-			return this.getDayTasksPriority(this.day.format('DD-MM-YY'));
+			return this.getDayTasksPriority(this.day.format('DD-MM-YYYY'));
 		}
 	}
 }
