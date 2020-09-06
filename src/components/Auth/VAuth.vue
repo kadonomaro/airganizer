@@ -22,18 +22,51 @@
 
 			<form v-if="type === 'registration'" class="auth__form">
 				<label class="auth__label auth__label--name">
-					<input type="text" class="auth__field input" placeholder="Имя пользователя" v-model="user.name">
+					<input
+						type="text"
+						class="auth__field input"
+						:class="{'input--error': $v.user.name.$error}"
+						placeholder="Имя пользователя"
+						v-model="user.name"
+						@blur="$v.user.name.$touch()"
+					>
 				</label>
 				<label class="auth__label auth__label--email">
-					<input type="text" class="auth__field input" placeholder="Адрес электронной почты" v-model="user.email">
+					<input
+						type="text"
+						class="auth__field input"
+						:class="{'input--error': $v.user.email.$error}"
+						placeholder="Адрес электронной почты"
+						v-model="user.email"
+						@blur="$v.user.email.$touch()"
+					>
 				</label>
 				<label class="auth__label auth__label--password">
-					<input type="password" class="auth__field input" placeholder="Пароль" autocomplete="on" v-model="user.password">
+					<input
+						type="password"
+						class="auth__field input"
+						:class="{'input--error': $v.user.password.$error}"
+						placeholder="Пароль"
+						autocomplete="on"
+						v-model="user.password"
+						@blur="$v.user.password.$touch()"
+					>
 				</label>
 				<label class="auth__label auth__label--password">
-					<input type="password" class="auth__field input" placeholder="Повторите пароль" autocomplete="on" v-model="user.repeatPassword">
+					<input
+						type="password"
+						class="auth__field input"
+						:class="{'input--error': $v.user.repeatPassword.$error}"
+						placeholder="Повторите пароль"
+						autocomplete="on"
+						v-model="user.repeatPassword"
+						@blur="$v.user.repeatPassword.$touch()"
+					>
 				</label>
-				<button class="auth__button button button--text">Зарегистрироваться</button>
+				<button
+					class="auth__button button button--text"
+					:disabled="$v.$invalid"
+				>Зарегистрироваться</button>
 				<span class="auth__text">
 					Уже есть аккаунт? <router-link class="auth__link" to="/login">Войти</router-link>
 				</span>
@@ -46,6 +79,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import VLogo from '@/components/blocks/VLogo.vue';
+import { required, minLength, sameAs } from 'vuelidate/lib/validators';
 
 export default {
 	name: 'v-auth',
@@ -65,6 +99,23 @@ export default {
 				email: '',
 				password: '',
 				repeatPassword: ''
+			}
+		}
+	},
+	validations: {
+		user: {
+			name: {
+				required
+			},
+			email: {
+				required
+			},
+			password: {
+				required,
+				minLength: minLength(6)
+			},
+			repeatPassword: {
+				sameAs: sameAs('password')
 			}
 		}
 	},

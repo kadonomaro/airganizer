@@ -48,6 +48,13 @@ export default {
 		&:hover {
 			background-color: $color-hover;
 		}
+		&:hover:disabled {
+			background-color: $color-background;
+		}
+		&:disabled {
+			opacity: 0.5;
+			cursor: initial;
+		}
 	}
 	.button--text {
 		width: auto;
