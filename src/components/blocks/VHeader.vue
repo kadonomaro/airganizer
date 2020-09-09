@@ -3,6 +3,9 @@
 		<div class="header__logo">
 			<v-logo :text="true" />
 		</div>
+		<div class="header__profile">
+			<user-info />
+		</div>
 		<div class="header__nav">
 			<v-navigation />
 		</div>
@@ -12,12 +15,14 @@
 <script>
 import VLogo from './VLogo';
 import VNavigation from './VNavigation';
+import UserInfo from './UserInfo';
 
 export default {
 	name: 'VHeader',
 	components: {
 		VLogo,
-		VNavigation
+		VNavigation,
+		UserInfo
 	}
 }
 </script>
@@ -32,6 +37,9 @@ export default {
 		box-shadow: 0 5px 5px rgba($color: #000000, $alpha: 0.05);
 		&__logo {
 			margin-right: auto;
+		}
+		&__profile {
+			margin-right: 10px;
 		}
 	}
 </style>

@@ -108,6 +108,10 @@ export default new Vuex.Store({
 					{ type: 'high', count: state.days[day]?.data.filter(item => item.priority === 'high').length }
 				]
 			}
+		},
+
+		getUserName(state) {
+			return state.user.name
 		}
 	}
 })
