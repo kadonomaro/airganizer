@@ -41,8 +41,8 @@ export default new Vuex.Store({
 			storage.save(state.days);
 		},
 
-		SET_USER(state, user) {
-			state.user.name = user.name;
+		SET_USER_NAME(state, name) {
+			state.user.name = name;
 		},
 
 		SET_LOGGED_IN(state) {
@@ -67,13 +67,26 @@ export default new Vuex.Store({
 			commit('CHANGE_TASK_PRIORITY', data);
 		},
 
+		async login({ commit }, user) {
+			try {
+				const response = await auth.signInWithEmailAndPassword(user.email, user.password);
+				if (response.user) {
+					commit('SET_USER_NAME', response.user.displayName);
+					commit('SET_LOGGED_IN');
+					router.replace({ name: 'Home' });
+				}
+			} catch (error) {
+				console.error(error);
+			}
+		},
+
 		async registration({ commit }, user) {
 			try {
 				const response = await auth.createUserWithEmailAndPassword(user.email, user.password);
 				await response.user.updateProfile({
 					displayName: user.name
 				});
-				commit('SET_USER', user);
+				commit('SET_USER_NAME', response.user.displayName);
 				commit('SET_LOGGED_IN');
 				router.replace({ name: 'Home' });
 			} catch (error) {

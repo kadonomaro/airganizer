@@ -6,7 +6,7 @@
 			</div>
 			<span class="auth__title">{{ title }}</span>
 
-			<form v-if="type === 'login'" class="auth__form">
+			<form v-if="type === 'login'" class="auth__form" @submit.prevent="submitHandler">
 				<label class="auth__label auth__label--name">
 					<input type="text" class="auth__field input" placeholder="Адрес электронной почты" v-model="user.email">
 				</label>
@@ -146,6 +146,12 @@ export default {
 	},
 	methods: {
 		submitHandler() {
+			if (this.type === 'login') {
+				this.$store.dispatch('login', {
+					email: this.user.email,
+					password: this.user.password
+				});
+			} else if (this.type === 'registration')
 			this.$store.dispatch('registration', {
 				name: this.user.name,
 				email: this.user.email,
