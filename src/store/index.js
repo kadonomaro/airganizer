@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import 'firebase/auth';
 import { LocalStorage } from '../libs/LocalStorage'
 
 Vue.use(Vuex)
 
 const storage = new LocalStorage('days');
+const auth = firebase.auth();
 
 export default new Vuex.Store({
   state: {
@@ -50,7 +52,7 @@ export default new Vuex.Store({
 
 		changePriority({ commit }, data) {
 			commit('CHANGE_TASK_PRIORITY', data);
-		}
+		},
 	},
 	getters: {
 		getDateByDay(state) {
