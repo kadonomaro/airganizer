@@ -7,6 +7,7 @@
 					:to="'login'"
 				>Войти</router-link>
 			</li>
+			{{ $store.state.user.name }}
 		</ul>
 	</nav>
 </template>

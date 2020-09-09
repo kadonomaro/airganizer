@@ -1,16 +1,21 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import 'firebase/auth';
+import router from '../router';
+import { auth } from '../main';
 import { LocalStorage } from '../libs/LocalStorage'
 
 Vue.use(Vuex)
 
 const storage = new LocalStorage('days');
-const auth = firebase.auth();
+
 
 export default new Vuex.Store({
   state: {
-		days: {}
+		days: {},
+		user: {
+			name: '',
+			isLoggedIn: false
+		}
   },
 	mutations: {
 		INIT_DATA(state, data) {
@@ -34,6 +39,14 @@ export default new Vuex.Store({
 			const current = state.days[day].data.find(item => item.id === task.id);
 			current.priority === 'high' ? current.priority = 'low' : current.priority = 'high';
 			storage.save(state.days);
+		},
+
+		SET_USER(state, user) {
+			state.user.name = user.name;
+		},
+
+		SET_LOGGED_IN(state) {
+			state.user.isLoggedIn = true;
 		}
   },
 	actions: {
@@ -53,6 +66,20 @@ export default new Vuex.Store({
 		changePriority({ commit }, data) {
 			commit('CHANGE_TASK_PRIORITY', data);
 		},
+
+		async registration({ commit }, user) {
+			try {
+				const response = await auth.createUserWithEmailAndPassword(user.email, user.password);
+				await response.user.updateProfile({
+					displayName: user.name
+				});
+				commit('SET_USER', user);
+				commit('SET_LOGGED_IN');
+				router.replace({ name: 'Home' });
+			} catch (error) {
+				console.error(error);
+			}
+		}
 	},
 	getters: {
 		getDateByDay(state) {

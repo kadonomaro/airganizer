@@ -20,7 +20,7 @@
 			</form>
 
 
-			<form v-if="type === 'registration'" class="auth__form">
+			<form v-if="type === 'registration'" class="auth__form" @submit.prevent="submitHandler">
 				<label class="auth__label auth__label--name">
 					<input
 						type="text"
@@ -142,6 +142,15 @@ export default {
 			repeatPassword: {
 				sameAs: sameAs('password')
 			}
+		}
+	},
+	methods: {
+		submitHandler() {
+			this.$store.dispatch('registration', {
+				name: this.user.name,
+				email: this.user.email,
+				password: this.user.password
+			});
 		}
 	},
 	computed: {
