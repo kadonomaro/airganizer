@@ -68,8 +68,11 @@ export default {
 	.button--add {
 		background-image: url('~@/assets/icons/add.svg');
 	}
-	.button--priority {
+	.button--low-priority {
 		background-image: url('~@/assets/icons/priority.svg');
+	}
+	.button--high-priority {
+		background-image: url('~@/assets/icons/hot.svg');
 	}
 	.button--arrow-left {
 		background-image: url('~@/assets/icons/arrow-left.svg');

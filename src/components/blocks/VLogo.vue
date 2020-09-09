@@ -2,7 +2,7 @@
 	<div class="logo">
 		<img class="logo__image" :src="logo" alt="airganizer logo" width="60">
 		<div class="logo__text" v-if="text">
-			<span class="logo__title">Airganizer</span>
+			<span class="logo__title"><span class="logo__title--blue">Air</span>ganizer</span>
 			<span class="logo__subtitle">Управление личным временем</span>
 		</div>
 	</div>
@@ -37,10 +37,14 @@ export default {
 		}
 		&__title {
 			display: block;
+			font-size: 20px;
 			font-weight: bold;
 		}
+		&__title--blue {
+			color: #3baeda;
+		}
 		&__subtitle {
-			font-size: 12px;
+			font-size: 14px;
 		}
 	}
 </style>
