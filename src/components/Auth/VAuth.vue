@@ -30,6 +30,10 @@
 						v-model="user.name"
 						@blur="$v.user.name.$touch()"
 					>
+					<span
+						class="auth__error"
+						v-if="$v.user.name.$dirty && !$v.user.name.required"
+					>Поле обязательно для заполнения</span>
 				</label>
 				<label class="auth__label auth__label--email">
 					<input
@@ -40,6 +44,10 @@
 						v-model="user.email"
 						@blur="$v.user.email.$touch()"
 					>
+					<span
+						class="auth__error"
+						v-if="$v.user.email.$dirty && !$v.user.email.email"
+					>Неверный формат</span>
 				</label>
 				<label class="auth__label auth__label--password">
 					<input
@@ -51,6 +59,10 @@
 						v-model="user.password"
 						@blur="$v.user.password.$touch()"
 					>
+					<span
+						class="auth__error"
+						v-if="$v.user.password.$dirty && !$v.user.password.minLength"
+					>Пароль должен содержать минимум {{ $v.user.password.$params.minLength.min }} символов</span>
 				</label>
 				<label class="auth__label auth__label--password">
 					<input
@@ -62,6 +74,10 @@
 						v-model="user.repeatPassword"
 						@blur="$v.user.repeatPassword.$touch()"
 					>
+					<span
+						class="auth__error"
+						v-if="$v.user.repeatPassword.$dirty && !$v.user.repeatPassword.sameAs"
+					>Пароли должны совпадать</span>
 				</label>
 				<button
 					class="auth__button button button--text"
@@ -79,7 +95,7 @@
 <script>
 import { mapGetters } from 'vuex';
 import VLogo from '@/components/blocks/VLogo.vue';
-import { required, minLength, sameAs } from 'vuelidate/lib/validators';
+import { required, email, minLength, sameAs } from 'vuelidate/lib/validators';
 
 export default {
 	name: 'v-auth',
@@ -108,10 +124,9 @@ export default {
 				required
 			},
 			email: {
-				required
+				email
 			},
 			password: {
-				required,
 				minLength: minLength(6)
 			},
 			repeatPassword: {
@@ -196,6 +211,30 @@ export default {
 		&__label--password {
 			&::before {
 				background-image: url("data:image/svg+xml,%3Csvg width='12' height='7' viewBox='0 0 12 7' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Ccircle cx='3.5' cy='3.5' r='2.5' stroke='%23606060' stroke-width='2'/%3E%3Cpath d='M6 3H12' stroke='%23606060' stroke-width='2'/%3E%3Cpath d='M9 5.25V3H10.4667V5.25H9Z' fill='%23606060' stroke='%23606060'/%3E%3C/svg%3E%0A");
+			}
+		}
+		&__error {
+			position: absolute;
+			right: 0%;
+			top: 50%;
+			padding: 4px 8px;
+			color: #ffffff;
+			line-height: 1;
+			white-space: nowrap;
+			background-color: $color-danger;
+			border-radius: $border-small-radius;
+			transform: translate(100%, -50%);
+			&::before {
+				content: '';
+				position: absolute;
+				top: 50%;
+				left: -7px;
+				width: 0;
+				height: 0;
+				border-style: solid;
+				border-width: 10px 10px 10px 0;
+				border-color: transparent $color-danger transparent transparent;
+				transform: translateY(-50%);
 			}
 		}
 		&__field {
