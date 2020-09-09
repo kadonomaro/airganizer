@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '../router';
-import { auth } from '../main';
+import { auth, database } from '../main';
 import { LocalStorage } from '../libs/LocalStorage'
 
 Vue.use(Vuex)
@@ -13,7 +13,9 @@ export default new Vuex.Store({
   state: {
 		days: {},
 		user: {
+			id: '',
 			name: '',
+			email: '',
 			isLoggedIn: false
 		}
   },
@@ -41,11 +43,10 @@ export default new Vuex.Store({
 			storage.save(state.days);
 		},
 
-		SET_USER_NAME(state, name) {
-			state.user.name = name;
-		},
-
-		SET_LOGGED_IN(state) {
+		SET_USER(state, user) {
+			state.user.id = user.id,
+			state.user.name = user.name;
+			state.user.email = user.email;
 			state.user.isLoggedIn = true;
 		}
   },
@@ -71,9 +72,13 @@ export default new Vuex.Store({
 			try {
 				const response = await auth.signInWithEmailAndPassword(user.email, user.password);
 				if (response.user) {
-					commit('SET_USER_NAME', response.user.displayName);
-					commit('SET_LOGGED_IN');
+					commit('SET_USER', {
+						id: response.user.uid,
+						name: response.user.displayName,
+						email: user.email
+					});
 					router.replace({ name: 'Home' });
+					database.ref('users/' + this.state.user.id).child('days').update(this.state.days);
 				}
 			} catch (error) {
 				console.error(error);
@@ -86,8 +91,11 @@ export default new Vuex.Store({
 				await response.user.updateProfile({
 					displayName: user.name
 				});
-				commit('SET_USER_NAME', response.user.displayName);
-				commit('SET_LOGGED_IN');
+				commit('SET_USER', {
+					id: response.user.uid,
+					name: response.user.displayName,
+					email: user.email
+				});
 				router.replace({ name: 'Home' });
 			} catch (error) {
 				console.error(error);

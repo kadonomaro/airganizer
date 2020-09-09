@@ -1,5 +1,6 @@
 import firebase from 'firebase/app';
 import 'firebase/auth';
+import 'firebase/database';
 
 import Vue from 'vue'
 import App from './App.vue'
@@ -30,7 +31,8 @@ const firebaseConfig = {
 
 firebase.initializeApp(firebaseConfig);
 const auth = firebase.auth();
-export { auth };
+const database = firebase.database();
+export { auth, database };
 
 Vue.use(Vuelidate);
 Vue.filter('format', formatFilter);
