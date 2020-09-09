@@ -68,8 +68,8 @@ export default {
 	.button--add {
 		background-image: url('~@/assets/icons/add.svg');
 	}
-	.button--switch {
-		background-image: url('~@/assets/icons/switch.svg');
+	.button--priority {
+		background-image: url('~@/assets/icons/priority.svg');
 	}
 	.button--arrow-left {
 		background-image: url('~@/assets/icons/arrow-left.svg');

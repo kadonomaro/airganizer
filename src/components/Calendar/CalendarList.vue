@@ -7,7 +7,7 @@
 						<span class="calendar-item__title">{{ task.title }}</span>
 						<v-button
 							class="calendar-item__button"
-							:icon="'switch'"
+							:icon="'priority'"
 							:title="'Изменить приоритет'"
 							@on-click="changePriority(task)"
 							v-if="day.editable"
