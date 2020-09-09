@@ -1,20 +1,39 @@
 <template>
 	<nav class="navigation">
 		<ul class="navigation__list">
-			<li class="navigation__item">
+			<li class="navigation__item" v-if="!getAuthStatus">
 				<router-link
-					class="navigation__link navigation__link--login"
+					class="navigation__link navigation__link--icon navigation__link--login"
 					:to="'login'"
 				>Войти</router-link>
+			</li>
+
+			<li class="navigation__item" v-else>
+				<a
+					href=""
+					class="navigation__link navigation__link--icon navigation__link--logout"
+					@click.prevent="clickHandler"
+				>Выйти</a>
 			</li>
 		</ul>
 	</nav>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 
 export default {
-	name: 'VNavigation'
+	name: 'VNavigation',
+	methods: {
+		clickHandler() {
+			this.$store.dispatch('logout');
+		}
+	},
+	computed: {
+		...mapGetters([
+			'getAuthStatus'
+		])
+	}
 }
 </script>
 
@@ -34,7 +53,7 @@ export default {
 			color: inherit;
 			text-decoration: none;
 		}
-		&__link--login {
+		&__link--icon {
 			position: relative;
 			padding-left: 30px;
 			&::before {
@@ -44,9 +63,18 @@ export default {
 				left: 0;
 				width: 25px;
 				height: 25px;
-				background-image: url('~@/assets/icons/login.svg');
 				background-repeat: no-repeat;
 				transform: translateY(-50%);
+			}
+		}
+		&__link--login {
+			&::before {
+				background-image: url('~@/assets/icons/login.svg');
+			}
+		}
+		&__link--logout {
+			&::before {
+				background-image: url('~@/assets/icons/logout.svg');
 			}
 		}
 	}

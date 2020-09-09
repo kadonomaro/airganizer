@@ -48,6 +48,13 @@ export default new Vuex.Store({
 			state.user.name = user.name;
 			state.user.email = user.email;
 			state.user.isLoggedIn = true;
+		},
+
+		REMOVE_USER(state) {
+			state.user.id = '',
+			state.user.name = '';
+			state.user.email = '';
+			state.user.isLoggedIn = false;
 		}
   },
 	actions: {
@@ -80,6 +87,15 @@ export default new Vuex.Store({
 					router.replace({ name: 'Home' });
 					database.ref('users/' + this.state.user.id).child('days').update(this.state.days);
 				}
+			} catch (error) {
+				console.error(error);
+			}
+		},
+
+		async logout({ commit }) {
+			try {
+				await auth.signOut();
+				commit('REMOVE_USER');
 			} catch (error) {
 				console.error(error);
 			}
@@ -120,6 +136,10 @@ export default new Vuex.Store({
 
 		getUserName(state) {
 			return state.user.name
+		},
+
+		getAuthStatus(state) {
+			return state.user.isLoggedIn;
 		}
 	}
 })
