@@ -46,6 +46,10 @@
 					>
 					<span
 						class="auth__error"
+						v-if="$v.user.email.$dirty && !$v.user.email.required"
+					>Поле обязательно для заполнения</span>
+					<span
+						class="auth__error"
 						v-if="$v.user.email.$dirty && !$v.user.email.email"
 					>Неверный формат</span>
 				</label>
@@ -59,6 +63,10 @@
 						v-model="user.password"
 						@blur="$v.user.password.$touch()"
 					>
+					<span
+						class="auth__error"
+						v-if="$v.user.password.$dirty && !$v.user.password.required"
+					>Поле обязательно для заполнения</span>
 					<span
 						class="auth__error"
 						v-if="$v.user.password.$dirty && !$v.user.password.minLength"
@@ -124,9 +132,11 @@ export default {
 				required
 			},
 			email: {
+				required,
 				email
 			},
 			password: {
+				required,
 				minLength: minLength(6)
 			},
 			repeatPassword: {
