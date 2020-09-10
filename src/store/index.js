@@ -25,20 +25,20 @@ export default new Vuex.Store({
 			state.days = data;
 		},
 
-		UPDATE_DATA(state, [day, value]) {
+		UPDATE_DATA(state, { day, value }) {
 			state.days[day]
 				? state.days[day].data.push(value)
 				: state.days = { ...state.days, [day]: { data: [value] } };
 			storage.save(state.days);
 		},
 
-		REMOVE_TASK(state, [day, task]) {
+		REMOVE_TASK(state, { day, task }) {
 			state.days[day].data = state.days[day].data.filter(item => item.id !== task.id);
 			if (!state.days[day].data.length) delete state.days[day];
 			storage.save(state.days);
 		},
 
-		CHANGE_TASK_PRIORITY(state, [day, task]) {
+		CHANGE_TASK_PRIORITY(state, { day, task }) {
 			const current = state.days[day].data.find(item => item.id === task.id);
 			current.priority === 'high' ? current.priority = 'low' : current.priority = 'high';
 			storage.save(state.days);
@@ -67,14 +67,14 @@ export default new Vuex.Store({
 		addTask({ commit, state }, data) {
 			commit('UPDATE_DATA', data);
 			if (state.user.isLoggedIn) {
-				db.update(state.user.id, data[0], state.days[data[0]]);
+				db.update(state.user.id, data.day, day.value);
 			}
 		},
 
 		removeTask({ commit, state }, data) {
 			commit('REMOVE_TASK', data);
 			if (state.user.isLoggedIn) {
-				db.update(state.user.id, data[0], state.days[data[0]]);
+				db.update(state.user.id, data.day, state.days[data.day]);
 			}
 		},
 

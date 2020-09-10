@@ -45,11 +45,17 @@ export default {
 	},
 	methods: {
 		removeTask(task) {
-			this.$store.dispatch('removeTask', [this.day.value, task]);
+			this.$store.dispatch('removeTask', {
+				day: this.day.value,
+				task
+			});
 		},
 
 		changePriority(task) {
-			this.$store.dispatch('changePriority', [this.day.value, task]);
+			this.$store.dispatch('changePriority', {
+				day: this.day.value,
+				task
+			});
 		}
 	},
 	computed: {

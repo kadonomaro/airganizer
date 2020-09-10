@@ -36,7 +36,10 @@ export default {
 					title: this.form.title,
 					priority: 'low'
 				}
-				this.$store.dispatch('addTask', [this.day.value, task]);
+				this.$store.dispatch('addTask', {
+					day: this.day.value,
+					value: task
+				});
 				this.form.title = '';
 			}
 		}
