@@ -3,11 +3,12 @@ import Vuex from 'vuex'
 import router from '../router';
 import { auth, database } from '../main';
 import { LocalStorage } from '../libs/LocalStorage'
+import { Database } from '../api/Database';
 
 Vue.use(Vuex)
 
 const storage = new LocalStorage('days');
-
+const db = new Database();
 
 export default new Vuex.Store({
   state: {
@@ -65,10 +66,13 @@ export default new Vuex.Store({
 
 		addData({ commit }, data) {
 			commit('UPDATE_DATA', data);
+			if (this.state.user.isLoggedIn) {
+				db.add(this.state.user.id, data[0], data[1]);
+			}
 		},
 
 		removeTask({ commit }, data) {
-			commit('REMOVE_TASK', data)
+			commit('REMOVE_TASK', data);
 		},
 
 		changePriority({ commit }, data) {
@@ -85,7 +89,7 @@ export default new Vuex.Store({
 						email: user.email
 					});
 					router.replace({ name: 'Home' });
-					database.ref('users/' + this.state.user.id).child('days').update(this.state.days);
+					db.fill(this.state.user.id, this.state.days);
 				}
 			} catch (error) {
 				console.error(error);
