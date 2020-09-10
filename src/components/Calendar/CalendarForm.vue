@@ -31,12 +31,12 @@ export default {
 	methods: {
 		onSubmit() {
 			if (this.form.title) {
-				const data = {
+				const task = {
 					id: (+new Date).toString(36),
 					title: this.form.title,
 					priority: 'low'
 				}
-				this.$store.dispatch('addData', [this.day.value, data]);
+				this.$store.dispatch('addTask', [this.day.value, task]);
 				this.form.title = '';
 			}
 		}

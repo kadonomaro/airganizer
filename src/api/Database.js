@@ -9,7 +9,7 @@ export class Database {
 			.update(days);
 	}
 
-	async add(userId, day, value) {
+	async update(userId, day, value) {
 		await database
 			.ref('users/' + userId)
 			.child('days')

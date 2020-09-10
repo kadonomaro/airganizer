@@ -64,15 +64,18 @@ export default new Vuex.Store({
 			commit('INIT_DATA', data);
 		},
 
-		addData({ commit }, data) {
+		addTask({ commit, state }, data) {
 			commit('UPDATE_DATA', data);
-			if (this.state.user.isLoggedIn) {
-				db.add(this.state.user.id, data[0], data[1]);
+			if (state.user.isLoggedIn) {
+				db.update(state.user.id, data[0], state.days[data[0]]);
 			}
 		},
 
-		removeTask({ commit }, data) {
+		removeTask({ commit, state }, data) {
 			commit('REMOVE_TASK', data);
+			if (state.user.isLoggedIn) {
+				db.update(state.user.id, data[0], state.days[data[0]]);
+			}
 		},
 
 		changePriority({ commit }, data) {
