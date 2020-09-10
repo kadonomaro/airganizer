@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '../router';
-import { auth, database } from '../main';
+import { auth } from '../main';
 import { LocalStorage } from '../libs/LocalStorage'
 import { Database } from '../api/Database';
 
@@ -67,7 +67,7 @@ export default new Vuex.Store({
 		addTask({ commit, state }, data) {
 			commit('UPDATE_DATA', data);
 			if (state.user.isLoggedIn) {
-				db.update(state.user.id, data.day, day.value);
+				db.update(state.user.id, data.day, state.days[data.day]);
 			}
 		},
 
@@ -78,8 +78,11 @@ export default new Vuex.Store({
 			}
 		},
 
-		changePriority({ commit }, data) {
+		changePriority({ commit, state }, data) {
 			commit('CHANGE_TASK_PRIORITY', data);
+			if (state.user.isLoggedIn) {
+				db.update(state.user.id, data.day, state.days[data.day]);
+			}
 		},
 
 		async login({ commit }, user) {
