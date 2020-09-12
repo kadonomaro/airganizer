@@ -106,6 +106,7 @@ export default new Vuex.Store({
 				}
 			} catch (error) {
 				commit('CHANGE_ERROR_CODE', error.message);
+				console.warn(error.message);
 			}
 		},
 
@@ -115,6 +116,7 @@ export default new Vuex.Store({
 				commit('REMOVE_USER');
 			} catch (error) {
 				commit('CHANGE_ERROR_CODE', error.message);
+				console.warn(error.message);
 			}
 		},
 
@@ -132,6 +134,7 @@ export default new Vuex.Store({
 				router.replace({ name: 'Home' });
 			} catch (error) {
 				commit('CHANGE_ERROR_CODE', error.message);
+				console.warn(error.message);
 			}
 		}
 	},

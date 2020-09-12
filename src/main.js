@@ -11,6 +11,7 @@ import Vuelidate from 'vuelidate';
 import '@/assets/css/style.scss';
 
 import formatFilter from '@/filters/format.filter';
+import localizationFilter from '@/filters/localization.filter';
 
 moment.updateLocale('ru', {
 	week: {
@@ -36,6 +37,7 @@ export { auth, database };
 
 Vue.use(Vuelidate);
 Vue.filter('format', formatFilter);
+Vue.filter('localization', localizationFilter);
 
 Vue.config.productionTip = false
 

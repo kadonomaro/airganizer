@@ -125,7 +125,7 @@
 				<span class="auth__text">
 					Уже есть аккаунт? <router-link class="auth__link" to="/login">Войти</router-link>
 				</span>
-				<span class="auth__error" v-if="getAuthError">{{ getAuthError }}</span>
+				<span class="auth__error" v-if="getAuthError">{{ getAuthError | localization }}</span>
 			</form>
 
 		</div>
