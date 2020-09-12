@@ -47,7 +47,7 @@
 				<span class="auth__text">
 					Еще нет аккаунта? <router-link class="auth__link" to="/registration">Зарегистрируйтесь</router-link>
 				</span>
-				<span class="auth__error" v-if="getAuthError">{{ getAuthError }}</span>
+				<span class="auth__error" v-if="getAuthError">{{ getAuthError | localization }}</span>
 			</form>
 
 

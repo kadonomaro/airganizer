@@ -105,8 +105,10 @@ export default new Vuex.Store({
 					db.fill(this.state.user.id, this.state.days);
 				}
 			} catch (error) {
-				commit('CHANGE_ERROR_CODE', error.message);
-				console.warn(error.message);
+				commit('CHANGE_ERROR_CODE', error.code);
+				setTimeout(() => {
+					commit('CHANGE_ERROR_CODE', '');
+				}, 3000);
 			}
 		},
 
@@ -115,8 +117,10 @@ export default new Vuex.Store({
 				await auth.signOut();
 				commit('REMOVE_USER');
 			} catch (error) {
-				commit('CHANGE_ERROR_CODE', error.message);
-				console.warn(error.message);
+				commit('CHANGE_ERROR_CODE', error.code);
+				setTimeout(() => {
+					commit('CHANGE_ERROR_CODE', '');
+				}, 3000);
 			}
 		},
 
@@ -133,8 +137,10 @@ export default new Vuex.Store({
 				});
 				router.replace({ name: 'Home' });
 			} catch (error) {
-				commit('CHANGE_ERROR_CODE', error.message);
-				console.warn(error.message);
+				commit('CHANGE_ERROR_CODE', error.code);
+				setTimeout(() => {
+					commit('CHANGE_ERROR_CODE', '');
+				}, 3000);
 			}
 		}
 	},

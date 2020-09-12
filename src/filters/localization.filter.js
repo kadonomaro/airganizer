@@ -3,5 +3,8 @@ export default function localizationFilter(value) {
 }
 
 const dictionary = {
-	'The email address is already in use by another account.': 'Адрес электронной почты уже используется другой учетной записью.'
+	'auth/wrong-password' : 'Неверный пароль',
+	'auth/too-many-requests': 'Слишком много неудачных попыток входа. Пожалуйста, попробуйте позже',
+	'auth/user-not-found': 'Пользователь с таким адресом электронной почты не найден',
+	'auth/email-already-in-use' : 'Адрес электронной почты уже используется другим пользователем'
 }
