@@ -12,7 +12,12 @@ export class Database {
 
 	async update(userId, day, value) {
 		try {
-			await database.ref('users/' + userId).child('days').child(day).update(value || {});
+			if (value) {
+				await database.ref('users/' + userId).child('days').child(day).update(value);
+			} else {
+				await database.ref('users/' + userId).child('days').child(day).remove();
+			}
+
 		} catch (error) {
 			console.error(error);
 		}
