@@ -8,12 +8,42 @@
 
 			<form v-if="type === 'login'" class="auth__form" @submit.prevent="submitHandler">
 				<label class="auth__label auth__label--name">
-					<input type="text" class="auth__field input" placeholder="Адрес электронной почты" v-model="user.email">
+					<input
+						type="text"
+						class="auth__field input"
+						:class="{'input--error': $v.user.email.$error}"
+						placeholder="Адрес электронной почты"
+						v-model="user.email"
+						@blur="$v.user.email.$touch()"
+					>
+					<span
+						class="auth__error"
+						v-if="$v.user.email.$dirty && !$v.user.email.required"
+					>Поле обязательно для заполнения</span>
+					<span
+						class="auth__error"
+						v-if="$v.user.email.$dirty && !$v.user.email.email"
+					>Неверный формат</span>
 				</label>
 				<label class="auth__label auth__label--password">
-					<input type="password" class="auth__field input" placeholder="Пароль" autocomplete="on" v-model="user.password">
+					<input
+						type="password"
+						class="auth__field input"
+						:class="{'input--error': $v.user.password.$error}"
+						placeholder="Пароль"
+						autocomplete="on"
+						v-model="user.password"
+						@blur="$v.user.password.$touch()"
+					>
+					<span
+						class="auth__error"
+						v-if="$v.user.password.$dirty && !$v.user.password.required"
+					>Поле обязательно для заполнения</span>
 				</label>
-				<button class="auth__button button button--text">Войти</button>
+				<button
+					class="auth__button button button--text"
+					:disabled="$v.user.email.$invalid || $v.user.password.$invalid"
+				>Войти</button>
 				<span class="auth__text">
 					Еще нет аккаунта? <router-link class="auth__link" to="/registration">Зарегистрируйтесь</router-link>
 				</span>
