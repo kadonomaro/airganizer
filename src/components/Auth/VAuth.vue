@@ -17,11 +17,11 @@
 						@blur="$v.user.email.$touch()"
 					>
 					<span
-						class="auth__error"
+						class="auth__error-tooltip"
 						v-if="$v.user.email.$dirty && !$v.user.email.required"
 					>Поле обязательно для заполнения</span>
 					<span
-						class="auth__error"
+						class="auth__error-tooltip"
 						v-if="$v.user.email.$dirty && !$v.user.email.email"
 					>Неверный формат</span>
 				</label>
@@ -36,7 +36,7 @@
 						@blur="$v.user.password.$touch()"
 					>
 					<span
-						class="auth__error"
+						class="auth__error-tooltip"
 						v-if="$v.user.password.$dirty && !$v.user.password.required"
 					>Поле обязательно для заполнения</span>
 				</label>
@@ -47,6 +47,7 @@
 				<span class="auth__text">
 					Еще нет аккаунта? <router-link class="auth__link" to="/registration">Зарегистрируйтесь</router-link>
 				</span>
+				<span class="auth__error" v-if="getAuthError">{{ getAuthError }}</span>
 			</form>
 
 
@@ -61,7 +62,7 @@
 						@blur="$v.user.name.$touch()"
 					>
 					<span
-						class="auth__error"
+						class="auth__error-tooltip"
 						v-if="$v.user.name.$dirty && !$v.user.name.required"
 					>Поле обязательно для заполнения</span>
 				</label>
@@ -75,11 +76,11 @@
 						@blur="$v.user.email.$touch()"
 					>
 					<span
-						class="auth__error"
+						class="auth__error-tooltip"
 						v-if="$v.user.email.$dirty && !$v.user.email.required"
 					>Поле обязательно для заполнения</span>
 					<span
-						class="auth__error"
+						class="auth__error-tooltip"
 						v-if="$v.user.email.$dirty && !$v.user.email.email"
 					>Неверный формат</span>
 				</label>
@@ -94,11 +95,11 @@
 						@blur="$v.user.password.$touch()"
 					>
 					<span
-						class="auth__error"
+						class="auth__error-tooltip"
 						v-if="$v.user.password.$dirty && !$v.user.password.required"
 					>Поле обязательно для заполнения</span>
 					<span
-						class="auth__error"
+						class="auth__error-tooltip"
 						v-if="$v.user.password.$dirty && !$v.user.password.minLength"
 					>Пароль должен содержать минимум {{ $v.user.password.$params.minLength.min }} символов</span>
 				</label>
@@ -113,7 +114,7 @@
 						@blur="$v.user.repeatPassword.$touch()"
 					>
 					<span
-						class="auth__error"
+						class="auth__error-tooltip"
 						v-if="$v.user.repeatPassword.$dirty && !$v.user.repeatPassword.sameAs"
 					>Пароли должны совпадать</span>
 				</label>
@@ -124,6 +125,7 @@
 				<span class="auth__text">
 					Уже есть аккаунт? <router-link class="auth__link" to="/login">Войти</router-link>
 				</span>
+				<span class="auth__error" v-if="getAuthError">{{ getAuthError }}</span>
 			</form>
 
 		</div>
@@ -190,6 +192,9 @@ export default {
 		}
 	},
 	computed: {
+		...mapGetters([
+			'getAuthError'
+		]),
 		title() {
 			return this.type === 'login' ? 'Авторизация' : 'Регистрация';
 		}
@@ -269,6 +274,12 @@ export default {
 			}
 		}
 		&__error {
+			display: block;
+			margin-top: 10px;
+			color: $color-danger;
+			font-size: 14px;
+		}
+		&__error-tooltip {
 			position: absolute;
 			right: 0%;
 			top: 50%;

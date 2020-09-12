@@ -18,6 +18,9 @@ export default new Vuex.Store({
 			name: '',
 			email: '',
 			isLoggedIn: false
+		},
+		auth: {
+			error: ''
 		}
   },
 	mutations: {
@@ -56,6 +59,10 @@ export default new Vuex.Store({
 			state.user.name = '';
 			state.user.email = '';
 			state.user.isLoggedIn = false;
+		},
+
+		CHANGE_ERROR_CODE(state, error) {
+			state.auth.error = error;
 		}
   },
 	actions: {
@@ -98,7 +105,7 @@ export default new Vuex.Store({
 					db.fill(this.state.user.id, this.state.days);
 				}
 			} catch (error) {
-				console.error(error);
+				commit('CHANGE_ERROR_CODE', error.message);
 			}
 		},
 
@@ -107,7 +114,7 @@ export default new Vuex.Store({
 				await auth.signOut();
 				commit('REMOVE_USER');
 			} catch (error) {
-				console.error(error);
+				commit('CHANGE_ERROR_CODE', error.message);
 			}
 		},
 
@@ -124,7 +131,7 @@ export default new Vuex.Store({
 				});
 				router.replace({ name: 'Home' });
 			} catch (error) {
-				console.error(error);
+				commit('CHANGE_ERROR_CODE', error.message);
 			}
 		}
 	},
@@ -150,6 +157,10 @@ export default new Vuex.Store({
 
 		getAuthStatus(state) {
 			return state.user.isLoggedIn;
+		},
+
+		getAuthError(state) {
+			return state.auth.error;
 		}
 	}
 })
