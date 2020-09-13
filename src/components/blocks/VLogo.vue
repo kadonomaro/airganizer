@@ -1,6 +1,9 @@
 <template>
 	<div class="logo">
-		<img class="logo__image" :src="logo" alt="airganizer logo" width="60">
+		<img class="logo__image" :src="logo" alt="airganizer logo" width="60" v-if="isHomePage">
+		<router-link to="/" v-else title="На главную">
+			<img class="logo__image" :src="logo" alt="airganizer logo" width="60">
+		</router-link>
 		<div class="logo__text" v-if="text">
 			<span class="logo__title"><span class="logo__title--blue">Air</span>ganizer</span>
 			<span class="logo__subtitle">Управление личным временем</span>
@@ -9,7 +12,7 @@
 </template>
 
 <script>
-import logo from '@/assets/logo.png'
+import logo from '@/assets/logo.png';
 
 export default {
 	name: 'VLogo',
@@ -22,6 +25,11 @@ export default {
 	data() {
 		return {
 			logo
+		}
+	},
+	computed: {
+		isHomePage() {
+			return this.$route.name === 'Home';
 		}
 	}
 }
