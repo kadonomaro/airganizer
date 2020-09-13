@@ -5,6 +5,9 @@
 				<li class="calendar-list__item" v-for="task in tasks.data" :key="task.id">
 					<div class="calendar-item">
 						<span class="calendar-item__title">{{ task.title }}</span>
+						<div class="calendar-item__desc" v-if="task.desc">
+							<p>{{ task.desc }}</p>
+						</div>
 						<v-button
 							class="calendar-item__button"
 							:icon="task.priority === 'high' ? 'high-priority' : 'low-priority'"

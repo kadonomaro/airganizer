@@ -2,6 +2,7 @@
 	<div class="calendar-form" v-if="day.editable">
 		<form action="" class="calendar-form__form" @submit.prevent="onSubmit">
 			<input type="text" class="calendar-form__field input" v-model="form.title" placeholder="Введите название">
+			<textarea type="text" class="calendar-form__field input" v-model="form.desc" placeholder="Описание"></textarea>
 			<v-button class="calendar-form__button">Добавить</v-button>
 		</form>
 	</div>
@@ -24,7 +25,8 @@ export default {
 	data() {
 		return {
 			form: {
-				title: ''
+				title: '',
+				desc: ''
 			}
 		}
 	},
@@ -34,14 +36,19 @@ export default {
 				const task = {
 					id: (+new Date).toString(36),
 					title: this.form.title,
+					desc: this.form.desc,
 					priority: 'low'
 				}
 				this.$store.dispatch('addTask', {
 					day: this.day.value,
 					value: task
 				});
-				this.form.title = '';
+				this.clear();
 			}
+		},
+		clear() {
+			this.form.title = '';
+			this.form.desc = '';
 		}
 	}
 }
@@ -49,12 +56,14 @@ export default {
 
 <style lang="scss">
 	.calendar-form {
+		display: flex;
+		min-width: 400px;
 		&__field {
-			width: 360px;
+			width: 100%;
 			max-width: 100%;
-		}
-		&__button {
-			margin-left: 5px;
+			min-height: 20px;
+			margin-bottom: 10px;
+			resize: vertical;
 		}
 	}
 </style>
