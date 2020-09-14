@@ -66,9 +66,14 @@ export default new Vuex.Store({
 		}
   },
 	actions: {
-		fetchData({ commit }) {
-			const data = storage.load();
-			commit('INIT_DATA', data);
+		fetchData({ commit, state }) {
+			if (state.user.isLoggedIn) {
+				db.load(state.user.id).then(data => {
+					commit('INIT_DATA', Object.assign(storage.load(), data));
+				})
+			} else {
+				commit('INIT_DATA', storage.load());
+			}
 		},
 
 		addTask({ commit, state }, data) {
@@ -92,7 +97,7 @@ export default new Vuex.Store({
 			}
 		},
 
-		async login({ commit }, user) {
+		async login({ commit, state }, user) {
 			try {
 				const response = await auth.signInWithEmailAndPassword(user.email, user.password);
 				if (response.user) {
@@ -102,7 +107,9 @@ export default new Vuex.Store({
 						email: user.email
 					});
 					router.replace({ name: 'Home' });
-					db.fill(this.state.user.id, this.state.days);
+					if (Object.keys(state.days).length) {
+						db.fill(state.user.id, state.days);
+					}
 				}
 			} catch (error) {
 				commit('CHANGE_ERROR_CODE', error.code);
