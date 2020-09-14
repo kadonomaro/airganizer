@@ -66,11 +66,20 @@ export default new Vuex.Store({
 		}
   },
 	actions: {
-		fetchData({ commit, state }) {
+		checkUserAuth({ commit }) {
+			auth.onAuthStateChanged(user => {
+				if (user) {
+					commit('SET_USER', { id: user.uid, name: user.displayName, email: user.email });
+				}
+			})
+		},
+
+		fetchData({ commit, dispatch, state }) {
+			dispatch('checkUserAuth');
 			if (state.user.isLoggedIn) {
 				db.load(state.user.id).then(data => {
 					commit('INIT_DATA', Object.assign(storage.load(), data));
-				})
+				});
 			} else {
 				commit('INIT_DATA', storage.load());
 			}
@@ -101,11 +110,7 @@ export default new Vuex.Store({
 			try {
 				const response = await auth.signInWithEmailAndPassword(user.email, user.password);
 				if (response.user) {
-					commit('SET_USER', {
-						id: response.user.uid,
-						name: response.user.displayName,
-						email: user.email
-					});
+					commit('SET_USER', { id: response.user.uid, name: response.user.displayName, email: user.email });
 					router.replace({ name: 'Home' });
 					if (Object.keys(state.days).length) {
 						db.fill(state.user.id, state.days);

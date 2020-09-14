@@ -26,7 +26,6 @@ export class Database {
 			} else {
 				await database.ref('users/' + userId).child('days').child(day).remove();
 			}
-
 		} catch (error) {
 			console.error(error);
 		}
