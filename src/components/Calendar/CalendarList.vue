@@ -3,25 +3,7 @@
 		<span class="calendar-list__title">{{ title }}</span>
 		<ul class="calendar-list__list" v-if="tasks">
 				<li class="calendar-list__item" v-for="task in tasks.data" :key="task.id">
-					<div class="calendar-item">
-						<span class="calendar-item__title">{{ task.title }}</span>
-						<div class="calendar-item__desc" v-if="task.desc">
-							<p>{{ task.desc }}</p>
-						</div>
-						<v-button
-							class="calendar-item__button"
-							:icon="task.priority === 'high' ? 'high-priority' : 'low-priority'"
-							:title="'Изменить приоритет'"
-							@on-click="changePriority(task)"
-							v-if="day.editable"
-						/>
-						<v-button
-							class="calendar-item__button"
-							:icon="'close'"
-							:title="'Удалить'"
-							@on-click="removeTask(task)"
-						/>
-					</div>
+					<calendar-list-item :day="day" :task="task" />
 				</li>
 		</ul>
 		<calendar-form :day="day"/>
@@ -32,33 +14,18 @@
 import * as moment from 'moment';
 import { mapGetters } from 'vuex';
 import CalendarForm from './CalendarForm';
-import VButton from '../blocks/VButton';
+import CalendarListItem from './CalendarListItem';
 
 export default {
 	name: 'CalendarList',
 	components: {
 		CalendarForm,
-		VButton
+		CalendarListItem
 	},
 	props: {
 		day: {
 			type: Object,
 			required: true
-		}
-	},
-	methods: {
-		removeTask(task) {
-			this.$store.dispatch('removeTask', {
-				day: this.day.value,
-				task
-			});
-		},
-
-		changePriority(task) {
-			this.$store.dispatch('changePriority', {
-				day: this.day.value,
-				task
-			});
 		}
 	},
 	computed: {
