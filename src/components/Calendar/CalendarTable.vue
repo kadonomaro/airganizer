@@ -119,14 +119,14 @@ export default {
 			position: relative;
 			font-size: 18px;
 			cursor: pointer;
+			transition: background-color, box-shadow 0.1s ease-in;
 			&:hover {
 				background-color: $color-hover;
 				box-shadow: 0 0 7px rgba(#000000, 0.1);
 			}
 		}
 		&__day--active {
-			font-weight: bold;
-			background-color: rgba($color: #f90, $alpha: 0.5);
+			background-color: rgba($color: $color-brand, $alpha: 0.5);
 		}
 		&__day--selected {
 			box-shadow: 0 0 0 2px $color-text inset;

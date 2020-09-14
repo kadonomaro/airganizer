@@ -49,7 +49,7 @@ export default {
 			font-weight: bold;
 		}
 		&__title--blue {
-			color: #3baeda;
+			color: $color-brand;
 		}
 		&__subtitle {
 			font-size: 14px;

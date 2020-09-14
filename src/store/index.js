@@ -81,7 +81,7 @@ export default new Vuex.Store({
 			dispatch('checkUserAuth').then(() => {
 				if (state.user.isLoggedIn) {
 					db.load(state.user.id).then(data => {
-						commit('INIT_DATA', Object.assign(storage.load(), data));
+						commit('INIT_DATA', { ...storage.load(), ...data });
 					});
 				} else {
 					commit('INIT_DATA', storage.load());

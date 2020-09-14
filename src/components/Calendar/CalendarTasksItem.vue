@@ -1,22 +1,32 @@
 <template>
 	<div class="calendar-item">
-		<span class="calendar-item__title">{{ task.title }}</span>
-		<div class="calendar-item__desc" v-if="task.desc">
+		<div
+			class="calendar-item__head"
+			:class="{
+				'calendar-item__head--clickable': task.desc,
+				'calendar-item__head--opened' : isOpened
+				}"
+			@click="toggle"
+		>
+			<span class="calendar-item__title">{{ task.title }}</span>
+			<v-button
+				class="calendar-item__button"
+				:icon="task.priority === 'high' ? 'high-priority' : 'low-priority'"
+				:title="'Изменить приоритет'"
+				@on-click="changePriority(task)"
+				v-if="day.editable"
+			/>
+			<v-button
+				class="calendar-item__button"
+				:icon="'close'"
+				:title="'Удалить'"
+				@on-click="removeTask(task)"
+			/>
+		</div>
+		<div class="calendar-item__desc" v-if="task.desc && isOpened">
 			<p>{{ task.desc }}</p>
 		</div>
-		<v-button
-			class="calendar-item__button"
-			:icon="task.priority === 'high' ? 'high-priority' : 'low-priority'"
-			:title="'Изменить приоритет'"
-			@on-click="changePriority(task)"
-			v-if="day.editable"
-		/>
-		<v-button
-			class="calendar-item__button"
-			:icon="'close'"
-			:title="'Удалить'"
-			@on-click="removeTask(task)"
-		/>
+
 	</div>
 </template>
 
@@ -38,7 +48,16 @@ export default {
 			required: true
 		},
 	},
+	data() {
+		return {
+			isOpened: false
+		}
+	},
 	methods: {
+		toggle () {
+			this.isOpened = !this.isOpened;
+		},
+
 		removeTask(task) {
 			this.$store.dispatch('removeTask', {
 				day: this.day.value,
@@ -58,17 +77,47 @@ export default {
 
 <style lang="scss">
 	.calendar-item {
-		display: flex;
-		align-items: center;
-		padding: 6px 12px;
-		color: $color-text;
-		font-size: 18px;
-		background-color: $color-background;
-		border: 1px solid $color-border;
-		border-radius: $border-large-radius;
+		&__head {
+			display: flex;
+			align-items: center;
+			padding: 6px 12px;
+			color: $color-text;
+			font-size: 18px;
+			background-color: $color-background;
+			border: 1px solid $color-border;
+			border-radius: $border-large-radius;
+		}
+		&__head--clickable {
+			position: relative;
+			padding-left: 25px;
+			cursor: pointer;
+			&::before {
+				position: absolute;
+				left: 10px;
+				content: '';
+				border-style: solid;
+				border-width: 5px 0 5px 7px;
+				border-color: transparent transparent transparent $color-text;
+				transition: transform 0.1s ease-in, border-color 0.1s ease-in;
+			}
+		}
+		&__head--opened {
+			&::before {
+								border-color: transparent transparent transparent $color-brand;
+				transform: rotate(90deg);
+			}
+		}
 		&__title {
 			display: block;
 			margin-right: auto;
+		}
+		&__desc {
+			font-size: 14px;
+			margin: 0 20px;
+			padding: 6px 12px;
+			border: 1px solid;
+			border-color: transparent $color-border $color-border $color-border;
+			border-radius: 0 0 $border-large-radius $border-large-radius;
 		}
 		&__button {
 			margin-left: 5px;
