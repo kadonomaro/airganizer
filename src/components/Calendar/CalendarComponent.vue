@@ -3,7 +3,7 @@
 		<div class="container">
 			<calendar-month-selector :date="date" @on-change-month="changeDate" />
     	<calendar-table :date="date" @on-select-day="selectDay"/>
-			<calendar-list :day="day"/>
+			<calendar-tasks :day="day"/>
 		</div>
 	</div>
 </template>
@@ -11,7 +11,7 @@
 <script>
 import CalendarMonthSelector from './CalendarMonthSelector.vue';
 import CalendarTable from './CalendarTable.vue';
-import CalendarList from './CalendarList.vue';
+import CalendarTasks from './CalendarTasks.vue';
 import * as moment from 'moment';
 
 export default {
@@ -19,7 +19,7 @@ export default {
 	components: {
 		CalendarMonthSelector,
 		CalendarTable,
-		CalendarList
+		CalendarTasks
 	},
 	data() {
 		return {

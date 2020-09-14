@@ -1,9 +1,9 @@
 <template>
-	<div class="calendar-list" v-if="day.value">
-		<span class="calendar-list__title">{{ title }}</span>
-		<ul class="calendar-list__list" v-if="tasks">
-				<li class="calendar-list__item" v-for="task in tasks.data" :key="task.id">
-					<calendar-list-item :day="day" :task="task" />
+	<div class="calendar-tasks" v-if="day.value">
+		<span class="calendar-tasks__title">{{ title }}</span>
+		<ul class="calendar-tasks__list" v-if="tasks">
+				<li class="calendar-tasks__item" v-for="task in tasks.data" :key="task.id">
+					<calendar-tasks-item :day="day" :task="task" />
 				</li>
 		</ul>
 		<calendar-form :day="day"/>
@@ -14,13 +14,13 @@
 import * as moment from 'moment';
 import { mapGetters } from 'vuex';
 import CalendarForm from './CalendarForm';
-import CalendarListItem from './CalendarListItem';
+import CalendarTasksItem from './CalendarTasksItem';
 
 export default {
-	name: 'CalendarList',
+	name: 'CalendarTasks',
 	components: {
 		CalendarForm,
-		CalendarListItem
+		CalendarTasksItem
 	},
 	props: {
 		day: {
@@ -43,7 +43,7 @@ export default {
 </script>
 
 <style lang="scss">
-	.calendar-list {
+	.calendar-tasks {
 		padding: 10px;
 		background-color: #ffffff;
 		&__title {
@@ -63,23 +63,4 @@ export default {
 			transition: all 0.3s ease-in;
 		}
 	}
-
-	.calendar-item {
-		display: flex;
-		align-items: center;
-		padding: 6px 12px;
-		color: $color-text;
-		font-size: 18px;
-		background-color: $color-background;
-		border: 1px solid $color-border;
-		border-radius: $border-large-radius;
-		&__title {
-			display: block;
-			margin-right: auto;
-		}
-		&__button {
-			margin-left: 5px;
-		}
-	}
-
 </style>

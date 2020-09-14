@@ -24,7 +24,7 @@
 import VButton from '../blocks/VButton';
 
 export default {
-	name: 'CalendarListItem',
+	name: 'CalendarTasksItem',
 	components: {
 		VButton
 	},
@@ -56,6 +56,22 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+	.calendar-item {
+		display: flex;
+		align-items: center;
+		padding: 6px 12px;
+		color: $color-text;
+		font-size: 18px;
+		background-color: $color-background;
+		border: 1px solid $color-border;
+		border-radius: $border-large-radius;
+		&__title {
+			display: block;
+			margin-right: auto;
+		}
+		&__button {
+			margin-left: 5px;
+		}
+	}
 </style>
