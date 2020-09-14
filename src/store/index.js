@@ -67,22 +67,26 @@ export default new Vuex.Store({
   },
 	actions: {
 		checkUserAuth({ commit }) {
-			auth.onAuthStateChanged(user => {
-				if (user) {
-					commit('SET_USER', { id: user.uid, name: user.displayName, email: user.email });
-				}
-			})
+			return new Promise(resolve => {
+				auth.onAuthStateChanged(user => {
+					if (user) {
+						commit('SET_USER', { id: user.uid, name: user.displayName, email: user.email });
+						resolve();
+					}
+				});
+			});
 		},
 
 		fetchData({ commit, dispatch, state }) {
-			dispatch('checkUserAuth');
-			if (state.user.isLoggedIn) {
-				db.load(state.user.id).then(data => {
-					commit('INIT_DATA', Object.assign(storage.load(), data));
-				});
-			} else {
-				commit('INIT_DATA', storage.load());
-			}
+			dispatch('checkUserAuth').then(() => {
+				if (state.user.isLoggedIn) {
+					db.load(state.user.id).then(data => {
+						commit('INIT_DATA', Object.assign(storage.load(), data));
+					});
+				} else {
+					commit('INIT_DATA', storage.load());
+				}
+			});
 		},
 
 		addTask({ commit, state }, data) {
