@@ -9,19 +9,22 @@
 			@click="toggle"
 		>
 			<span class="calendar-item__title">{{ task.title }}</span>
-			<v-button
-				class="calendar-item__button"
-				:icon="task.priority === 'high' ? 'high-priority' : 'low-priority'"
-				:title="'Изменить приоритет'"
-				@on-click="changePriority(task)"
-				v-if="day.editable"
-			/>
-			<v-button
-				class="calendar-item__button"
-				:icon="'close'"
-				:title="'Удалить'"
-				@on-click="removeTask(task)"
-			/>
+			<div class="calendar-item__controls">
+				<v-button
+					class="calendar-item__button"
+					:icon="task.priority === 'high' ? 'high-priority' : 'low-priority'"
+					:title="'Изменить приоритет'"
+					@on-click="changePriority(task)"
+					v-if="day.editable"
+				/>
+				<v-button
+					class="calendar-item__button"
+					:icon="'close'"
+					:title="'Удалить'"
+					@on-click="removeTask(task)"
+				/>
+			</div>
+
 		</div>
 		<div class="calendar-item__desc" v-if="task.desc && isOpened">
 			<p>{{ task.desc }}</p>
@@ -110,6 +113,9 @@ export default {
 		&__title {
 			display: block;
 			margin-right: auto;
+		}
+		&__controls {
+			display: flex;
 		}
 		&__desc {
 			font-size: 14px;

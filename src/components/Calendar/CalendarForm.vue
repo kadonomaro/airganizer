@@ -57,13 +57,24 @@ export default {
 <style lang="scss">
 	.calendar-form {
 		display: flex;
-		min-width: 400px;
+		width: 400px;
+		max-width: 100%;
 		&__field {
 			width: 100%;
 			max-width: 100%;
 			min-height: 20px;
 			margin-bottom: 10px;
 			resize: vertical;
+		}
+	}
+
+
+	@media (max-width: $size-mobile) {
+		.calendar-form {
+			width: 100%;
+			&__form {
+				width: inherit;
+			}
 		}
 	}
 </style>

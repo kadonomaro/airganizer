@@ -95,17 +95,19 @@ export default {
 <style lang="scss">
 	.calendar-table-wrapper {
 		padding: 10px 0;
-		// overflow-x: auto;
+		overflow-x: auto;
 	}
 	.calendar-table {
 		max-width: 100%;
 		width: 100%;
 		text-align: center;
 		background-color: $color-background;
+		border: 1px solid #eff3f9;
 		border-collapse: collapse;
 		td, th {
-			border: 1px solid #eff3f9;
+			min-width: 50px;
 			padding: 10px 15px;
+			border: 1px solid #eff3f9;
 		}
 		&__week--head {
 			color: #ffffff;

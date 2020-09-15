@@ -46,12 +46,12 @@ export default {
 
 <style lang="scss">
 	.calendar-selector {
-		display: flex;
+		display: inline-flex;
 		justify-content: center;
 		align-items: center;
-		max-width: 240px;
+		// max-width: 240px;
 		margin: 0 auto;
-		padding: 10px 0;
+		padding: 10px;
 		color: $color-text;
 		background-color: $color-background;
 		border: 1px solid $color-border;
@@ -59,11 +59,18 @@ export default {
 		&__value {
 			display: inline-block;
 			padding: 0 10px;
-			min-width: 130px;
+			min-width: 150px;
 			font-size: 18px;
 			font-weight: bold;
 			text-align: center;
 			text-transform: capitalize;
+		}
+	}
+
+
+	@media (max-width: $size-mobile) {
+		.calendar-selector {
+			max-width: 100%;
 		}
 	}
 </style>
