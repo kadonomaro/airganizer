@@ -111,7 +111,7 @@ export default {
 		}
 		&__week--head {
 			color: #ffffff;
-			background-color: #282C31;
+			background-color: $color-background-dark;
 			th {
 				padding: 10px 15px;
 				border: none;

@@ -14,3 +14,9 @@ export default {
   }
 }
 </script>
+
+<style lang="scss">
+	.home {
+		flex-grow: 1;
+	}
+</style>
