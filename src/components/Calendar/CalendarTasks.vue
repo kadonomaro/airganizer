@@ -1,12 +1,16 @@
 <template>
 	<div class="calendar-tasks" v-if="day.value">
-		<span class="calendar-tasks__title">{{ title }}</span>
+		<div class="calendar-tasks__head">
+			<span class="calendar-tasks__title">{{ title }}</span>
+		</div>
 		<ul class="calendar-tasks__list" v-if="tasks">
 				<li class="calendar-tasks__item" v-for="task in tasks.data" :key="task.id">
 					<calendar-tasks-item :day="day" :task="task" />
 				</li>
 		</ul>
-		<calendar-form :day="day"/>
+		<div class="calendar-tasks__form" v-if="day.editable">
+			<calendar-form :day="day"/>
+		</div>
 	</div>
 </template>
 
@@ -44,19 +48,26 @@ export default {
 
 <style lang="scss">
 	.calendar-tasks {
-		padding: 10px;
-		background-color: #ffffff;
+		&__head {
+			margin-bottom: 10px;
+			padding: 15px 10px;
+			background-color: #ffffff;
+		}
 		&__title {
 			display: block;
-			margin-bottom: 10px;
 			font-size: 18px;
 			font-weight: bold;
 			text-align: center;
 		}
 		&__list {
-			margin: 0 0 20px;
-			padding: 0;
+			margin: 0 0 10px;
+			padding: 15px 10px 10px;
 			list-style: none;
+			background-color: #ffffff;
+		}
+		&__form {
+			padding: 15px 10px;
+			background-color: #ffffff;
 		}
 		&__item {
 			margin-bottom: 5px;

@@ -26,7 +26,6 @@
 		<div class="calendar-item__desc" v-if="task.desc && isOpened">
 			<p>{{ task.desc }}</p>
 		</div>
-
 	</div>
 </template>
 
@@ -89,6 +88,7 @@ export default {
 		}
 		&__head--clickable {
 			position: relative;
+			z-index: 9;
 			padding-left: 25px;
 			cursor: pointer;
 			&::before {
@@ -103,7 +103,7 @@ export default {
 		}
 		&__head--opened {
 			&::before {
-								border-color: transparent transparent transparent $color-brand;
+				border-color: transparent transparent transparent $color-brand;
 				transform: rotate(90deg);
 			}
 		}
