@@ -3,12 +3,15 @@
 		<div class="header__logo">
 			<v-logo :text="true" />
 		</div>
-		<div class="header__profile">
-			<user-info />
+		<div class="header__side">
+			<div class="header__profile">
+				<user-info />
+			</div>
+			<div class="header__nav">
+				<v-navigation />
+			</div>
 		</div>
-		<div class="header__nav">
-			<v-navigation />
-		</div>
+
 	</header>
 </template>
 
@@ -38,8 +41,26 @@ export default {
 		&__logo {
 			margin-right: auto;
 		}
+		&__side {
+			display: flex;
+		}
 		&__profile {
 			margin-right: 10px;
+		}
+	}
+
+
+	@media (max-width: $size-mobile) {
+		.header {
+			padding: 10px;
+			&__side {
+				display: block;
+				text-align: right;
+			}
+			&__profile {
+				margin-right: 0;
+				margin-bottom: 5px;
+			}
 		}
 	}
 </style>

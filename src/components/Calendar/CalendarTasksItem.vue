@@ -129,4 +129,13 @@ export default {
 			margin-left: 5px;
 		}
 	}
+
+
+	@media (max-width: $size-mobile) {
+		.calendar-item {
+			&__head {
+				font-size: 16px;
+			}
+		}
+	}
 </style>

@@ -49,7 +49,6 @@ export default {
 		display: inline-flex;
 		justify-content: center;
 		align-items: center;
-		// max-width: 240px;
 		margin: 0 auto;
 		padding: 10px;
 		color: $color-text;
@@ -70,7 +69,8 @@ export default {
 
 	@media (max-width: $size-mobile) {
 		.calendar-selector {
-			max-width: 100%;
+			width: 100%;
+			box-sizing: border-box;
 		}
 	}
 </style>

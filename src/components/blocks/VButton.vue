@@ -31,8 +31,8 @@ export default {
 
 <style lang="scss">
 	.button {
-		width: 40px;
-		height: 40px;
+		width: 30px;
+		height: 30px;
 		padding: 10px;
 		color: $color-text-dark;
 		font-family: inherit;
@@ -79,5 +79,13 @@ export default {
 	}
 	.button--arrow-right {
 		background-image: url('~@/assets/icons/arrow-right.svg');
+	}
+
+
+	@media (max-width: $size-mobile) {
+		.button {
+			width: 40px;
+			height: 40px;
+		}
 	}
 </style>
