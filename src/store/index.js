@@ -66,20 +66,22 @@ export default new Vuex.Store({
 		}
   },
 	actions: {
-		checkUserAuth({ commit }) {
+		checkUserAuthStatus({ commit }) {
 			return new Promise(resolve => {
 				auth.onAuthStateChanged(user => {
 					if (user) {
 						commit('SET_USER', { id: user.uid, name: user.displayName, email: user.email });
-						resolve();
+						resolve(true);
+					} else {
+						resolve(false);
 					}
 				});
 			});
 		},
 
 		fetchData({ commit, dispatch, state }) {
-			dispatch('checkUserAuth').then(() => {
-				if (state.user.isLoggedIn) {
+			dispatch('checkUserAuthStatus').then((status) => {
+				if (status) {
 					db.load(state.user.id).then(data => {
 						commit('INIT_DATA', { ...storage.load(), ...data });
 					});
@@ -128,10 +130,13 @@ export default new Vuex.Store({
 			}
 		},
 
-		async logout({ commit }) {
+		async logout({ commit, state }) {
 			try {
 				await auth.signOut();
 				commit('REMOVE_USER');
+				if (Object.keys(state.days).length) {
+					storage.save(state.days);
+				}
 			} catch (error) {
 				commit('CHANGE_ERROR_CODE', error.code);
 				setTimeout(() => {
