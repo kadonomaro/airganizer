@@ -1,12 +1,11 @@
 <template>
 	<footer class="footer">
 		<div class="footer__inner">
-			<div class="footer__logo">
-				<v-logo />
-			</div>
+			<div>Airganizer &copy;{{ new Date().getFullYear() }}</div>
 			<div class="footer__author">
-				<a href="https://airsoftware.ru.com/" target="_blank">
-					<img :src="require('@/assets/images/airsoftware.png')" alt="Airsoftware" title="Airsoftware">
+				<a class="author" href="https://airsoftware.ru.com/" target="_blank">
+					<img class="author__image" :src="require('@/assets/images/airsoftware.png')" alt="Airsoftware" title="Airsoftware">
+					<span class="author__text">Airsoftware</span>
 				</a>
 			</div>
 		</div>
@@ -14,13 +13,8 @@
 </template>
 
 <script>
-import VLogo from './VLogo';
-
 export default {
-	name: 'VFooter',
-	components: {
-		VLogo
-	}
+	name: 'VFooter'
 }
 </script>
 
@@ -37,11 +31,27 @@ export default {
 			align-items: center;
 		}
 		&__author {
+			margin-left: 10px;
+		}
+	}
+
+	.author {
+		display: flex;
+		align-items: center;
+		color: #ffffff;
+		text-decoration: none;
+		&:hover &__image {
+			background-color: #cecece;
+		}
+		&__image {
 			width: 30px;
 			height: 30px;
+			margin-right: 5px;
+			margin-left: 15px;
 			padding: 3px;
 			background-color: #ffffff;
 			border-radius: 50%;
+			transition: background-color 0.1s ease-in;
 			box-sizing: border-box;
 		}
 	}
