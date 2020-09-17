@@ -41,6 +41,12 @@ export default new Vuex.Store({
 			storage.save(state.days);
 		},
 
+		CHANGE_TASK_COMPLETE(state, { day, task }) {
+			const current = state.days[day].data.find(item => item.id === task.id);
+			current.completed === true ? current.completed = false : current.completed = true;
+			storage.save(state.days);
+		},
+
 		CHANGE_TASK_PRIORITY(state, { day, task }) {
 			const current = state.days[day].data.find(item => item.id === task.id);
 			current.priority === 'high' ? current.priority = 'low' : current.priority = 'high';
@@ -93,6 +99,13 @@ export default new Vuex.Store({
 
 		addTask({ commit, state }, data) {
 			commit('UPDATE_DATA', data);
+			if (state.user.isLoggedIn) {
+				db.update(state.user.id, data.day, state.days[data.day]);
+			}
+		},
+
+		completeTask({ commit, state }, data) {
+			commit('CHANGE_TASK_COMPLETE', data);
 			if (state.user.isLoggedIn) {
 				db.update(state.user.id, data.day, state.days[data.day]);
 			}

@@ -68,6 +68,9 @@ export default {
 	.button--add {
 		background-image: url('~@/assets/icons/add.svg');
 	}
+	.button--check {
+		background-image: url('~@/assets/icons/check.svg');
+	}
 	.button--low-priority {
 		background-image: url('~@/assets/icons/priority.svg');
 	}

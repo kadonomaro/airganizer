@@ -37,7 +37,8 @@ export default {
 					id: (+new Date).toString(36),
 					title: this.form.title,
 					desc: this.form.desc,
-					priority: 'low'
+					priority: 'low',
+					completed: false
 				}
 				this.$store.dispatch('addTask', {
 					day: this.day.value,

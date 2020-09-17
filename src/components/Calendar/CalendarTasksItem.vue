@@ -1,5 +1,5 @@
 <template>
-	<div class="calendar-item">
+	<div class="calendar-item" :class="{'calendar-item--completed': task.completed}">
 		<div
 			class="calendar-item__head"
 			:class="{
@@ -10,6 +10,12 @@
 		>
 			<span class="calendar-item__title">{{ task.title }}</span>
 			<div class="calendar-item__controls">
+				<v-button
+					class="calendar-item__button"
+					:icon="'check'"
+					:title="'Завершить'"
+					@on-click="completeTask(task)"
+				/>
 				<v-button
 					class="calendar-item__button"
 					:icon="task.priority === 'high' ? 'high-priority' : 'low-priority'"
@@ -24,7 +30,6 @@
 					@on-click="removeTask(task)"
 				/>
 			</div>
-
 		</div>
 		<div class="calendar-item__desc" v-if="task.desc && isOpened">
 			<p>{{ task.desc }}</p>
@@ -58,6 +63,13 @@ export default {
 	methods: {
 		toggle () {
 			this.isOpened = !this.isOpened;
+		},
+
+		completeTask(task) {
+			this.$store.dispatch('completeTask', {
+				day: this.day.value,
+				task
+			});
 		},
 
 		removeTask(task) {
@@ -128,6 +140,10 @@ export default {
 		&__button {
 			margin-left: 5px;
 		}
+	}
+	.calendar-item--completed {
+		text-decoration: line-through;
+		opacity: 0.5;
 	}
 
 
