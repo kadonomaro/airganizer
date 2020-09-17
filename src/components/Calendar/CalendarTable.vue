@@ -100,7 +100,7 @@ export default {
 	.calendar-table {
 		max-width: 100%;
 		width: 100%;
-		text-align: center;
+		text-align: right;
 		background-color: $color-background;
 		border: 1px solid #eff3f9;
 		border-collapse: collapse;

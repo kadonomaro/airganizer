@@ -185,17 +185,33 @@ export default new Vuex.Store({
 			};
 		},
 
-		getDayTasksPriority(state) {
+		getDayTasksMarkers(state) {
 			return (day) => {
 				return [
-					{ type: 'low', count: state.days[day]?.data.filter(item => item.priority === 'low').length },
-					{ type: 'high', count: state.days[day]?.data.filter(item => item.priority === 'high').length }
-				]
+					{
+						type: 'active',
+						count: state.days[day]?.data.filter(item => {
+							return item.completed === false && item.priority === 'low';
+						}).length
+					},
+					{
+						type: 'completed',
+						count: state.days[day]?.data.filter(item => {
+							return item.completed === true;
+						}).length
+					},
+					{
+						type: 'high',
+						count: state.days[day]?.data.filter(item => {
+							return item.priority === 'high' && item.completed === false;
+						}).length
+					}
+				];
 			}
 		},
 
 		getUserName(state) {
-			return state.user.name
+			return state.user.name;
 		},
 
 		getAuthStatus(state) {
