@@ -141,4 +141,17 @@ export default {
 			color: #b1b1b1;
 		}
 	}
+
+
+	@media (max-width: $size-mobile) {
+		.calendar-table {
+			td, th {
+				padding: 12px 10px 5px;
+			}
+			&__day {
+
+				font-size: 16px;
+			}
+		}
+	}
 </style>
