@@ -49,9 +49,6 @@ export default {
 			}
 		}
 	},
-	created() {
-		this.$store.dispatch('fetchData');
-	},
 	methods: {
 		selectDay(day) {
 			this.selectedDay = day;

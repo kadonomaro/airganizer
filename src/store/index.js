@@ -11,7 +11,8 @@ const storage = new LocalStorage('days');
 const db = new Database();
 
 export default new Vuex.Store({
-  state: {
+	state: {
+		component: 'calendar',
 		days: {},
 		user: {
 			id: '',
@@ -69,9 +70,17 @@ export default new Vuex.Store({
 
 		CHANGE_ERROR_CODE(state, error) {
 			state.auth.error = error;
+		},
+
+		SET_COMPONENT(state, name) {
+			state.component = name;
 		}
   },
 	actions: {
+		setActiveComponent({ commit }, name) {
+			commit('SET_COMPONENT', name);
+		},
+
 		checkUserAuthStatus({ commit }) {
 			return new Promise(resolve => {
 				auth.onAuthStateChanged(user => {
@@ -179,6 +188,10 @@ export default new Vuex.Store({
 		}
 	},
 	getters: {
+		getActiveComponent(state) {
+			return state.component;
+		},
+
 		getDateByDay(state) {
 			return (day) => {
 				return state.days[day];

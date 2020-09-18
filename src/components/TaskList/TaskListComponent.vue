@@ -20,9 +20,6 @@ export default {
 	components: {
 		CalendarTasksItem
 	},
-	created() {
-		this.$store.dispatch('fetchData');
-	},
 	computed: {
 		...mapGetters([
 			'getDateByAllDays'

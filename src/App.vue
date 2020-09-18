@@ -15,6 +15,9 @@ export default {
 		MainLayout,
 		AuthLayout
 	},
+	created() {
+		this.$store.dispatch('fetchData');
+	},
 	computed: {
 		layout() {
 			return (this.$route.meta.layout || 'Main') + 'Layout';
