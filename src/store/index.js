@@ -185,6 +185,10 @@ export default new Vuex.Store({
 			};
 		},
 
+		getDateByAllDays(state) {
+			return state.days;
+		},
+
 		getDayTasksMarkers(state) {
 			return (day) => {
 				return [

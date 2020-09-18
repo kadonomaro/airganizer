@@ -12,15 +12,22 @@ Vue.use(VueRouter)
 		meta: {
 			layout: 'Main'
 		}
-
-  },
+	},
+		{
+			path: '/list',
+			name: 'List',
+			component: () => import(/* webpackChunkName: "list" */ '../views/List.vue'),
+			meta: {
+				layout: 'Main'
+			}
+		},
   {
     path: '/login',
 		name: 'Login',
 		meta: {
 			layout: 'Auth'
 		},
-    component: () => import(/* webpackChunkName: "about" */ '../views/Login.vue')
+    component: () => import(/* webpackChunkName: "auth" */ '../views/Login.vue')
 	},
 	{
 		path: '/registration',
@@ -28,7 +35,7 @@ Vue.use(VueRouter)
 		meta: {
 			layout: 'Auth'
 		},
-		component: () => import(/* webpackChunkName: "about" */ '../views/Registration.vue')
+		component: () => import(/* webpackChunkName: "auth" */ '../views/Registration.vue')
 	}
 
 ]
