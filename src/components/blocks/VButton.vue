@@ -1,5 +1,13 @@
 <template>
-	<button class="button" :class="style" @click.stop="clickHandler">
+	<button
+		class="button"
+		:class="style"
+		:style="{
+			'width': width + 'px',
+			'height': width + 'px',
+		}"
+		@click.stop="clickHandler"
+	>
 		<slot></slot>
 	</button>
 </template>
@@ -10,6 +18,10 @@ export default {
 	props: {
 		icon: {
 			type: String,
+			required: false
+		},
+		width: {
+			type: Number,
 			required: false
 		}
 	},
@@ -42,7 +54,7 @@ export default {
 		background-position: center;
 		background-size: 70%;
 		border: 1px solid $color-border;
-		border-radius: 50%;
+		border-radius: $border-small-radius;
 		cursor: pointer;
 		transition: background-color 0.1s ease-in;
 		&:hover {
@@ -76,6 +88,12 @@ export default {
 	}
 	.button--high-priority {
 		background-image: url('~@/assets/icons/hot.svg');
+	}
+	.button--calendar {
+		background-image: url('~@/assets/icons/calendar.svg');
+	}
+	.button--list {
+		background-image: url('~@/assets/icons/list.svg');
 	}
 	.button--arrow-left {
 		background-image: url('~@/assets/icons/arrow-left.svg');

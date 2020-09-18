@@ -138,7 +138,7 @@ export default {
 			border-radius: 0 0 $border-large-radius $border-large-radius;
 		}
 		&__button {
-			margin-left: 5px;
+			margin-left: 3px;
 		}
 	}
 	.calendar-item--completed {
