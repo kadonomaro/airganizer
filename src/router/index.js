@@ -13,14 +13,6 @@ Vue.use(VueRouter)
 			layout: 'Main'
 		}
 	},
-		{
-			path: '/list',
-			name: 'List',
-			component: () => import(/* webpackChunkName: "list" */ '../views/List.vue'),
-			meta: {
-				layout: 'Main'
-			}
-		},
   {
     path: '/login',
 		name: 'Login',
