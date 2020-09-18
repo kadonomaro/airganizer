@@ -146,7 +146,7 @@ export default {
 	@media (max-width: $size-mobile) {
 		.calendar-table {
 			td, th {
-				padding: 12px 10px 5px;
+				padding: 15px 10px 5px;
 			}
 			&__day {
 

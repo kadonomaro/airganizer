@@ -57,8 +57,8 @@ export default {
 		}
 	}
 	.button--text {
-		width: auto !important;
-		height: auto !important;
+		width: auto;
+		height: auto;
 		padding: 8px 16px;
 		border-radius: $border-small-radius;
 	}
@@ -89,6 +89,10 @@ export default {
 		.button {
 			width: 40px;
 			height: 40px;
+		}
+		.button--text {
+			width: auto;
+			height: auto;
 		}
 	}
 </style>

@@ -319,4 +319,26 @@ export default {
 			font-size: 14px;
 		}
 	}
+
+
+	@media (max-width: $size-mobile) {
+		.auth {
+			&__label {
+				margin-bottom: 20px;
+			}
+			&__error-tooltip {
+				top: 100%;
+				width: 100%;
+				padding: 4px 4px;
+				font-size: 14px;
+				border-top-left-radius: 0;
+				border-top-right-radius: 0;
+				transform: translate(0, -6px);
+				box-sizing: border-box;
+				&::before {
+					display: none;
+				}
+			}
+		}
+	}
 </style>
