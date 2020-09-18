@@ -1,6 +1,8 @@
 <template>
   <div class="home">
-    <calendar-component />
+		<div class="container">
+			<calendar-component />
+		</div>
   </div>
 </template>
 

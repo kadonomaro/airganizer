@@ -1,17 +1,25 @@
 <template>
 	<div class="task-list">
-		<div class="day" v-for="(day, key, index) in getDateByAllDays" :key="index">
-			{{ key }}
-			{{ day }}
+		<div class="task-list__day" v-for="(day, key) in getDateByAllDays" :key="key">
+			<span class="task-list__title">{{ key }}</span>
+			<ul class="task-list__list">
+					<li class="task-list__item" v-for="task in day.data" :key="task.id">
+						<calendar-tasks-item :day="{ value: key, editable: true }" :task="task" />
+					</li>
+			</ul>
 		</div>
 	</div>
 </template>
 
 <script>
 import { mapGetters } from 'vuex';
+import CalendarTasksItem from '../Calendar/CalendarTasksItem';
 
 export default {
 	name: 'TaskListComponent',
+	components: {
+		CalendarTasksItem
+	},
 	created() {
 		this.$store.dispatch('fetchData');
 	},
@@ -23,6 +31,23 @@ export default {
 }
 </script>
 
-<style>
-
+<style lang="scss">
+	.task-list {
+		padding: 50px 0;
+		&__day {
+			margin-bottom: 20px;
+		}
+		&__title {
+			display: block;
+			margin-bottom: 5px;
+		}
+		&__list {
+			margin: 0;
+			padding: 0;
+			list-style: none;
+		}
+		&__item {
+			margin-bottom: 5px;
+		}
+	}
 </style>

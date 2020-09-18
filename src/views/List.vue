@@ -1,6 +1,8 @@
 <template>
   <div class="list">
-    <task-list-component />
+		<div class="container">
+			<task-list-component />
+		</div>
   </div>
 </template>
 
