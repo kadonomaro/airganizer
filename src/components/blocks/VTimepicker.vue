@@ -6,6 +6,8 @@
 			:value="timeValue"
 			readonly
 			@focus="open"
+			@keydown.exact.esc="close"
+			ref="timepicker"
 		>
 		<div class="timepicker__dropdown" v-if="isOpen">
 			<ul class="timepicker__list">
@@ -52,6 +54,12 @@ export default {
 			}
 		}
 	},
+	created() {
+		document.addEventListener('click', this.closeEvent);
+	},
+	destroyed() {
+		document.removeEventListener('click', this.closeEvent);
+	},
 	methods: {
 		open() {
 			this.isOpen = true;
@@ -70,8 +78,15 @@ export default {
 		selectHour(value) {
 			this.currentTime.hour = value < 10 ? '0' + value : value;
 		},
+
 		selectMinute(value) {
 			this.currentTime.minute = value < 10 ? '0' + value : value;
+		},
+
+		closeEvent(event) {
+			if (event.target !== this.$refs.timepicker) {
+				this.close();
+			}
 		}
 	},
 	computed: {
