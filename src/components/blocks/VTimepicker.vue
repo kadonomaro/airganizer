@@ -1,12 +1,33 @@
 <template>
 	<div class="timepicker">
-		<input class="timepicker__input input" type="text" placeholder="ЧЧ:ММ">
+		<input
+			class="timepicker__input input"
+			type="text"
+			:value="timeValue"
+			readonly
+		>
 		<div class="timepicker__dropdown" v-if="isOpen">
 			<ul class="timepicker__list">
-				<li class="timepicker__item" v-for="(_, hour) in 24" :key="hour">{{ hour }}</li>
+				<li
+					v-for="(_, hour) in 24"
+					class="timepicker__item"
+					:class="{'timepicker__item--active': +hour === +time.hour}"
+					:key="hour"
+					@click="selectHour(hour)"
+				>
+					{{ hour < 10 ? '0' + hour : hour }}
+				</li>
 			</ul>
 			<ul class="timepicker__list">
-				<li class="timepicker__item" v-for="(_, minute) in 60" :key="minute">{{ minute }}</li>
+				<li
+					:class="{'timepicker__item--active': +minute === +time.minute}"
+					class="timepicker__item"
+					v-for="(_, minute) in 60"
+					:key="minute"
+					@click="selectMinute(minute)"
+				>
+					{{ minute < 10 ? '0' + minute : minute }}
+				</li>
 			</ul>
 		</div>
 	</div>
@@ -17,7 +38,34 @@ export default {
 	name: 'VTimepicker',
 	data() {
 		return {
-			isOpen: true
+			isOpen: true,
+			time: {
+				hour: 'ЧЧ',
+				minute: 'ММ'
+			}
+		}
+	},
+	methods: {
+		selectHour(value) {
+			this.time.hour = value < 10 ? '0' + value : value;
+		},
+		selectMinute(value) {
+			this.time.minute = value < 10 ? '0' + value : value;
+		}
+	},
+	computed: {
+		timeValue() {
+			return this.time.hour + ':' + this.time.minute;
+		}
+	},
+	watch: {
+		time: {
+			deep: true,
+			handler(time) {
+				if(time.hour !== 'ЧЧ' && time.minute !== 'ММ') {
+					this.$emit('on-select-time', time);
+				}
+			}
 		}
 	}
 }
@@ -58,6 +106,9 @@ export default {
 			&:hover {
 				background-color: #ececec;
 			}
+		}
+		&__item--active {
+			background-color: rgba($color: $color-brand, $alpha: 0.5);
 		}
 	}
 </style>
