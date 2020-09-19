@@ -3,6 +3,7 @@
 		<form action="" class="calendar-form__form" @submit.prevent="onSubmit">
 			<input type="text" class="calendar-form__field input" v-model="form.title" placeholder="Введите название">
 			<textarea type="text" class="calendar-form__field input" v-model="form.desc" placeholder="Описание"></textarea>
+			<v-timepicker />
 			<v-button class="calendar-form__button">Добавить</v-button>
 		</form>
 	</div>
@@ -10,11 +11,13 @@
 
 <script>
 import VButton from '../blocks/VButton';
+import VTimepicker from '../blocks/VTimepicker';
 
 export default {
 	name: 'CalendarForm',
 	components: {
-		VButton
+		VButton,
+		VTimepicker
 	},
 	props: {
 		day: {
