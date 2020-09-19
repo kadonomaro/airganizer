@@ -5,13 +5,14 @@
 			type="text"
 			:value="timeValue"
 			readonly
+			@focus="open"
 		>
 		<div class="timepicker__dropdown" v-if="isOpen">
 			<ul class="timepicker__list">
 				<li
 					v-for="(_, hour) in 24"
 					class="timepicker__item"
-					:class="{'timepicker__item--active': +hour === +time.hour}"
+					:class="{'timepicker__item--active': +hour === +currentTime.hour}"
 					:key="hour"
 					@click="selectHour(hour)"
 				>
@@ -20,7 +21,7 @@
 			</ul>
 			<ul class="timepicker__list">
 				<li
-					:class="{'timepicker__item--active': +minute === +time.minute}"
+					:class="{'timepicker__item--active': +minute === +currentTime.minute}"
 					class="timepicker__item"
 					v-for="(_, minute) in 60"
 					:key="minute"
@@ -36,37 +37,63 @@
 <script>
 export default {
 	name: 'VTimepicker',
+	props: {
+		time: {
+			type: String,
+			required: true
+		}
+	},
 	data() {
 		return {
-			isOpen: true,
-			time: {
+			isOpen: false,
+			currentTime: {
 				hour: 'ЧЧ',
 				minute: 'ММ'
 			}
 		}
 	},
 	methods: {
+		open() {
+			this.isOpen = true;
+		},
+
+		close() {
+			this.isOpen = false;
+		},
+
+		clear() {
+			this.currentTime.hour = 'ЧЧ';
+			this.currentTime.minute = 'ММ';
+			this.close();
+		},
+
 		selectHour(value) {
-			this.time.hour = value < 10 ? '0' + value : value;
+			this.currentTime.hour = value < 10 ? '0' + value : value;
 		},
 		selectMinute(value) {
-			this.time.minute = value < 10 ? '0' + value : value;
+			this.currentTime.minute = value < 10 ? '0' + value : value;
 		}
 	},
 	computed: {
 		timeValue() {
-			return this.time.hour + ':' + this.time.minute;
+			return this.currentTime.hour + ':' + this.currentTime.minute;
 		}
 	},
 	watch: {
-		time: {
+		currentTime: {
 			deep: true,
 			handler(time) {
 				if(time.hour !== 'ЧЧ' && time.minute !== 'ММ') {
 					this.$emit('on-select-time', time);
 				}
 			}
+		},
+		time(value) {
+			if (!value) {
+				this.clear();
+			}
 		}
+
 	}
 }
 </script>

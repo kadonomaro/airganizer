@@ -9,6 +9,7 @@
 			@click="toggle"
 		>
 			<span class="calendar-item__title">{{ task.title }}</span>
+			<span class="calendar-item__time" v-if="task.time">{{ task.time }}</span>
 			<div class="calendar-item__controls">
 				<v-button
 					class="calendar-item__button"
@@ -92,6 +93,8 @@ export default {
 <style lang="scss">
 	.calendar-item {
 		&__head {
+			position: relative;
+			z-index: 9;
 			display: flex;
 			align-items: center;
 			padding: 6px 12px;
@@ -102,8 +105,6 @@ export default {
 			border-radius: $border-large-radius;
 		}
 		&__head--clickable {
-			position: relative;
-			z-index: 9;
 			padding-left: 25px;
 			cursor: pointer;
 			&::before {
@@ -125,6 +126,18 @@ export default {
 		&__title {
 			display: block;
 			margin-right: auto;
+		}
+		&__time {
+			position: absolute;
+			top: 0;
+			left: 9px;
+			display: block;
+			padding: 0 3px;
+			font-size: 14px;
+			font-weight: bold;
+			line-height: 14px;
+			background-color: #ffffff;
+			transform: translateY(-50%);
 		}
 		&__controls {
 			display: flex;

@@ -70,7 +70,7 @@ export default {
 			background-color: #ffffff;
 		}
 		&__item {
-			margin-bottom: 5px;
+			margin-bottom: 10px;
 			transition: all 0.3s ease-in;
 		}
 	}

@@ -3,7 +3,9 @@
 		<form action="" class="calendar-form__form" @submit.prevent="onSubmit">
 			<input type="text" class="calendar-form__field input" v-model="form.title" placeholder="Введите название">
 			<textarea type="text" class="calendar-form__field input" v-model="form.desc" placeholder="Описание"></textarea>
-			<v-timepicker />
+			<div class="calendar-form__field">
+				<v-timepicker @on-select-time="selectTime" :time="form.time"/>
+			</div>
 			<v-button class="calendar-form__button">Добавить</v-button>
 		</form>
 	</div>
@@ -29,7 +31,8 @@ export default {
 		return {
 			form: {
 				title: '',
-				desc: ''
+				desc: '',
+				time: ''
 			}
 		}
 	},
@@ -40,6 +43,7 @@ export default {
 					id: (+new Date).toString(36),
 					title: this.form.title,
 					desc: this.form.desc,
+					time: this.form.time,
 					priority: 'low',
 					completed: false
 				}
@@ -50,9 +54,15 @@ export default {
 				this.clear();
 			}
 		},
+
 		clear() {
 			this.form.title = '';
 			this.form.desc = '';
+			this.form.time = '';
+		},
+
+		selectTime(payload) {
+			this.form.time = payload.hour + ':' + payload.minute;
 		}
 	}
 }
