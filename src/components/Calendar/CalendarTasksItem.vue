@@ -1,12 +1,13 @@
 <template>
-	<div class="calendar-item" :class="{'calendar-item--completed': task.completed}">
+	<div class="calendar-item">
 		<div
 			class="calendar-item__head"
 			:class="{
 				'calendar-item__head--clickable': task.desc,
+				'calendar-item__head--transparent': task.completed,
 				'calendar-item__head--opened' : isOpened
 				}"
-			@click="toggle"
+			@click="toggle(task.desc)"
 		>
 			<span class="calendar-item__title">{{ task.title }}</span>
 			<span class="calendar-item__time" v-if="task.time">{{ task.time }}</span>
@@ -84,8 +85,8 @@ export default {
 		}
 	},
 	methods: {
-		toggle () {
-			this.isOpened = !this.isOpened;
+		toggle (state) {
+			if (state) this.isOpened = !this.isOpened;
 		},
 
 		completeTask(task) {
@@ -146,6 +147,10 @@ export default {
 				transition: transform 0.1s ease-in, border-color 0.1s ease-in;
 			}
 		}
+		&__head--transparent {
+			opacity: 0.5;
+			text-decoration: line-through;
+		}
 		&__head--opened {
 			&::before {
 				border-color: transparent transparent transparent $color-brand;
@@ -182,10 +187,6 @@ export default {
 		&__button {
 			margin-left: 3px;
 		}
-	}
-	.calendar-item--completed {
-		text-decoration: line-through;
-		opacity: 0.5;
 	}
 
 
