@@ -28,23 +28,44 @@
 					class="calendar-item__button"
 					:icon="'close'"
 					:title="'Удалить'"
-					@on-click="removeTask(task)"
+					@on-click="openModalHandler"
 				/>
 			</div>
 		</div>
 		<div class="calendar-item__desc" v-if="task.desc && isOpened">
 			<p>{{ task.desc }}</p>
 		</div>
+
+		<v-modal v-if="isModalVisible" @close="closeModalHandler">
+      <template v-slot:header>
+        <span>Удаление</span>
+      </template>
+      <template v-slot:body>
+        <p>Вы действительно хотите удалить «{{ task.title }}»?</p>
+      </template>
+			<template v-slot:footer>
+        <v-button
+					style="margin-right:5px;"
+					@on-click="closeModalHandler"
+				>Отменить</v-button>
+				<v-button
+					@on-click="removeTask(task)"
+				>Удалить</v-button>
+      </template>
+    </v-modal>
+
 	</div>
 </template>
 
 <script>
-import VButton from '../blocks/VButton';
+import VButton from '../blocks/VButton.vue';
+import VModal from '../blocks/VModal';
 
 export default {
 	name: 'CalendarTasksItem',
 	components: {
-		VButton
+		VButton,
+		VModal
 	},
 	props: {
 		task: {
@@ -58,7 +79,8 @@ export default {
 	},
 	data() {
 		return {
-			isOpened: false
+			isOpened: false,
+			isModalVisible: false
 		}
 	},
 	methods: {
@@ -85,6 +107,13 @@ export default {
 				day: this.day.value,
 				task
 			});
+		},
+		openModalHandler() {
+			this.isModalVisible = true;
+		},
+
+		closeModalHandler() {
+			this.isModalVisible = false;
 		}
 	},
 }

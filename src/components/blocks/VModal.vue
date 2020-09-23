@@ -5,7 +5,7 @@
         <header class="modal__header">
           <slot name="header"></slot>
 					<v-button
-						class="modal__button modal__button--close"
+						class="modal__button-close"
 						:icon="'close'"
 						@on-click="closeHandler"
 					/>
@@ -41,7 +41,8 @@ export default {
 	@import '@/assets/css/variables.scss';
 
   .modal-overlay {
-    position: fixed;
+		position: fixed;
+		z-index: 9999;
     top: 0;
     bottom: 0;
     left: 0;
@@ -56,10 +57,10 @@ export default {
 		z-index: 999;
     min-width: 300px;
     max-width: 600px;
-		background: #ffffff;
-		border-radius: 3px;
+		background-color: #ffffff;
+		border-radius: $border-small-radius;
 		overflow-x: auto;
-		box-shadow: 0 3px 15px rgba($color: #000000, $alpha: 0.2);
+		box-shadow: 0 0 7px rgba($color: #000000, $alpha: 0.2);
     &__header,
     &__footer {
       display: flex;
@@ -83,30 +84,11 @@ export default {
 			align-items: center;
       border-top: 1px solid $color-border;
     }
-    &__button {
-      padding: 0;
-      background-color: transparent;
-      border: none;
-      cursor: pointer;
-    }
-    &__button--close {
+    &__button-close {
       position: absolute;
       top: 50%;
       right: 10px;
-      width: 30px;
-      height: 30px;
-      background-image: url('~@/assets/icons/close.svg');
-      background-size: 70%;
-      background-repeat: no-repeat;
-      background-position: center;
-			border: 2px solid #ffffff;
-			border-radius: 3px;
 			transform: translateY(-50%);
-			transition: background-color 0.2s ease-in, background-image 0.2s ease-in;
-			&:hover,
-			&:focus {
-				background-color: #ffffff;
-			}
 		}
 		&__button--ok {
 			margin-left: 10px;
