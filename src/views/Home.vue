@@ -1,18 +1,7 @@
 <template>
   <div class="home">
 		<div class="container">
-			<v-button
-				:icon="'calendar'"
-				:title="'Календарь'"
-				:width="40"
-				@on-click="setActiveComponent('calendar')"
-			/>
-			<v-button
-				:icon="'list'"
-				:title="'Список'"
-				:width="40"
-				@on-click="setActiveComponent('task-list')"
-			/>
+			<v-toolbar />
 			<keep-alive>
 				<component :is="component" />
 			</keep-alive>
@@ -22,21 +11,16 @@
 
 <script>
 import { mapGetters } from 'vuex';
-import VButton from '@/components/blocks/VButton.vue';
 import CalendarComponent from '@/components/Calendar/CalendarComponent.vue';
 import TaskListComponent from '@/components/TaskList/TaskListComponent.vue';
+import VToolbar from '@/components/blocks/VToolbar.vue';
 
 export default {
   name: 'Home',
   components: {
 		CalendarComponent,
 		TaskListComponent,
-		VButton
-	},
-	methods: {
-		setActiveComponent(name) {
-			this.$store.dispatch('setActiveComponent', name);
-		}
+		VToolbar
 	},
 	computed: {
 		...mapGetters(['getActiveComponent']),

@@ -1,10 +1,8 @@
 <template>
 	<div class="calendar">
-		<div class="container">
-			<calendar-month-selector :date="date" @on-change-month="changeDate" />
-    	<calendar-table :date="date" @on-select-day="selectDay"/>
-			<calendar-tasks :day="day"/>
-		</div>
+		<calendar-month-selector :date="date" @on-change-month="changeDate" />
+		<calendar-table :date="date" @on-select-day="selectDay"/>
+		<calendar-tasks :day="day"/>
 	</div>
 </template>
 
@@ -43,7 +41,7 @@ export default {
 
 <style lang="scss">
 	.calendar {
-		padding: 50px 0;
+		padding: 30px 0;
 		background-image: url("~@/assets/images/cloud.svg");
 		background-repeat: no-repeat;
 		background-position: right 10px;
