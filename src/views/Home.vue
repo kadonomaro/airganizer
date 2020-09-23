@@ -13,7 +13,9 @@
 				:width="40"
 				@on-click="setActiveComponent('task-list')"
 			/>
-			<component :is="component" />
+			<keep-alive>
+				<component :is="component" />
+			</keep-alive>
 		</div>
   </div>
 </template>

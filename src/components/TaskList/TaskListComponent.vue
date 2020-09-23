@@ -32,7 +32,9 @@ export default {
 	.task-list {
 		padding: 50px 0;
 		&__day {
-			margin-bottom: 20px;
+			margin-bottom: 10px;
+			padding: 10px;
+			background-color: #ffffff;
 		}
 		&__title {
 			display: block;
@@ -44,7 +46,7 @@ export default {
 			list-style: none;
 		}
 		&__item {
-			margin-bottom: 5px;
+			margin-bottom: 10px;
 		}
 	}
 </style>

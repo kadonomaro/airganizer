@@ -199,7 +199,11 @@ export default new Vuex.Store({
 		},
 
 		getDateByAllDays(state) {
-			return state.days;
+			return Object.fromEntries(Object.entries(state.days).sort((a, b) => {
+				const date1 = new Date(a[0].replace(/(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
+				const date2 = new Date(b[0].replace(/(\d{2})-(\d{2})-(\d{4})/, "$2/$1/$3"));
+				return date1 - date2;
+			}));
 		},
 
 		getDayTasksMarkers(state) {
