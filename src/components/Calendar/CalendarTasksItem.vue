@@ -14,21 +14,27 @@
 			<div class="calendar-item__controls" v-if="isControlsVisible">
 				<v-button
 					class="calendar-item__button"
-					:icon="'check'"
-					:title="'Завершить'"
+					title="Редактировать"
+					:icon="'edit'"
 					@on-click="completeTask(task)"
 				/>
 				<v-button
 					class="calendar-item__button"
+					title="Завершить"
+					:icon="'check'"
+					@on-click="completeTask(task)"
+				/>
+				<v-button
+					class="calendar-item__button"
+					title="Изменить приоритет"
 					:icon="task.priority === 'high' ? 'high-priority' : 'low-priority'"
-					:title="'Изменить приоритет'"
 					@on-click="changePriority(task)"
 					v-if="day.editable"
 				/>
 				<v-button
 					class="calendar-item__button"
+					title="Удалить"
 					:icon="'close'"
-					:title="'Удалить'"
 					@on-click="openModalHandler"
 				/>
 			</div>

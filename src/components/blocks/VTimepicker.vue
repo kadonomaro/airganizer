@@ -25,11 +25,11 @@
 				<li
 					:class="{'timepicker__item--active': +minute === +currentTime.minute}"
 					class="timepicker__item"
-					v-for="(_, minute) in 60"
+					v-for="(_, minute) in 12"
 					:key="minute"
-					@click="selectMinute(minute)"
+					@click="selectMinute(minute * 5)"
 				>
-					{{ minute < 10 ? '0' + minute : minute }}
+					{{ (minute * 5) < 10 ? '0' + (minute * 5) : (minute * 5) }}
 				</li>
 			</ul>
 		</div>
@@ -41,7 +41,7 @@ export default {
 	name: 'VTimepicker',
 	props: {
 		time: {
-			type: String,
+			type: Object,
 			required: true
 		}
 	},
@@ -56,6 +56,8 @@ export default {
 	},
 	created() {
 		document.addEventListener('click', this.closeEvent);
+		this.currentTime.hour = this.time.hour;
+		this.currentTime.minute = this.time.minute;
 	},
 	destroyed() {
 		document.removeEventListener('click', this.closeEvent);
@@ -103,12 +105,14 @@ export default {
 				}
 			}
 		},
-		time(value) {
-			if (!value) {
-				this.clear();
+		time: {
+			deep: true,
+			handler(time) {
+				if(!time.hour && !time.minute) {
+					this.clear();
+				}
 			}
 		}
-
 	}
 }
 </script>

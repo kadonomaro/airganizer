@@ -32,7 +32,10 @@ export default {
 			form: {
 				title: '',
 				desc: '',
-				time: ''
+				time: {
+					hour: '',
+					minute: ''
+				}
 			}
 		}
 	},
@@ -43,7 +46,7 @@ export default {
 					id: (+new Date).toString(36),
 					title: this.form.title,
 					desc: this.form.desc,
-					time: this.form.time,
+					time: (this.form.time.hour && this.form.time.minute) ? this.form.time.hour + ':' + this.form.time.minute : '',
 					priority: 'low',
 					completed: false
 				}
@@ -58,11 +61,11 @@ export default {
 		clear() {
 			this.form.title = '';
 			this.form.desc = '';
-			this.form.time = '';
+			this.form.time = { hour: '', minute: '' }
 		},
 
 		selectTime(payload) {
-			this.form.time = payload.hour + ':' + payload.minute;
+			this.form.time = { hour: payload.hour, minute: payload.minute };
 		}
 	}
 }

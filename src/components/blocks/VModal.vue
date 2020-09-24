@@ -59,7 +59,6 @@ export default {
     max-width: 600px;
 		background-color: #ffffff;
 		border-radius: $border-small-radius;
-		overflow-x: auto;
 		box-shadow: 0 0 7px rgba($color: #000000, $alpha: 0.2);
     &__header,
     &__footer {
