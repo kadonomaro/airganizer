@@ -16,7 +16,7 @@
 					class="calendar-item__button"
 					title="Редактировать"
 					:icon="'edit'"
-					@on-click="completeTask(task)"
+					@on-click="openModalHandler('edit')"
 				/>
 				<v-button
 					class="calendar-item__button"
@@ -35,7 +35,7 @@
 					class="calendar-item__button"
 					title="Удалить"
 					:icon="'close'"
-					@on-click="openModalHandler"
+					@on-click="openModalHandler('delete')"
 				/>
 			</div>
 			<v-button class="calendar-item__controls-toggle" :icon="'menu'" @on-click="toggleControls" />
@@ -44,12 +44,19 @@
 			<p>{{ task.desc }}</p>
 		</div>
 
-		<v-modal v-if="isModalVisible" @close="closeModalHandler">
+		<v-modal v-if="modal.visible" @close="closeModalHandler">
       <template v-slot:header>
-        <span>Удаление</span>
+        <span v-if="modal.type === 'delete'">Удаление</span>
+				<span v-else-if="modal.type === 'edit'">Изменение</span>
       </template>
       <template v-slot:body>
-        <p>Вы действительно хотите удалить «{{ task.title }}»?</p>
+
+        <p v-if="modal.type === 'delete'">Вы действительно хотите удалить «{{ task.title }}»?</p>
+				<form v-else-if="modal.type === 'edit'">
+					<input type="text" class="input" v-model="task.title">
+					<v-timepicker :time="time"/>
+				</form>
+
       </template>
 			<template v-slot:footer>
         <v-button
@@ -57,8 +64,13 @@
 					@on-click="closeModalHandler"
 				>Отменить</v-button>
 				<v-button
+					v-if="modal.type === 'delete'"
 					@on-click="removeTask(task)"
 				>Удалить</v-button>
+				<v-button
+					v-else-if="modal.type === 'edit'"
+					@on-click="changeTask(task)"
+				>Изменить</v-button>
       </template>
     </v-modal>
 
@@ -68,12 +80,14 @@
 <script>
 import VButton from '../blocks/VButton.vue';
 import VModal from '../blocks/VModal';
+import VTimepicker from '../blocks/VTimepicker';
 
 export default {
 	name: 'CalendarTasksItem',
 	components: {
 		VButton,
-		VModal
+		VModal,
+		VTimepicker
 	},
 	props: {
 		task: {
@@ -88,7 +102,10 @@ export default {
 	data() {
 		return {
 			isOpened: false,
-			isModalVisible: false,
+			modal: {
+				visible: false,
+				type: ''
+			},
 			isControlsVisible: false
 		}
 	},
@@ -108,6 +125,10 @@ export default {
 			});
 		},
 
+		changeTask(task) {
+			console.log(task, ' changed');
+		},
+
 		removeTask(task) {
 			this.$store.dispatch('removeTask', {
 				day: this.day.value,
@@ -122,14 +143,21 @@ export default {
 			});
 		},
 
-		openModalHandler() {
-			this.isModalVisible = true;
+		openModalHandler(type) {
+			this.modal.visible = true;
+			this.modal.type = type;
 		},
 
 		closeModalHandler() {
-			this.isModalVisible = false;
+			this.modal.visible = false;
 		}
 	},
+	computed: {
+		time() {
+			const time = this.task.time.split(':');
+			return { hour: time[0], minute: time[1] };
+		}
+	}
 }
 </script>
 

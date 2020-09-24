@@ -56,8 +56,8 @@ export default {
 	},
 	created() {
 		document.addEventListener('click', this.closeEvent);
-		this.currentTime.hour = this.time.hour;
-		this.currentTime.minute = this.time.minute;
+		this.currentTime.hour = this.time.hour || 'ЧЧ';
+		this.currentTime.minute = this.time.minute || 'ММ';
 	},
 	destroyed() {
 		document.removeEventListener('click', this.closeEvent);
