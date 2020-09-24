@@ -36,6 +36,12 @@ export default new Vuex.Store({
 			storage.save(state.days);
 		},
 
+		CHANGE_TASK(state, { day, task }) {
+			let current = state.days[day].data.find(item => item.id === task.id);
+			Object.assign(current, task);
+			storage.save(state.days);
+		},
+
 		REMOVE_TASK(state, { day, task }) {
 			state.days[day].data = state.days[day].data.filter(item => item.id !== task.id);
 			if (!state.days[day].data.length) delete state.days[day];
@@ -108,6 +114,13 @@ export default new Vuex.Store({
 
 		addTask({ commit, state }, data) {
 			commit('UPDATE_DATA', data);
+			if (state.user.isLoggedIn) {
+				db.update(state.user.id, data.day, state.days[data.day]);
+			}
+		},
+
+		changeTask({ commit, state }, data) {
+			commit('CHANGE_TASK', data);
 			if (state.user.isLoggedIn) {
 				db.update(state.user.id, data.day, state.days[data.day]);
 			}

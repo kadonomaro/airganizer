@@ -10,7 +10,7 @@
 			@click="toggle(task.desc)"
 		>
 			<span class="calendar-item__title">{{ task.title }}</span>
-			<span class="calendar-item__time" v-if="task.time">{{ task.time }}</span>
+			<span class="calendar-item__time" v-if="task.time">{{formattedTime}}</span>
 			<div class="calendar-item__controls" v-if="isControlsVisible">
 				<v-button
 					class="calendar-item__button"
@@ -53,8 +53,19 @@
 
         <p v-if="modal.type === 'delete'">Вы действительно хотите удалить «{{ task.title }}»?</p>
 				<form v-else-if="modal.type === 'edit'">
-					<input type="text" class="input" v-model="task.title">
-					<v-timepicker :time="time"/>
+					<input
+						type="text"
+						class="input calendar-item__input"
+						v-model="currentTask.title"
+						placeholder="Название"
+					>
+					<textarea
+						type="text"
+						class="input calendar-item__input"
+						v-model="currentTask.desc"
+						placeholder="Описание"
+					></textarea>
+					<v-timepicker :time="time" @on-select-time="changeTimeHandler"/>
 				</form>
 
       </template>
@@ -102,12 +113,16 @@ export default {
 	data() {
 		return {
 			isOpened: false,
+			currentTask: {},
 			modal: {
 				visible: false,
 				type: ''
 			},
 			isControlsVisible: false
 		}
+	},
+	created() {
+		this.currentTask = {...this.task};
 	},
 	methods: {
 		toggle(state) {
@@ -118,6 +133,10 @@ export default {
 			this.isControlsVisible = !this.isControlsVisible;
 		},
 
+		changeTimeHandler(payload) {
+			this.currentTask.time = payload;
+		},
+
 		completeTask(task) {
 			this.$store.dispatch('completeTask', {
 				day: this.day.value,
@@ -126,7 +145,11 @@ export default {
 		},
 
 		changeTask(task) {
-			console.log(task, ' changed');
+			this.modal.visible = false;
+			this.$store.dispatch('changeTask', {
+				day: this.day.value,
+				task: this.currentTask
+			});
 		},
 
 		removeTask(task) {
@@ -154,8 +177,17 @@ export default {
 	},
 	computed: {
 		time() {
-			const time = this.task.time.split(':');
-			return { hour: time[0], minute: time[1] };
+			return {
+				hour: this.task.time.hour,
+				minute: this.task.time.minute
+			};
+		},
+		formattedTime() {
+			if (this.time.hour && this.time.minute) {
+				return this.time.hour + ':' + this.time.minute;
+			} else {
+				return ''
+			}
 		}
 	}
 }
@@ -231,6 +263,10 @@ export default {
 		}
 		&__button {
 			margin-left: 3px;
+		}
+		&__input {
+			width: 100%;
+			margin-bottom: 10px;
 		}
 	}
 

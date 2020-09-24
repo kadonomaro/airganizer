@@ -46,7 +46,10 @@ export default {
 					id: (+new Date).toString(36),
 					title: this.form.title,
 					desc: this.form.desc,
-					time: (this.form.time.hour && this.form.time.minute) ? this.form.time.hour + ':' + this.form.time.minute : '',
+					time: {
+						hour: this.form.time.hour,
+						minute: this.form.time.minute
+					},
 					priority: 'low',
 					completed: false
 				}
