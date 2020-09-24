@@ -11,7 +11,7 @@
 		>
 			<span class="calendar-item__title">{{ task.title }}</span>
 			<span class="calendar-item__time" v-if="task.time">{{ task.time }}</span>
-			<div class="calendar-item__controls">
+			<div class="calendar-item__controls" v-if="isControlsVisible">
 				<v-button
 					class="calendar-item__button"
 					:icon="'check'"
@@ -32,6 +32,7 @@
 					@on-click="openModalHandler"
 				/>
 			</div>
+			<v-button class="calendar-item__controls-toggle" :icon="'menu'" @on-click="toggleControls" />
 		</div>
 		<div class="calendar-item__desc" v-if="task.desc && isOpened">
 			<p>{{ task.desc }}</p>
@@ -81,12 +82,17 @@ export default {
 	data() {
 		return {
 			isOpened: false,
-			isModalVisible: false
+			isModalVisible: false,
+			isControlsVisible: false
 		}
 	},
 	methods: {
-		toggle (state) {
+		toggle(state) {
 			if (state) this.isOpened = !this.isOpened;
+		},
+
+		toggleControls() {
+			this.isControlsVisible = !this.isControlsVisible;
 		},
 
 		completeTask(task) {
@@ -109,6 +115,7 @@ export default {
 				task
 			});
 		},
+
 		openModalHandler() {
 			this.isModalVisible = true;
 		},
@@ -137,6 +144,7 @@ export default {
 		&__head--clickable {
 			padding-left: 25px;
 			cursor: pointer;
+			-webkit-tap-highlight-color: transparent;
 			&::before {
 				position: absolute;
 				left: 10px;
@@ -176,6 +184,9 @@ export default {
 		&__controls {
 			display: flex;
 		}
+		&__controls-toggle {
+			margin-left: 3px;
+		}
 		&__desc {
 			font-size: 14px;
 			margin: 0 20px;
@@ -192,8 +203,23 @@ export default {
 
 	@media (max-width: $size-mobile) {
 		.calendar-item {
+			position: relative;
 			&__head {
+				padding-right: 6px;
 				font-size: 16px;
+			}
+			&__controls {
+				position: absolute;
+				right: 60px;
+				border-radius: $border-small-radius;
+			}
+			&__controls-toggle {
+				display: block;
+			}
+			&__button {
+				&:first-child {
+					margin-left: 0;
+				}
 			}
 		}
 	}

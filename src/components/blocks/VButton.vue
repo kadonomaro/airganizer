@@ -95,6 +95,9 @@ export default {
 	.button--list {
 		background-image: url('~@/assets/icons/list.svg');
 	}
+	.button--menu {
+		background-image: url('~@/assets/icons/menu.svg');
+	}
 	.button--arrow-left {
 		background-image: url('~@/assets/icons/arrow-left.svg');
 	}
