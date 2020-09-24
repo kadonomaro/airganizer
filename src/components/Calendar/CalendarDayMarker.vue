@@ -71,7 +71,7 @@ export default {
 			border-radius: 50%;
 		}
 		&__marker--active {
-			background-color: #00aa1c;
+			background-color: $color-success;
 		}
 		&__marker--high {
 			background-image: url('~@/assets/icons/fire.svg');

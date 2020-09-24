@@ -20,6 +20,10 @@ export default {
 			type: String,
 			required: false
 		},
+		type: {
+			type: String,
+			required: false
+		},
 		width: {
 			type: Number,
 			required: false
@@ -34,6 +38,7 @@ export default {
 		style() {
 			return [
 				this.icon ? 'button--' + this.icon : '',
+				this.type ? 'button--' + this.type : '',
 				this.$slots.default ? 'button--text' : ''
 			]
 		}
@@ -73,6 +78,20 @@ export default {
 		height: auto;
 		padding: 8px 16px;
 		border-radius: $border-small-radius;
+	}
+	.button--danger {
+		background-color: $color-danger;
+		border-color: $color-danger;
+		&:hover {
+			background-color: darken($color: $color-danger, $amount: 5%);
+		}
+	}
+	.button--success {
+		background-color: $color-success;
+		border-color: $color-success;
+		&:hover {
+			background-color: darken($color: $color-success, $amount: 5%);
+		}
 	}
 	.button--close {
 		background-image: url('~@/assets/icons/close.svg');

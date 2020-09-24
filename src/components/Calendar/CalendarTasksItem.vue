@@ -72,14 +72,18 @@
 			<template v-slot:footer>
         <v-button
 					style="margin-right:5px;"
+					:type="'danger'"
 					@on-click="closeModalHandler"
+					ref="cancel"
 				>Отменить</v-button>
 				<v-button
 					v-if="modal.type === 'delete'"
+					:type="'success'"
 					@on-click="removeTask(task)"
 				>Удалить</v-button>
 				<v-button
 					v-else-if="modal.type === 'edit'"
+					:type="'success'"
 					@on-click="changeTask(task)"
 				>Изменить</v-button>
       </template>

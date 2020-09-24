@@ -5,6 +5,7 @@
 	font-size: 14px;
 	border: 1px solid $color-border;
 	border-radius: $border-small-radius;
+	resize: vertical;
 	outline: none;
 	transition: box-shadow 0.1s ease-in;
 	box-sizing: border-box;
