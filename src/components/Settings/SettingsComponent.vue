@@ -1,23 +1,41 @@
 <template>
 	<div class="settings">
+		<span class="settings__title">Настройки</span>
 		<ul class="settings__list">
 			<li class="settings__item">
-				<v-checkbox :text="'text'" :checked="true"/>
+				<v-checkbox
+					:text="'Подтверждение удаления задач'"
+					:checked="getSettings.removeTaskConfirm"
+					@on-change="updateSettings('removeTaskConfirm')"
+				/>
 			</li>
 			<li class="settings__item">
-				<v-checkbox :text="'text'"/>
+				<v-checkbox
+					:text="'Скрывать завершенные задачи'"
+					:checked="getSettings.hideCompletedTasks"
+					@on-change="updateSettings('hideCompletedTasks')"
+				/>
 			</li>
 		</ul>
 	</div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import VCheckbox from '../blocks/VCheckbox.vue';
 
 export default {
 	name: 'SettingsComponent',
 	components: {
 		VCheckbox
+	},
+	methods: {
+		updateSettings(type) {
+			// console.log(type);
+		}
+	},
+	computed: {
+		...mapGetters(['getSettings'])
 	}
 }
 </script>
@@ -25,6 +43,12 @@ export default {
 <style lang="scss">
 	.settings {
 		padding: 30px 0;
+		&__title {
+			display: block;
+			margin-bottom: 5px;
+			font-size: 18px;
+			font-weight: bold;
+		}
 		&__list {
 			margin: 0;
 			padding: 10px;
@@ -32,7 +56,9 @@ export default {
 			background-color: #ffffff;
 		}
 		&__item {
-			margin-bottom: 10px;
+			&:not(:last-child) {
+				margin-bottom: 10px;
+			}
 		}
 	}
 </style>

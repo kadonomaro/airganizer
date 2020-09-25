@@ -8,6 +8,7 @@ import { Database } from '../api/Database';
 Vue.use(Vuex)
 
 const storage = new LocalStorage('days');
+const settings = new LocalStorage('settings');
 const db = new Database();
 
 export default new Vuex.Store({
@@ -19,6 +20,10 @@ export default new Vuex.Store({
 			name: '',
 			email: '',
 			isLoggedIn: false
+		},
+		settings: {
+			removeTaskConfirm: true,
+			hideCompletedTasks: false,
 		},
 		auth: {
 			error: ''
@@ -254,6 +259,10 @@ export default new Vuex.Store({
 
 		getAuthError(state) {
 			return state.auth.error;
+		},
+
+		getSettings(state) {
+			return state.settings;
 		}
 	}
 })

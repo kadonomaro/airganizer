@@ -55,13 +55,14 @@ export default {
 		}
 		&__custom {
 			position: relative;
+			flex-shrink: 0;
 			display: block;
 			width: 40px;
 			height: 20px;
 			padding: 2px;
 			background-color: $color-danger;
 			border: 1px solid $color-border;
-			border-radius: $border-large-radius;
+			border-radius: 100px;
 			box-sizing: border-box;
 			cursor: pointer;
 			&::before {
@@ -79,6 +80,27 @@ export default {
 		}
 		&__text {
 			margin-left: 5px;
+		}
+	}
+
+
+	@media (max-width: $size-mobile) {
+		.checkbox {
+			&__custom {
+				width: 60px;
+				height: 30px;
+				&::before {
+					width: 24px;
+					height: 24px;
+				}
+			}
+			&__input {
+				&:checked ~ .checkbox__custom {
+					&::before {
+						transform: translate(30px, -50%);
+					}
+				}
+			}
 		}
 	}
 </style>
