@@ -2,20 +2,23 @@
 	<div class="settings">
 		<ul class="settings__list">
 			<li class="settings__item">
-				<input type="checkbox">
-				<span>text</span>
+				<v-checkbox :text="'text'" :checked="true"/>
 			</li>
 			<li class="settings__item">
-				<input type="checkbox">
-				<span>text</span>
+				<v-checkbox :text="'text'"/>
 			</li>
 		</ul>
 	</div>
 </template>
 
 <script>
+import VCheckbox from '../blocks/VCheckbox.vue';
+
 export default {
-	name: 'SettingsComponent'
+	name: 'SettingsComponent',
+	components: {
+		VCheckbox
+	}
 }
 </script>
 
