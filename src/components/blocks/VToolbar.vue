@@ -16,6 +16,14 @@
 			:width="40"
 			@on-click="setActiveComponent('task-list')"
 		/>
+		<v-button
+			class="toolbar__button"
+			:class="{'toolbar__button--active': getActiveComponent === 'settings'}"
+			:icon="'settings'"
+			:title="'Настройки'"
+			:width="40"
+			@on-click="setActiveComponent('settings')"
+		/>
 	</div>
 </template>
 

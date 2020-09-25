@@ -13,6 +13,7 @@
 import { mapGetters } from 'vuex';
 import CalendarComponent from '@/components/Calendar/CalendarComponent.vue';
 import TaskListComponent from '@/components/TaskList/TaskListComponent.vue';
+import SettingsComponent from '@/components/Settings/SettingsComponent.vue';
 import VToolbar from '@/components/blocks/VToolbar.vue';
 
 export default {
@@ -20,6 +21,7 @@ export default {
   components: {
 		CalendarComponent,
 		TaskListComponent,
+		SettingsComponent,
 		VToolbar
 	},
 	computed: {

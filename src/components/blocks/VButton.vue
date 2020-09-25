@@ -120,6 +120,9 @@ export default {
 	.button--edit {
 		background-image: url('~@/assets/icons/edit.svg');
 	}
+	.button--settings {
+		background-image: url('~@/assets/icons/settings.svg');
+	}
 	.button--arrow-left {
 		background-image: url('~@/assets/icons/arrow-left.svg');
 	}

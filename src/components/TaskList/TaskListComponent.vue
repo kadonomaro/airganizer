@@ -30,7 +30,7 @@ export default {
 
 <style lang="scss">
 	.task-list {
-		padding: 50px 0;
+		padding: 30px 0;
 		&__day {
 			margin-bottom: 10px;
 			padding: 10px;
