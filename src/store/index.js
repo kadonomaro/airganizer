@@ -23,7 +23,7 @@ export default new Vuex.Store({
 		},
 		settings: {
 			removeTaskConfirm: true,
-			hideCompletedTasks: false,
+			showCompletedTasks: true,
 		},
 		auth: {
 			error: ''
@@ -35,7 +35,7 @@ export default new Vuex.Store({
 		},
 
 		INIT_SETTINGS(state, settings) {
-			state.settings = settings;
+			settings.length ? state.settings = settings : state.settings;
 		},
 
 		UPDATE_DATA(state, { day, value }) {

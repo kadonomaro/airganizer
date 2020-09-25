@@ -11,9 +11,9 @@
 			</li>
 			<li class="settings__item">
 				<v-checkbox
-					:text="'Скрывать завершенные задачи'"
-					:checked="getSettings.hideCompletedTasks"
-					@on-change="updateSettings('hideCompletedTasks')"
+					:text="'Показывать завершенные задачи'"
+					:checked="getSettings.showCompletedTasks"
+					@on-change="updateSettings('showCompletedTasks')"
 				/>
 			</li>
 		</ul>

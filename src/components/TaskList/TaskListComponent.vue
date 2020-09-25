@@ -4,7 +4,11 @@
 			<span class="task-list__title">{{ key }}</span>
 			<ul class="task-list__list">
 					<li class="task-list__item" v-for="task in day.data" :key="task.id">
-						<calendar-tasks-item :day="{ value: key, editable: true }" :task="task" />
+						<calendar-tasks-item
+							:day="{ value: key, editable: true }"
+							:task="task"
+							v-if="!task.completed || getSettings.showCompletedTasks"
+						/>
 					</li>
 			</ul>
 		</div>
@@ -22,7 +26,8 @@ export default {
 	},
 	computed: {
 		...mapGetters([
-			'getDateByAllDays'
+			'getDateByAllDays',
+			'getSettings'
 		])
 	}
 }

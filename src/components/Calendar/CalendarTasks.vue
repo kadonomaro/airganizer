@@ -5,7 +5,11 @@
 		</div>
 		<ul class="calendar-tasks__list" v-if="tasks">
 				<li class="calendar-tasks__item" v-for="task in tasks.data" :key="task.id">
-					<calendar-tasks-item :day="day" :task="task" />
+					<calendar-tasks-item
+						:day="day"
+						:task="task"
+						v-if="!task.completed || getSettings.showCompletedTasks"
+					/>
 				</li>
 		</ul>
 		<div class="calendar-tasks__form" v-if="day.editable">
@@ -34,7 +38,8 @@ export default {
 	},
 	computed: {
 		...mapGetters([
-			'getDateByDay'
+			'getDateByDay',
+			'getSettings'
 		]),
 		tasks() {
 			return this.getDateByDay(this.day.value);
