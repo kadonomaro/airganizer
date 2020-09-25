@@ -34,6 +34,10 @@ export default new Vuex.Store({
 			state.days = data;
 		},
 
+		INIT_SETTINGS(state, settings) {
+			state.settings = settings;
+		},
+
 		UPDATE_DATA(state, { day, value }) {
 			state.days[day]
 				? state.days[day].data.push(value)
@@ -85,11 +89,20 @@ export default new Vuex.Store({
 
 		SET_COMPONENT(state, name) {
 			state.component = name;
+		},
+
+		SET_SETTINGS(state, type) {
+			state.settings[type] = !state.settings[type];
 		}
   },
 	actions: {
 		setActiveComponent({ commit }, name) {
 			commit('SET_COMPONENT', name);
+		},
+
+		updateSettings({ commit, state }, type) {
+			commit('SET_SETTINGS', type);
+			settings.save(state.settings);
 		},
 
 		checkUserAuthStatus({ commit }) {
@@ -106,6 +119,7 @@ export default new Vuex.Store({
 		},
 
 		fetchData({ commit, dispatch, state }) {
+			commit('INIT_SETTINGS', settings.load());
 			dispatch('checkUserAuthStatus').then((status) => {
 				if (status) {
 					db.load(state.user.id).then(data => {

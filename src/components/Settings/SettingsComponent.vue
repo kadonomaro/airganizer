@@ -31,7 +31,7 @@ export default {
 	},
 	methods: {
 		updateSettings(type) {
-			// console.log(type);
+			this.$store.dispatch('updateSettings', type);
 		}
 	},
 	computed: {
