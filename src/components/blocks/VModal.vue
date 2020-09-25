@@ -49,7 +49,8 @@ export default {
     right: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
+		align-items: center;
+		padding: 10px;
     background-color: rgba($color: #ffffff, $alpha: 0.7);
   }
   .modal {
@@ -71,7 +72,9 @@ export default {
       justify-content: space-between;
       color: #ffffff;
       font-size: 18px;
-      background-color: $color-background-dark;
+			background-color: $color-background-dark;
+			border-top-left-radius: $border-small-radius;
+			border-top-right-radius: $border-small-radius;
     }
     &__body {
       position: relative;

@@ -35,7 +35,7 @@
 					class="calendar-item__button"
 					title="Удалить"
 					:icon="'close'"
-					@on-click="openModalHandler('delete')"
+					@on-click="getSettings.removeTaskConfirm ? openModalHandler('delete') : removeTask(task)"
 				/>
 			</div>
 			<v-button class="calendar-item__controls-toggle" :icon="'menu'" @on-click="toggleControls" />
@@ -93,6 +93,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import VButton from '../blocks/VButton.vue';
 import VModal from '../blocks/VModal';
 import VTimepicker from '../blocks/VTimepicker';
@@ -180,6 +181,7 @@ export default {
 		}
 	},
 	computed: {
+		...mapGetters(['getSettings']),
 		time() {
 			return {
 				hour: this.task.time.hour,

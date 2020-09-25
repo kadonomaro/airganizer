@@ -35,7 +35,7 @@ export default new Vuex.Store({
 		},
 
 		INIT_SETTINGS(state, settings) {
-			settings.length ? state.settings = settings : state.settings;
+			Object.keys(settings).length ? state.settings = settings : state.settings;
 		},
 
 		UPDATE_DATA(state, { day, value }) {
