@@ -10,7 +10,7 @@
 import CalendarMonthSelector from './CalendarMonthSelector.vue';
 import CalendarTable from './CalendarTable.vue';
 import CalendarTasks from './CalendarTasks.vue';
-import * as moment from 'moment';
+import moment from 'moment';
 
 export default {
 	name: 'CalendarComponent',
