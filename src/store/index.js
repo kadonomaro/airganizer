@@ -24,6 +24,7 @@ export default new Vuex.Store({
 		settings: {
 			removeTaskConfirm: true,
 			showCompletedTasks: true,
+			еditingExpiredTasks: false
 		},
 		auth: {
 			error: ''

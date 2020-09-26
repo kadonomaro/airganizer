@@ -18,6 +18,7 @@
 						class="calendar-item__button"
 						title="Редактировать"
 						:icon="'edit'"
+						v-if="day.editable || getSettings.еditingExpiredTasks"
 						@on-click="openModalHandler('edit')"
 					/>
 					<v-button
@@ -31,7 +32,7 @@
 						title="Изменить приоритет"
 						:icon="task.priority === 'high' ? 'high-priority' : 'low-priority'"
 						@on-click="changePriority(task)"
-						v-if="day.editable"
+						v-if="day.editable || getSettings.еditingExpiredTasks"
 					/>
 					<v-button
 						class="calendar-item__button"
@@ -195,7 +196,7 @@ export default {
 			if (this.time.hour && this.time.minute) {
 				return this.time.hour + ':' + this.time.minute;
 			} else {
-				return ''
+				return '';
 			}
 		}
 	}

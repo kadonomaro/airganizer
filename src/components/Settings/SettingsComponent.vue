@@ -16,6 +16,13 @@
 					@on-change="updateSettings('showCompletedTasks')"
 				/>
 			</li>
+			<li class="settings__item">
+				<v-checkbox
+					:text="'Редактирование задач с истекшим сроком'"
+					:checked="getSettings.еditingExpiredTasks"
+					@on-change="updateSettings('еditingExpiredTasks')"
+				/>
+			</li>
 		</ul>
 	</div>
 </template>
