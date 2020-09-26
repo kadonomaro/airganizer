@@ -3,7 +3,7 @@
 		<div class="calendar-tasks__head">
 			<span class="calendar-tasks__title">{{ title }}</span>
 		</div>
-		<ul class="calendar-tasks__list" v-if="tasks">
+		<ul class="calendar-tasks__list" v-if="isVisible">
 				<li class="calendar-tasks__item" v-for="task in tasks.data" :key="task.id">
 					<calendar-tasks-item
 						:day="day"
@@ -43,6 +43,9 @@ export default {
 		]),
 		tasks() {
 			return this.getDateByDay(this.day.value);
+		},
+		isVisible() {
+			return this.tasks?.data?.length;
 		},
 		title() {
 			return moment(this.day.value, 'DD-MM-YYYY').format('DD MMMM YYYY');
