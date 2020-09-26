@@ -5,39 +5,42 @@
 			:class="{
 				'calendar-item__head--clickable': task.desc,
 				'calendar-item__head--transparent': task.completed,
-				'calendar-item__head--opened' : isOpened
+				'calendar-item__head--opened' : isOpened,
+				'calendar-item__head--high-priority': task.priority === 'high'
 				}"
 			@click="toggle(task.desc)"
 		>
 			<span class="calendar-item__title">{{ task.title }}</span>
 			<span class="calendar-item__time" v-if="task.time">{{formattedTime}}</span>
-			<div class="calendar-item__controls" v-if="isControlsVisible">
-				<v-button
-					class="calendar-item__button"
-					title="Редактировать"
-					:icon="'edit'"
-					@on-click="openModalHandler('edit')"
-				/>
-				<v-button
-					class="calendar-item__button"
-					title="Завершить"
-					:icon="'check'"
-					@on-click="completeTask(task)"
-				/>
-				<v-button
-					class="calendar-item__button"
-					title="Изменить приоритет"
-					:icon="task.priority === 'high' ? 'high-priority' : 'low-priority'"
-					@on-click="changePriority(task)"
-					v-if="day.editable"
-				/>
-				<v-button
-					class="calendar-item__button"
-					title="Удалить"
-					:icon="'close'"
-					@on-click="getSettings.removeTaskConfirm ? openModalHandler('delete') : removeTask(task)"
-				/>
-			</div>
+			<transition name="fade">
+				<div class="calendar-item__controls" v-if="isControlsVisible">
+					<v-button
+						class="calendar-item__button"
+						title="Редактировать"
+						:icon="'edit'"
+						@on-click="openModalHandler('edit')"
+					/>
+					<v-button
+						class="calendar-item__button"
+						title="Завершить"
+						:icon="'check'"
+						@on-click="completeTask(task)"
+					/>
+					<v-button
+						class="calendar-item__button"
+						title="Изменить приоритет"
+						:icon="task.priority === 'high' ? 'high-priority' : 'low-priority'"
+						@on-click="changePriority(task)"
+						v-if="day.editable"
+					/>
+					<v-button
+						class="calendar-item__button"
+						title="Удалить"
+						:icon="'close'"
+						@on-click="getSettings.removeTaskConfirm ? openModalHandler('delete') : removeTask(task)"
+					/>
+				</div>
+			</transition>
 			<v-button class="calendar-item__controls-toggle" :icon="'menu'" @on-click="toggleControls" />
 		</div>
 		<div class="calendar-item__desc" v-if="task.desc && isOpened">
@@ -201,20 +204,31 @@ export default {
 
 <style lang="scss">
 	.calendar-item {
+		position: relative;
 		&__head {
 			position: relative;
 			z-index: 9;
 			display: flex;
 			align-items: center;
-			padding: 6px 12px;
+			padding: 6px 12px 6px 20px;
 			color: $color-text;
 			font-size: 18px;
 			background-color: $color-background;
 			border: 1px solid $color-border;
 			border-radius: $border-large-radius;
 		}
+		&__head--high-priority {
+			&::after {
+				content: '';
+				position: absolute;
+				top: -10px;
+				left: -10px;
+				width: 25px;
+				height: 25px;
+				background-image: url('~@/assets/icons/hot.svg');
+			}
+		}
 		&__head--clickable {
-			padding-left: 25px;
 			cursor: pointer;
 			-webkit-tap-highlight-color: transparent;
 			&::before {
@@ -244,7 +258,7 @@ export default {
 		&__time {
 			position: absolute;
 			top: 0;
-			left: 9px;
+			left: 15px;
 			display: block;
 			padding: 0 3px;
 			font-size: 14px;
@@ -286,7 +300,7 @@ export default {
 			}
 			&__controls {
 				position: absolute;
-				right: 60px;
+				right: 50px;
 				border-radius: $border-small-radius;
 			}
 			&__controls-toggle {

@@ -43,7 +43,7 @@ export default {
 		}
 		&__title {
 			display: block;
-			margin-bottom: 5px;
+			margin-bottom: 10px;
 		}
 		&__list {
 			margin: 0;
