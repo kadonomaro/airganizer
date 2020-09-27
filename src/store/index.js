@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import router from '../router';
+import settingsModule from './modules/settings';
 import { auth } from '../main';
-import { LocalStorage } from '../libs/LocalStorage'
+import { LocalStorage } from '../libs/LocalStorage';
 import { Database } from '../api/Database';
 
 Vue.use(Vuex)
 
 const storage = new LocalStorage('days');
-const settings = new LocalStorage('settings');
 const db = new Database();
 
 export default new Vuex.Store({
@@ -21,11 +21,6 @@ export default new Vuex.Store({
 			email: '',
 			isLoggedIn: false
 		},
-		settings: {
-			removeTaskConfirm: true,
-			showCompletedTasks: true,
-			еditingExpiredTasks: false
-		},
 		auth: {
 			error: ''
 		}
@@ -33,10 +28,6 @@ export default new Vuex.Store({
 	mutations: {
 		INIT_DATA(state, data) {
 			state.days = data;
-		},
-
-		INIT_SETTINGS(state, settings) {
-			Object.keys(settings).length ? state.settings = settings : state.settings;
 		},
 
 		UPDATE_DATA(state, { day, value }) {
@@ -90,20 +81,11 @@ export default new Vuex.Store({
 
 		SET_COMPONENT(state, name) {
 			state.component = name;
-		},
-
-		SET_SETTINGS(state, type) {
-			state.settings[type] = !state.settings[type];
 		}
   },
 	actions: {
 		setActiveComponent({ commit }, name) {
 			commit('SET_COMPONENT', name);
-		},
-
-		updateSettings({ commit, state }, type) {
-			commit('SET_SETTINGS', type);
-			settings.save(state.settings);
 		},
 
 		checkUserAuthStatus({ commit }) {
@@ -120,7 +102,6 @@ export default new Vuex.Store({
 		},
 
 		fetchData({ commit, dispatch, state }) {
-			commit('INIT_SETTINGS', settings.load());
 			dispatch('checkUserAuthStatus').then((status) => {
 				if (status) {
 					db.load(state.user.id).then(data => {
@@ -274,10 +255,9 @@ export default new Vuex.Store({
 
 		getAuthError(state) {
 			return state.auth.error;
-		},
-
-		getSettings(state) {
-			return state.settings;
 		}
+	},
+	modules: {
+		settings: settingsModule
 	}
 })
