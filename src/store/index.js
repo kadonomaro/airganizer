@@ -1,7 +1,8 @@
-import Vue from 'vue'
-import Vuex from 'vuex'
+import Vue from 'vue';
+import Vuex from 'vuex';
 import router from '../router';
 import settingsModule from './modules/settings';
+import componentModule from './modules/component';
 import { auth } from '../main';
 import { LocalStorage } from '../libs/LocalStorage';
 import { Database } from '../api/Database';
@@ -13,7 +14,6 @@ const db = new Database();
 
 export default new Vuex.Store({
 	state: {
-		component: 'calendar',
 		days: {},
 		user: {
 			id: '',
@@ -24,7 +24,7 @@ export default new Vuex.Store({
 		auth: {
 			error: ''
 		}
-  },
+	},
 	mutations: {
 		INIT_DATA(state, data) {
 			state.days = data;
@@ -62,14 +62,14 @@ export default new Vuex.Store({
 		},
 
 		SET_USER(state, user) {
-			state.user.id = user.id,
+			state.user.id = user.id;
 			state.user.name = user.name;
 			state.user.email = user.email;
 			state.user.isLoggedIn = true;
 		},
 
 		REMOVE_USER(state) {
-			state.user.id = '',
+			state.user.id = '';
 			state.user.name = '';
 			state.user.email = '';
 			state.user.isLoggedIn = false;
@@ -77,17 +77,9 @@ export default new Vuex.Store({
 
 		CHANGE_ERROR_CODE(state, error) {
 			state.auth.error = error;
-		},
-
-		SET_COMPONENT(state, name) {
-			state.component = name;
 		}
-  },
+	},
 	actions: {
-		setActiveComponent({ commit }, name) {
-			commit('SET_COMPONENT', name);
-		},
-
 		checkUserAuthStatus({ commit }) {
 			return new Promise(resolve => {
 				auth.onAuthStateChanged(user => {
@@ -202,10 +194,6 @@ export default new Vuex.Store({
 		}
 	},
 	getters: {
-		getActiveComponent(state) {
-			return state.component;
-		},
-
 		getDateByDay(state) {
 			return (day) => {
 				return state.days[day];
@@ -258,6 +246,7 @@ export default new Vuex.Store({
 		}
 	},
 	modules: {
+		component: componentModule,
 		settings: settingsModule
 	}
-})
+});
