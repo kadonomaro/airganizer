@@ -68,7 +68,7 @@ export default {
 		},
 
 		selectTime(payload) {
-			this.form.time = { hour: payload.hour, minute: payload.minute };
+			this.form.time = payload;
 		}
 	}
 }
@@ -79,7 +79,11 @@ export default {
 		display: flex;
 		width: 400px;
 		max-width: 100%;
+		&__form {
+			width: 100%;
+		}
 		&__field {
+			display: block;
 			width: 100%;
 			max-width: 100%;
 			min-height: 20px;

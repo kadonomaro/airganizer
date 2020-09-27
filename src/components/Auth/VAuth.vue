@@ -7,7 +7,7 @@
 			<span class="auth__title">{{ title }}</span>
 
 			<form v-if="type === 'login'" class="auth__form" @submit.prevent="submitHandler">
-				<label class="auth__label auth__label--name">
+				<label class="auth__label auth__label--email">
 					<input
 						type="text"
 						class="auth__field input"
@@ -249,7 +249,7 @@ export default {
 				content: '';
 				position: absolute;
 				top: 50%;
-				right: 10px;
+				left: 10px;
 				width: 15px;
 				height: 15px;
 				transform: translateY(-50%);
@@ -265,7 +265,7 @@ export default {
 		}
 		&__label--email {
 			&::before {
-				background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='iso-8859-1'%3F%3E%3C!--Generator: Adobe Illustrator 19.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)--%3E%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' style='enable-background:new 0 0 512 512'%3E%3Cpath fill='%23606060' d='M339.392 258.624L512 367.744V144.896zM0 144.896v222.848l172.608-109.12zM480 80H32C16.032 80 3.36 91.904.96 107.232L256 275.264l255.04-168.032C508.64 91.904 495.968 80 480 80zM310.08 277.952l-45.28 29.824a15.983 15.983 0 01-8.8 2.624c-3.072 0-6.112-.864-8.8-2.624l-45.28-29.856L1.024 404.992C3.488 420.192 16.096 432 32 432h448c15.904 0 28.512-11.808 30.976-27.008L310.08 277.952z'/%3E%3C/svg%3E");
+				background-image: url("data:image/svg+xml,%3C%3Fxml version='1.0' encoding='iso-8859-1'%3F%3E%3C!----%3E%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512' style='enable-background:new 0 0 512 512'%3E%3Cpath fill='%23606060' d='M339.392 258.624L512 367.744V144.896zM0 144.896v222.848l172.608-109.12zM480 80H32C16.032 80 3.36 91.904.96 107.232L256 275.264l255.04-168.032C508.64 91.904 495.968 80 480 80zM310.08 277.952l-45.28 29.824a15.983 15.983 0 01-8.8 2.624c-3.072 0-6.112-.864-8.8-2.624l-45.28-29.856L1.024 404.992C3.488 420.192 16.096 432 32 432h448c15.904 0 28.512-11.808 30.976-27.008L310.08 277.952z'/%3E%3C/svg%3E");
 			}
 		}
 		&__label--password {
@@ -305,6 +305,7 @@ export default {
 		}
 		&__field {
 			width: 100%;
+			padding-left: 30px;
 			box-sizing: border-box;
 		}
 		&__button {
