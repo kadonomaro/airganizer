@@ -1,5 +1,8 @@
-import { auth } from '@/main';
 import router from '@/router';
+import { auth } from '@/main';
+import { LocalStorage } from '@/libs/LocalStorage';
+
+const storage = new LocalStorage('days');
 
 export default {
 	state: {
@@ -46,11 +49,11 @@ export default {
 			});
 		},
 
-		async login({ commit, state, rootState }, user) {
+		async login({ dispatch, commit, state, rootState }, user) {
 			try {
 				const response = await auth.signInWithEmailAndPassword(user.email, user.password);
 				if (response.user) {
-					commit('SET_USER', { id: response.user.uid, name: response.user.displayName, email: user.email });
+					dispatch('fetchData');
 					router.replace({ name: 'Home' });
 					if (Object.keys(rootState.days).length) {
 						db.fill(state.user.id, rootState.days);
