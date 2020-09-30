@@ -98,7 +98,6 @@ export default {
 		max-width: 100%;
 		width: 100%;
 		text-align: right;
-		background-color: $color-background;
 		border: 1px solid #eff3f9;
 		border-collapse: collapse;
 		td, th {
@@ -117,6 +116,7 @@ export default {
 		&__day {
 			position: relative;
 			font-size: 18px;
+			background-color: $color-background;
 			cursor: pointer;
 			transition: background-color, box-shadow 0.1s ease-in;
 			&:hover {

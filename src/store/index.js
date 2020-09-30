@@ -1,9 +1,8 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-import router from '../router';
+import authModule from './modules/auth';
 import settingsModule from './modules/settings';
 import componentModule from './modules/component';
-import { auth } from '../main';
 import { LocalStorage } from '../libs/LocalStorage';
 import { Database } from '../api/Database';
 
@@ -14,16 +13,7 @@ const db = new Database();
 
 export default new Vuex.Store({
 	state: {
-		days: {},
-		user: {
-			id: '',
-			name: '',
-			email: '',
-			isLoggedIn: false
-		},
-		auth: {
-			error: ''
-		}
+		days: {}
 	},
 	mutations: {
 		INIT_DATA(state, data) {
@@ -59,44 +49,13 @@ export default new Vuex.Store({
 			const current = state.days[day].data.find(item => item.id === task.id);
 			current.priority === 'high' ? current.priority = 'low' : current.priority = 'high';
 			storage.save(state.days);
-		},
-
-		SET_USER(state, user) {
-			state.user.id = user.id;
-			state.user.name = user.name;
-			state.user.email = user.email;
-			state.user.isLoggedIn = true;
-		},
-
-		REMOVE_USER(state) {
-			state.user.id = '';
-			state.user.name = '';
-			state.user.email = '';
-			state.user.isLoggedIn = false;
-		},
-
-		CHANGE_ERROR_CODE(state, error) {
-			state.auth.error = error;
 		}
 	},
 	actions: {
-		checkUserAuthStatus({ commit }) {
-			return new Promise(resolve => {
-				auth.onAuthStateChanged(user => {
-					if (user) {
-						commit('SET_USER', { id: user.uid, name: user.displayName, email: user.email });
-						resolve(true);
-					} else {
-						resolve(false);
-					}
-				});
-			});
-		},
-
 		fetchData({ commit, dispatch, state }) {
 			dispatch('checkUserAuthStatus').then((status) => {
 				if (status) {
-					db.load(state.user.id).then(data => {
+					db.load(state.authorization.user.id).then(data => {
 						commit('INIT_DATA', { ...storage.load(), ...data });
 					});
 				} else {
@@ -107,89 +66,36 @@ export default new Vuex.Store({
 
 		addTask({ commit, state }, data) {
 			commit('UPDATE_DATA', data);
-			if (state.user.isLoggedIn) {
-				db.update(state.user.id, data.day, state.days[data.day]);
+			if (state.authorization.user.isLoggedIn) {
+				db.update(state.authorization.user.id, data.day, state.days[data.day]);
 			}
 		},
 
 		changeTask({ commit, state }, data) {
 			commit('CHANGE_TASK', data);
-			if (state.user.isLoggedIn) {
-				db.update(state.user.id, data.day, state.days[data.day]);
+			if (state.authorization.user.isLoggedIn) {
+				db.update(state.authorization.user.id, data.day, state.days[data.day]);
 			}
 		},
 
 		completeTask({ commit, state }, data) {
 			commit('CHANGE_TASK_COMPLETE', data);
-			if (state.user.isLoggedIn) {
-				db.update(state.user.id, data.day, state.days[data.day]);
+			if (state.authorization.user.isLoggedIn) {
+				db.update(state.authorization.user.id, data.day, state.days[data.day]);
 			}
 		},
 
 		removeTask({ commit, state }, data) {
 			commit('REMOVE_TASK', data);
-			if (state.user.isLoggedIn) {
-				db.update(state.user.id, data.day, state.days[data.day]);
+			if (state.authorization.user.isLoggedIn) {
+				db.update(state.authorization.user.id, data.day, state.days[data.day]);
 			}
 		},
 
 		changePriority({ commit, state }, data) {
 			commit('CHANGE_TASK_PRIORITY', data);
-			if (state.user.isLoggedIn) {
-				db.update(state.user.id, data.day, state.days[data.day]);
-			}
-		},
-
-		async login({ commit, state }, user) {
-			try {
-				const response = await auth.signInWithEmailAndPassword(user.email, user.password);
-				if (response.user) {
-					commit('SET_USER', { id: response.user.uid, name: response.user.displayName, email: user.email });
-					router.replace({ name: 'Home' });
-					if (Object.keys(state.days).length) {
-						db.fill(state.user.id, state.days);
-					}
-				}
-			} catch (error) {
-				commit('CHANGE_ERROR_CODE', error.code);
-				setTimeout(() => {
-					commit('CHANGE_ERROR_CODE', '');
-				}, 3000);
-			}
-		},
-
-		async logout({ commit, state }) {
-			try {
-				await auth.signOut();
-				commit('REMOVE_USER');
-				if (Object.keys(state.days).length) {
-					storage.save(state.days);
-				}
-			} catch (error) {
-				commit('CHANGE_ERROR_CODE', error.code);
-				setTimeout(() => {
-					commit('CHANGE_ERROR_CODE', '');
-				}, 3000);
-			}
-		},
-
-		async registration({ commit }, user) {
-			try {
-				const response = await auth.createUserWithEmailAndPassword(user.email, user.password);
-				await response.user.updateProfile({
-					displayName: user.name
-				});
-				commit('SET_USER', {
-					id: response.user.uid,
-					name: response.user.displayName,
-					email: user.email
-				});
-				router.replace({ name: 'Home' });
-			} catch (error) {
-				commit('CHANGE_ERROR_CODE', error.code);
-				setTimeout(() => {
-					commit('CHANGE_ERROR_CODE', '');
-				}, 3000);
+			if (state.authorization.user) {
+				db.update(state.authorization.user.id, data.day, state.days[data.day]);
 			}
 		}
 	},
@@ -231,21 +137,10 @@ export default new Vuex.Store({
 					}
 				];
 			}
-		},
-
-		getUserName(state) {
-			return state.user.name;
-		},
-
-		getAuthStatus(state) {
-			return state.user.isLoggedIn;
-		},
-
-		getAuthError(state) {
-			return state.auth.error;
 		}
 	},
 	modules: {
+		authorization: authModule,
 		component: componentModule,
 		settings: settingsModule
 	}
