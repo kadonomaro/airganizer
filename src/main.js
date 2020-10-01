@@ -9,6 +9,7 @@ import store from './store'
 import moment from 'moment';
 import 'moment/locale/ru';
 import Vuelidate from 'vuelidate';
+import VueMeta from 'vue-meta'
 import '@/assets/css/style.scss';
 
 import formatFilter from '@/filters/format.filter';
@@ -47,6 +48,7 @@ const database = firebase.database();
 export { auth, database };
 
 Vue.use(Vuelidate);
+Vue.use(VueMeta);
 Vue.filter('format', formatFilter);
 Vue.filter('localization', localizationFilter);
 

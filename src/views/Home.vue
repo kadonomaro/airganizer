@@ -24,6 +24,14 @@ export default {
 		SettingsComponent,
 		VToolbar
 	},
+	metaInfo: {
+		title: 'Airganizer - управление личным временем',
+		meta: [{
+			vmid: 'description',
+			name: 'description',
+			content: 'Airganizer это система для управления личными задачами. Помогает правильно организовывать ваше время.',
+		}]
+	},
 	computed: {
 		...mapGetters(['getActiveComponent']),
 		component() {
