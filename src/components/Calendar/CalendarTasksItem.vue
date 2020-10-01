@@ -147,9 +147,11 @@ export default {
 		},
 
 		completeTask(task) {
-			this.$store.dispatch('completeTask', {
+			this.currentTask.completed = !this.currentTask.completed;
+
+			this.$store.dispatch('changeTask', {
 				day: this.day.value,
-				task
+				task: this.currentTask
 			});
 		},
 
@@ -169,9 +171,13 @@ export default {
 		},
 
 		changePriority(task) {
-			this.$store.dispatch('changePriority', {
+			this.currentTask.priority === 'high'
+				? this.currentTask.priority = 'low'
+				: this.currentTask.priority = 'high';
+
+			this.$store.dispatch('changeTask', {
 				day: this.day.value,
-				task
+				task: this.currentTask
 			});
 		},
 

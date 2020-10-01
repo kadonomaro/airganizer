@@ -37,18 +37,6 @@ export default new Vuex.Store({
 			state.days[day].data = state.days[day].data.filter(item => item.id !== task.id);
 			if (!state.days[day].data.length) delete state.days[day];
 			storage.save(state.days);
-		},
-
-		CHANGE_TASK_COMPLETE(state, { day, task }) {
-			const current = state.days[day].data.find(item => item.id === task.id);
-			current.completed === true ? current.completed = false : current.completed = true;
-			storage.save(state.days);
-		},
-
-		CHANGE_TASK_PRIORITY(state, { day, task }) {
-			const current = state.days[day].data.find(item => item.id === task.id);
-			current.priority === 'high' ? current.priority = 'low' : current.priority = 'high';
-			storage.save(state.days);
 		}
 	},
 	actions: {
@@ -78,23 +66,9 @@ export default new Vuex.Store({
 			}
 		},
 
-		completeTask({ commit, state }, data) {
-			commit('CHANGE_TASK_COMPLETE', data);
-			if (state.authorization.user.isLoggedIn) {
-				db.update(state.authorization.user.id, data.day, state.days[data.day]);
-			}
-		},
-
 		removeTask({ commit, state }, data) {
 			commit('REMOVE_TASK', data);
 			if (state.authorization.user.isLoggedIn) {
-				db.update(state.authorization.user.id, data.day, state.days[data.day]);
-			}
-		},
-
-		changePriority({ commit, state }, data) {
-			commit('CHANGE_TASK_PRIORITY', data);
-			if (state.authorization.user) {
 				db.update(state.authorization.user.id, data.day, state.days[data.day]);
 			}
 		}
