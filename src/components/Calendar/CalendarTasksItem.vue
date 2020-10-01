@@ -11,7 +11,7 @@
 			@click="toggle(task.desc)"
 		>
 			<span class="calendar-item__title">{{ task.title }}</span>
-			<span class="calendar-item__time" v-if="task.time">{{formattedTime}}</span>
+			<span class="calendar-item__time" v-if="task.time">{{ formattedTime }}</span>
 			<transition name="fade">
 				<div class="calendar-item__controls" v-if="isControlsVisible">
 					<v-button

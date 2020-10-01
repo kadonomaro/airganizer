@@ -15,11 +15,12 @@ import '@/assets/css/style.scss';
 import formatFilter from '@/filters/format.filter';
 import localizationFilter from '@/filters/localization.filter';
 
-moment.updateLocale('ru', {
+moment.updateLocale(store.getters.getLanguage, {
 	week: {
 		dow: 1
 	}
 });
+
 
 const firebaseDevConfig = {
 	apiKey: process.env.VUE_APP_FIREBASE_API_KEY,

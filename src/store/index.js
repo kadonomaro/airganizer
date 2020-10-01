@@ -3,6 +3,7 @@ import Vuex from 'vuex';
 import authModule from './modules/auth';
 import settingsModule from './modules/settings';
 import componentModule from './modules/component';
+import localizationModule from './modules/localization';
 import { LocalStorage } from '../libs/LocalStorage';
 import { Database } from '../api/Database';
 
@@ -116,6 +117,7 @@ export default new Vuex.Store({
 	modules: {
 		authorization: authModule,
 		component: componentModule,
-		settings: settingsModule
+		settings: settingsModule,
+		localization: localizationModule
 	}
 });
