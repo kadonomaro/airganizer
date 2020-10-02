@@ -1,19 +1,43 @@
 <template>
 	<div class="language-switcher">
 		<label class="language-switcher__label">
-			<input class="language-switcher__input visually-hidden" name="language" type="radio" value="ru" checked>
+			<input
+				class="language-switcher__input visually-hidden"
+				name="language"
+				type="radio"
+				value="ru"
+				:checked="getLanguage === 'ru'"
+				@change="changeHandler"
+			>
 			<span class="language-switcher__input-custom language-switcher__input-custom--ru"></span>
 		</label>
 		<label class="language-switcher__label">
-			<input class="language-switcher__input visually-hidden" name="language" type="radio" value="en">
+			<input
+				class="language-switcher__input visually-hidden"
+				name="language"
+				type="radio"
+				value="en"
+				:checked="getLanguage === 'en'"
+				@change="changeHandler"
+			>
 			<span class="language-switcher__input-custom language-switcher__input-custom--en"></span>
 		</label>
 	</div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
-	name: 'LanguageSwitcher'
+	name: 'LanguageSwitcher',
+	methods: {
+		changeHandler(event) {
+			this.$store.dispatch('changeLanguage', event.target.value);
+		}
+	},
+	computed: {
+		...mapGetters(['getLanguage'])
+	}
 }
 </script>
 

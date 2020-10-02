@@ -18,6 +18,7 @@ export default {
 	created() {
 		this.$store.dispatch('fetchData');
 		this.$store.dispatch('fetchSettings');
+		this.$store.dispatch('fetchLocalization');
 	},
 	computed: {
 		layout() {
