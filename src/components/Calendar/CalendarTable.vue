@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import moment from 'moment';
 import CalendarDayMarker from './CalendarDayMarker';
 
@@ -59,6 +60,7 @@ export default {
 		}
 	},
 	computed: {
+		...mapGetters(['getLocale']),
 		calendar() {
 			const calendar = [];
 			const startDay = moment(this.date).clone().startOf('month').startOf('week');
@@ -83,7 +85,7 @@ export default {
 			return calendar;
 		},
 		weekHeaders() {
-			return ['Пн', 'Вт', 'Ср', 'Чт', 'Пт', 'Сб', 'Вс'];
+			return this.getLocale.calendar.week;
 		}
 	}
 }

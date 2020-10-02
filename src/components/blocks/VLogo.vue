@@ -6,12 +6,13 @@
 		</router-link>
 		<div class="logo__text" v-if="text">
 			<span class="logo__title"><span class="logo__title--blue">Air</span>ganizer</span>
-			<span class="logo__subtitle">Управление личным временем</span>
+			<span class="logo__subtitle">{{ getLocale.header.title }}</span>
 		</div>
 	</div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import logo from '@/assets/logo.png';
 
 export default {
@@ -28,6 +29,7 @@ export default {
 		}
 	},
 	computed: {
+		...mapGetters(['getLocale']),
 		isHomePage() {
 			return this.$route.name === 'Home';
 		}

@@ -1,12 +1,33 @@
 {
+    "header": {
+        "title": "Personal time management",
+        "login": "Login",
+        "logout": "Logout"
+    },
     "components": {
         "calendar": "Calendar",
         "list": "List",
         "settings": "Settings"
     },
+    "calendar": {
+        "week": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+    },
     "settings": {
         "confirm": "Confirmation of task deletion",
         "complete": "Show completed tasks",
         "edit": "Editing expired tasks"
+    },
+    "controls": {
+        "prev": "Prev",
+        "next": "Next",
+        "edit": "Edit",
+        "complete": "Complete",
+        "priority": "Change priority",
+        "delete": "Delete",
+        "add": "Add"
+    },
+    "form": {
+        "title": "Enter the title",
+        "description": "Description"
     }
 }

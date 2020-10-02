@@ -1,12 +1,21 @@
 <template>
 	<div class="calendar-selector">
-		<v-button :icon="'arrow-left'" @on-click="prevMonth" />
+		<v-button
+			:title="getLocale.controls.prev"
+			:icon="'arrow-left'"
+			@on-click="prevMonth"
+		/>
 		<span class="calendar-selector__value">{{ month | format('MMMM YYYY') }}</span>
-		<v-button :icon="'arrow-right'" @on-click="nextMonth" />
+		<v-button
+			:title="getLocale.controls.next"
+			:icon="'arrow-right'"
+			@on-click="nextMonth"
+		/>
 	</div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import moment from 'moment';
 import VButton from '../blocks/VButton';
 
@@ -40,6 +49,9 @@ export default {
 		nextMonth() {
 			this.changeMonth(1);
 		}
+	},
+	computed: {
+		...mapGetters(['getLocale'])
 	}
 }
 </script>

@@ -1,17 +1,28 @@
 <template>
 	<div class="calendar-form" v-if="day.editable">
 		<form action="" class="calendar-form__form" @submit.prevent="onSubmit">
-			<input type="text" class="calendar-form__field input" v-model="form.title" placeholder="Введите название">
-			<textarea type="text" class="calendar-form__field input" v-model="form.desc" placeholder="Описание"></textarea>
+			<input
+				type="text"
+				class="calendar-form__field input"
+				v-model="form.title"
+				:placeholder="getLocale.form.title"
+			>
+			<textarea
+				type="text"
+				class="calendar-form__field input"
+				v-model="form.desc"
+				:placeholder="getLocale.form.description"
+			></textarea>
 			<div class="calendar-form__field">
 				<v-timepicker @on-select-time="selectTime" :time="form.time"/>
 			</div>
-			<v-button class="calendar-form__button">Добавить</v-button>
+			<v-button class="calendar-form__button">{{ getLocale.controls.add }}</v-button>
 		</form>
 	</div>
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
 import VButton from '../blocks/VButton';
 import VTimepicker from '../blocks/VTimepicker';
 
@@ -70,6 +81,9 @@ export default {
 		selectTime(payload) {
 			this.form.time = payload;
 		}
+	},
+	computed: {
+		...mapGetters(['getLocale'])
 	}
 }
 </script>

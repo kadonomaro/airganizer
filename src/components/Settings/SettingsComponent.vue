@@ -1,6 +1,6 @@
 <template>
 	<div class="settings">
-		<span class="settings__title">Настройки</span>
+		<span class="settings__title">{{ getLocale.components.settings }}</span>
 		<ul class="settings__list">
 			<li class="settings__item">
 				<v-checkbox

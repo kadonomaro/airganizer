@@ -5,7 +5,7 @@
 				<router-link
 					class="navigation__link navigation__link--icon navigation__link--login"
 					:to="'login'"
-				>Войти</router-link>
+				>{{ getLocale.header.login }}</router-link>
 			</li>
 
 			<li class="navigation__item" v-else>
@@ -13,7 +13,7 @@
 					href=""
 					class="navigation__link navigation__link--icon navigation__link--logout"
 					@click.prevent="clickHandler"
-				>Выйти</a>
+				>{{ getLocale.header.logout }}</a>
 			</li>
 		</ul>
 	</nav>
@@ -30,9 +30,7 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters([
-			'getAuthStatus'
-		])
+		...mapGetters(['getAuthStatus', 'getLocale'])
 	}
 }
 </script>

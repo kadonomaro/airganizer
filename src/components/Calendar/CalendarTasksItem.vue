@@ -16,27 +16,27 @@
 				<div class="calendar-item__controls" v-if="isControlsVisible">
 					<v-button
 						class="calendar-item__button"
-						title="Редактировать"
+						:title="getLocale.controls.edit"
 						:icon="'edit'"
 						v-if="day.editable || getSettings.еditingExpiredTasks"
 						@on-click="openModalHandler('edit')"
 					/>
 					<v-button
 						class="calendar-item__button"
-						title="Завершить"
+						:title="getLocale.controls.complete"
 						:icon="'check'"
 						@on-click="completeTask(task)"
 					/>
 					<v-button
 						class="calendar-item__button"
-						title="Изменить приоритет"
+						:title="getLocale.controls.priority"
 						:icon="task.priority === 'high' ? 'high-priority' : 'low-priority'"
 						@on-click="changePriority(task)"
 						v-if="day.editable || getSettings.еditingExpiredTasks"
 					/>
 					<v-button
 						class="calendar-item__button"
-						title="Удалить"
+						:title="getLocale.controls.delete"
 						:icon="'close'"
 						@on-click="getSettings.removeTaskConfirm ? openModalHandler('delete') : removeTask(task)"
 					/>
@@ -191,7 +191,7 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters(['getSettings']),
+		...mapGetters(['getSettings', 'getLocale']),
 		time() {
 			return {
 				hour: this.task.time.hour,

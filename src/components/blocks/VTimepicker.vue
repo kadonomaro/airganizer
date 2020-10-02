@@ -49,15 +49,15 @@ export default {
 		return {
 			isOpen: false,
 			currentTime: {
-				hour: 'ЧЧ',
-				minute: 'ММ'
+				hour: 'HH',
+				minute: 'MM'
 			}
 		}
 	},
 	created() {
 		document.addEventListener('click', this.closeEvent);
-		this.currentTime.hour = this.time.hour || 'ЧЧ';
-		this.currentTime.minute = this.time.minute || 'ММ';
+		this.currentTime.hour = this.time.hour || 'HH';
+		this.currentTime.minute = this.time.minute || 'MM';
 	},
 	destroyed() {
 		document.removeEventListener('click', this.closeEvent);
@@ -72,8 +72,8 @@ export default {
 		},
 
 		clear() {
-			this.currentTime.hour = 'ЧЧ';
-			this.currentTime.minute = 'ММ';
+			this.currentTime.hour = 'HH';
+			this.currentTime.minute = 'MM';
 			this.close();
 		},
 
@@ -100,7 +100,7 @@ export default {
 		currentTime: {
 			deep: true,
 			handler(time) {
-				if(time.hour !== 'ЧЧ' && time.minute !== 'ММ') {
+				if(time.hour !== 'HH' && time.minute !== 'MM') {
 					this.$emit('on-select-time', time);
 				}
 			}
