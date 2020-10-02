@@ -4,7 +4,7 @@
 			class="toolbar__button"
 			:class="{'toolbar__button--active': getActiveComponent === 'calendar'}"
 			:icon="'calendar'"
-			:title="'Календарь'"
+			:title="getLocale.components.calendar"
 			:width="40"
 			@on-click="setActiveComponent('calendar')"
 		/>
@@ -12,7 +12,7 @@
 			class="toolbar__button"
 			:class="{'toolbar__button--active': getActiveComponent === 'task-list'}"
 			:icon="'list'"
-			:title="'Список'"
+			:title="getLocale.components.list"
 			:width="40"
 			@on-click="setActiveComponent('task-list')"
 		/>
@@ -20,7 +20,7 @@
 			class="toolbar__button"
 			:class="{'toolbar__button--active': getActiveComponent === 'settings'}"
 			:icon="'settings'"
-			:title="'Настройки'"
+			:title="getLocale.components.settings"
 			:width="40"
 			@on-click="setActiveComponent('settings')"
 		/>
@@ -42,7 +42,7 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters(['getActiveComponent'])
+		...mapGetters(['getActiveComponent', 'getLocale'])
 	}
 }
 </script>

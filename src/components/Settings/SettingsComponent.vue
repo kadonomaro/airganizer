@@ -4,21 +4,21 @@
 		<ul class="settings__list">
 			<li class="settings__item">
 				<v-checkbox
-					:text="'Подтверждение удаления задач'"
+					:text="getLocale.settings.confirm"
 					:checked="getSettings.removeTaskConfirm"
 					@on-change="updateSettings('removeTaskConfirm')"
 				/>
 			</li>
 			<li class="settings__item">
 				<v-checkbox
-					:text="'Показывать завершенные задачи'"
+					:text="getLocale.settings.complete"
 					:checked="getSettings.showCompletedTasks"
 					@on-change="updateSettings('showCompletedTasks')"
 				/>
 			</li>
 			<li class="settings__item">
 				<v-checkbox
-					:text="'Редактирование задач с истекшим сроком'"
+					:text="getLocale.settings.edit"
 					:checked="getSettings.еditingExpiredTasks"
 					@on-change="updateSettings('еditingExpiredTasks')"
 				/>
@@ -42,7 +42,7 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters(['getSettings'])
+		...mapGetters(['getSettings', 'getLocale'])
 	}
 }
 </script>

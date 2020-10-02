@@ -1,0 +1,12 @@
+{
+    "components": {
+        "calendar": "Calendar",
+        "list": "List",
+        "settings": "Settings"
+    },
+    "settings": {
+        "confirm": "Confirmation of task deletion",
+        "complete": "Show completed tasks",
+        "edit": "Editing expired tasks"
+    }
+}
