@@ -4,7 +4,7 @@ import en from '@/locales/en.json';
 
 const localization = new LocalStorage('localization');
 
-const locales = { ru, en }
+const locales = { ru, en };
 
 export default {
 	state: {
@@ -12,7 +12,7 @@ export default {
 	},
 	mutations: {
 		INIT_LANGUAGE(state, language) {
-			state.language = language;
+			language.length ? state.language = language : state.language = 'ru';
 		},
 
 		SET_LANGUAGE(state, language) {

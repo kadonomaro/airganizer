@@ -21,7 +21,7 @@ export default {
 		this.$store.dispatch('fetchData');
 		this.$store.dispatch('fetchSettings');
 		this.$store.dispatch('fetchLocalization');
-		moment.locale(this.getLanguage, { week: { dow: 1 } });
+		moment.updateLocale(this.getLanguage, { week: { dow: 1 } });
 	},
 	computed: {
 		...mapGetters(['getLanguage']),
