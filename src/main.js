@@ -6,7 +6,6 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import moment from 'moment';
 import 'moment/locale/ru';
 import Vuelidate from 'vuelidate';
 import VueMeta from 'vue-meta'
@@ -14,12 +13,6 @@ import '@/assets/css/style.scss';
 
 import formatFilter from '@/filters/format.filter';
 import localizationFilter from '@/filters/localization.filter';
-
-moment.updateLocale(store.getters.getLanguage, {
-	week: {
-		dow: 1
-	}
-});
 
 
 const firebaseDevConfig = {
