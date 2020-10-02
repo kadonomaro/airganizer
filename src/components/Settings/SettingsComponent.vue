@@ -3,6 +3,9 @@
 		<span class="settings__title">{{ getLocale.components.settings }}</span>
 		<ul class="settings__list">
 			<li class="settings__item">
+				<language-switcher />
+			</li>
+			<li class="settings__item">
 				<v-checkbox
 					:text="getLocale.settings.confirm"
 					:checked="getSettings.removeTaskConfirm"
@@ -30,11 +33,13 @@
 <script>
 import { mapGetters } from 'vuex';
 import VCheckbox from '../blocks/VCheckbox.vue';
+import LanguageSwitcher from '../blocks/LanguageSwitcher.vue';
 
 export default {
 	name: 'SettingsComponent',
 	components: {
-		VCheckbox
+		VCheckbox,
+		LanguageSwitcher
 	},
 	methods: {
 		updateSettings(type) {
