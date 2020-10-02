@@ -50,24 +50,24 @@
 
 		<v-modal v-if="modal.visible" @close="closeModalHandler">
       <template v-slot:header>
-        <span v-if="modal.type === 'delete'">Удаление</span>
-				<span v-else-if="modal.type === 'edit'">Изменение</span>
+        <span v-if="modal.type === 'delete'">{{ getLocale.modal.title.removing }}</span>
+				<span v-else-if="modal.type === 'edit'">{{ getLocale.modal.title.editing }}</span>
       </template>
       <template v-slot:body>
 
-        <p v-if="modal.type === 'delete'">Вы действительно хотите удалить «{{ task.title }}»?</p>
+        <p v-if="modal.type === 'delete'">{{ getLocale.modal.body.removing }} «{{ task.title }}»?</p>
 				<form v-else-if="modal.type === 'edit'">
 					<input
 						type="text"
 						class="input calendar-item__input"
 						v-model="currentTask.title"
-						placeholder="Название"
+						:placeholder="getLocale.form.title"
 					>
 					<textarea
 						type="text"
 						class="input calendar-item__input"
 						v-model="currentTask.desc"
-						placeholder="Описание"
+						:placeholder="getLocale.form.description"
 					></textarea>
 					<v-timepicker :time="time" @on-select-time="changeTimeHandler"/>
 				</form>
@@ -79,17 +79,17 @@
 					:type="'danger'"
 					@on-click="closeModalHandler"
 					ref="cancel"
-				>Отменить</v-button>
+				>{{ getLocale.controls.cancel }}</v-button>
 				<v-button
 					v-if="modal.type === 'delete'"
 					:type="'success'"
 					@on-click="removeTask(task)"
-				>Удалить</v-button>
+				>{{ getLocale.controls.delete }}</v-button>
 				<v-button
 					v-else-if="modal.type === 'edit'"
 					:type="'success'"
 					@on-click="changeTask(task)"
-				>Изменить</v-button>
+				>{{ getLocale.controls.edit }}</v-button>
       </template>
     </v-modal>
 

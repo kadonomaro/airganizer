@@ -1,7 +1,7 @@
 <template>
 	<div class="logo">
 		<img class="logo__image" :src="logo" alt="airganizer logo" width="60" v-if="isHomePage">
-		<router-link to="/" v-else title="На главную">
+		<router-link to="/" v-else :title="getLocale.controls.index_page">
 			<img class="logo__image" :src="logo" alt="airganizer logo" width="60">
 		</router-link>
 		<div class="logo__text" v-if="text">

@@ -12,25 +12,25 @@
 						type="text"
 						class="auth__field input"
 						:class="{'input--error': $v.user.email.$error}"
-						placeholder="Адрес электронной почты"
+						:placeholder="getLocale.auth.fields.email"
 						v-model="user.email"
 						@blur="$v.user.email.$touch()"
 					>
 					<span
 						class="auth__error-tooltip"
 						v-if="$v.user.email.$dirty && !$v.user.email.required"
-					>Поле обязательно для заполнения</span>
+					>{{ getLocale.auth.errors.required }}</span>
 					<span
 						class="auth__error-tooltip"
 						v-if="$v.user.email.$dirty && !$v.user.email.email"
-					>Неверный формат</span>
+					>{{ getLocale.auth.errors.format }}</span>
 				</label>
 				<label class="auth__label auth__label--password">
 					<input
 						type="password"
 						class="auth__field input"
 						:class="{'input--error': $v.user.password.$error}"
-						placeholder="Пароль"
+						:placeholder="getLocale.auth.fields.password"
 						autocomplete="on"
 						v-model="user.password"
 						@blur="$v.user.password.$touch()"
@@ -38,14 +38,14 @@
 					<span
 						class="auth__error-tooltip"
 						v-if="$v.user.password.$dirty && !$v.user.password.required"
-					>Поле обязательно для заполнения</span>
+					>{{ getLocale.auth.errors.required }}</span>
 				</label>
 				<button
 					class="auth__button button button--text"
 					:disabled="$v.user.email.$invalid || $v.user.password.$invalid"
-				>Войти</button>
+				>{{ getLocale.controls.login}}</button>
 				<span class="auth__text">
-					Еще нет аккаунта? <router-link class="auth__link" to="/registration">Зарегистрируйтесь</router-link>
+					{{ getLocale.auth.footer.absent }}? <router-link class="auth__link" to="/registration">{{ getLocale.controls.register }}</router-link>
 				</span>
 				<span class="auth__error" v-if="getAuthError">{{ getAuthError | localization }}</span>
 			</form>
@@ -57,39 +57,39 @@
 						type="text"
 						class="auth__field input"
 						:class="{'input--error': $v.user.name.$error}"
-						placeholder="Имя пользователя"
+						:placeholder="getLocale.auth.fields.username"
 						v-model="user.name"
 						@blur="$v.user.name.$touch()"
 					>
 					<span
 						class="auth__error-tooltip"
 						v-if="$v.user.name.$dirty && !$v.user.name.required"
-					>Поле обязательно для заполнения</span>
+					>{{ getLocale.auth.errors.required }}</span>
 				</label>
 				<label class="auth__label auth__label--email">
 					<input
 						type="text"
 						class="auth__field input"
 						:class="{'input--error': $v.user.email.$error}"
-						placeholder="Адрес электронной почты"
+						:placeholder="getLocale.auth.fields.email"
 						v-model="user.email"
 						@blur="$v.user.email.$touch()"
 					>
 					<span
 						class="auth__error-tooltip"
 						v-if="$v.user.email.$dirty && !$v.user.email.required"
-					>Поле обязательно для заполнения</span>
+					>{{ getLocale.auth.errors.required }}</span>
 					<span
 						class="auth__error-tooltip"
 						v-if="$v.user.email.$dirty && !$v.user.email.email"
-					>Неверный формат</span>
+					>{{ getLocale.auth.errors.format }}</span>
 				</label>
 				<label class="auth__label auth__label--password">
 					<input
 						type="password"
 						class="auth__field input"
 						:class="{'input--error': $v.user.password.$error}"
-						placeholder="Пароль"
+						:placeholder="getLocale.auth.fields.password"
 						autocomplete="on"
 						v-model="user.password"
 						@blur="$v.user.password.$touch()"
@@ -97,18 +97,18 @@
 					<span
 						class="auth__error-tooltip"
 						v-if="$v.user.password.$dirty && !$v.user.password.required"
-					>Поле обязательно для заполнения</span>
+					>{{ getLocale.auth.errors.required }}</span>
 					<span
 						class="auth__error-tooltip"
 						v-if="$v.user.password.$dirty && !$v.user.password.minLength"
-					>Пароль должен содержать минимум {{ $v.user.password.$params.minLength.min }} символов</span>
+					>{{ getLocale.auth.errors.password_length.start }} {{ $v.user.password.$params.minLength.min }} {{getLocale.auth.errors.password_length.end}}</span>
 				</label>
 				<label class="auth__label auth__label--password">
 					<input
 						type="password"
 						class="auth__field input"
 						:class="{'input--error': $v.user.repeatPassword.$error}"
-						placeholder="Повторите пароль"
+						:placeholder="getLocale.auth.fields.repeat_password"
 						autocomplete="on"
 						v-model="user.repeatPassword"
 						@blur="$v.user.repeatPassword.$touch()"
@@ -116,14 +116,14 @@
 					<span
 						class="auth__error-tooltip"
 						v-if="$v.user.repeatPassword.$dirty && !$v.user.repeatPassword.sameAs"
-					>Пароли должны совпадать</span>
+					>{{ getLocale.auth.errors.password_match }}</span>
 				</label>
 				<button
 					class="auth__button button button--text"
 					:disabled="$v.$invalid"
-				>Зарегистрироваться</button>
+				>{{ getLocale.controls.register }}</button>
 				<span class="auth__text">
-					Уже есть аккаунт? <router-link class="auth__link" to="/login">Войти</router-link>
+					{{ getLocale.auth.footer.exist }}? <router-link class="auth__link" to="/login">{{ getLocale.controls.login }}</router-link>
 				</span>
 				<span class="auth__error" v-if="getAuthError">{{ getAuthError | localization }}</span>
 			</form>
@@ -192,11 +192,11 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters([
-			'getAuthError'
-		]),
+		...mapGetters(['getAuthError', 'getLocale']),
 		title() {
-			return this.type === 'login' ? 'Авторизация' : 'Регистрация';
+			return this.type === 'login'
+				? this.getLocale.auth.title.auth
+				: this.getLocale.auth.title.register;
 		}
 	}
 }

@@ -1,4 +1,18 @@
 {
+    "meta": {
+        "index": {
+            "title": "Airganizer - personal time management",
+            "description": "Airganizer is a system for managing personal tasks. Helps to organize your time properly."
+        },
+        "login": {
+            "title": "Airganizer - user authorization",
+            "description": "Airganizer is a system for managing personal tasks. Helps to organize your time properly."
+        },
+        "register": {
+            "title": "Airganizer - new user registration",
+            "description": "Airganizer is a system for managing personal tasks. Helps to organize your time properly."
+        }
+    },
     "header": {
         "title": "Personal time management",
         "login": "Login",
@@ -24,10 +38,48 @@
         "complete": "Complete",
         "priority": "Change priority",
         "delete": "Delete",
-        "add": "Add"
+        "add": "Add",
+        "cancel": "Cancel",
+        "login": "Login",
+        "register": "Register",
+        "index_page": "To home page"
+    },
+    "auth": {
+        "title": {
+            "auth": "Authorization",
+            "register": "Registration"
+        },
+        "footer": {
+            "exist": "Already have an account",
+            "absent": "Don't have an account yet"
+        },
+        "fields": {
+            "username": "Username",
+            "email": "Email",
+            "password": "Password",
+            "repeat_password": "Repeat password"
+        },
+        "errors": {
+            "required": "Required field",
+            "format": "Wrong format",
+            "password_match": "Passwords must match",
+            "password_length": {
+                "start": "Password must contain at least",
+                "end": "characters"
+            }
+        }
     },
     "form": {
         "title": "Enter the title",
         "description": "Description"
+    },
+    "modal": {
+        "title": {
+            "removing": "Removing",
+            "editing": "Editing"
+        },
+        "body": {
+            "removing": "Do you really want to delete"
+        }
     }
 }
