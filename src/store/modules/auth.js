@@ -1,8 +1,10 @@
 import router from '@/router';
 import { auth } from '@/main';
 import { LocalStorage } from '@/libs/LocalStorage';
+import { Database } from '@/api/Database';
 
 const storage = new LocalStorage('days');
+const db = new Database();
 
 export default {
 	state: {
@@ -94,6 +96,7 @@ export default {
 					email: user.email
 				});
 				router.replace({ name: 'Home' });
+				db.fill(state.user.id, rootState.days);
 			} catch (error) {
 				commit('CHANGE_ERROR_CODE', error.code);
 				setTimeout(() => {
