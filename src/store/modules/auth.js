@@ -111,8 +111,10 @@ export default {
 			return state.user.isLoggedIn;
 		},
 
-		getAuthError(state) {
-			return state.auth.error;
+		getAuthError(state, rootGetters) {
+			if (state.auth.error) {
+				return rootGetters.getLocale.auth.errors[state.auth.error];
+			}
 		}
 	}
 };
