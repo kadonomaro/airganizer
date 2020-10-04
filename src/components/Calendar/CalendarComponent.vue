@@ -42,8 +42,5 @@ export default {
 <style lang="scss">
 	.calendar {
 		padding: 30px 0;
-		background-image: url("~@/assets/images/cloud.svg");
-		background-repeat: no-repeat;
-		background-position: right 10px;
 	}
 </style>

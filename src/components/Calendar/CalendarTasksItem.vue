@@ -131,7 +131,7 @@ export default {
 		}
 	},
 	created() {
-		this.currentTask = {...this.task};
+		this.currentTask = { ...this.task };
 	},
 	methods: {
 		toggle(state) {
@@ -187,6 +187,7 @@ export default {
 		},
 
 		closeModalHandler() {
+			this.currentTask = { ...this.task };
 			this.modal.visible = false;
 		}
 	},

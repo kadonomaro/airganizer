@@ -46,5 +46,8 @@ export default {
 <style lang="scss">
 	.home {
 		flex-grow: 1;
+		background-image: url("~@/assets/images/cloud.svg");
+		background-repeat: no-repeat;
+		background-position: -10px 20px;
 	}
 </style>
