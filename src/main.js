@@ -12,7 +12,6 @@ import VueMeta from 'vue-meta'
 import '@/assets/css/style.scss';
 
 import formatFilter from '@/filters/format.filter';
-import localizationFilter from '@/filters/localization.filter';
 
 
 const firebaseDevConfig = {
@@ -44,7 +43,6 @@ export { auth, database };
 Vue.use(Vuelidate);
 Vue.use(VueMeta);
 Vue.filter('format', formatFilter);
-Vue.filter('localization', localizationFilter);
 
 Vue.config.productionTip = false
 

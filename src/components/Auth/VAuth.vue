@@ -47,7 +47,7 @@
 				<span class="auth__text">
 					{{ getLocale.auth.footer.absent }}? <router-link class="auth__link" to="/registration">{{ getLocale.controls.register }}</router-link>
 				</span>
-				<span class="auth__error" v-if="getAuthError">{{ getAuthError | localization }}</span>
+				<span class="auth__error" v-if="getAuthError">{{ getAuthError }}</span>
 			</form>
 
 
@@ -125,7 +125,7 @@
 				<span class="auth__text">
 					{{ getLocale.auth.footer.exist }}? <router-link class="auth__link" to="/login">{{ getLocale.controls.login }}</router-link>
 				</span>
-				<span class="auth__error" v-if="getAuthError">{{ getAuthError | localization }}</span>
+				<span class="auth__error" v-if="getAuthError">{{ getAuthError }}</span>
 			</form>
 
 		</div>
