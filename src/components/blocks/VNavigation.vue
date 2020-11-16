@@ -1,7 +1,7 @@
 <template>
 	<nav class="navigation">
 		<ul class="navigation__list">
-			<li class="navigation__item" v-if="!getAuthStatus">
+			<li class="navigation__item" v-if="!status">
 				<router-link
 					class="navigation__link navigation__link--icon navigation__link--login"
 					:to="'login'"
@@ -20,7 +20,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 
 export default {
 	name: 'VNavigation',
@@ -30,7 +30,10 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters(['getAuthStatus', 'getLocale'])
+		...mapState({
+			status: state => state.user.isLoggedIn
+		}),
+		...mapGetters(['getLocale'])
 	}
 }
 </script>

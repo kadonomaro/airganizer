@@ -1,18 +1,18 @@
 <template>
-	<div class="user-info" v-if="getUserName">
-		<span class="user-info__title">{{ getUserName }}</span>
+	<div class="user-info" v-if="username">
+		<span class="user-info__title">{{ username }}</span>
 	</div>
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 
 export default {
 	name: 'UserInfo',
 	computed: {
-		...mapGetters([
-			'getUserName'
-		])
+		...mapState({
+			username: state => state.user.name
+		})
 	}
 }
 </script>

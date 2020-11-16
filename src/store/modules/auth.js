@@ -106,14 +106,6 @@ export default {
 		}
 	},
 	getters: {
-		getUserName(state) {
-			return state.user.name;
-		},
-
-		getAuthStatus(state) {
-			return state.user.isLoggedIn;
-		},
-
 		getAuthError(state, rootGetters) {
 			if (state.auth.error) {
 				return rootGetters.getLocale.auth.errors[state.auth.error];
