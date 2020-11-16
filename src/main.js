@@ -35,7 +35,7 @@ const firebaseProdConfig = {
 };
 
 
-firebase.initializeApp(process.env.NODE_ENV === 'production' ? firebaseProdConfig : firebaseDevConfig);
+firebase.initializeApp(process.env.NODE_ENV === 'production' ? firebaseProdConfig : firebaseProdConfig);
 const auth = firebase.auth();
 const database = firebase.database();
 export { auth, database };

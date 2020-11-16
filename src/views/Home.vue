@@ -3,7 +3,7 @@
 		<div class="container">
 			<v-toolbar />
 			<keep-alive>
-				<component :is="component" />
+				<component :is="activeComponent" />
 			</keep-alive>
 		</div>
   </div>
@@ -36,10 +36,10 @@ export default {
 	},
 	computed: {
 		...mapState({
-			component: state => state.component
+			component: state => state.component.component
 		}),
 		...mapGetters(['getLocale']),
-		component() {
+		activeComponent() {
 			return this.component + '-component';
 		}
 	}

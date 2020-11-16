@@ -11,7 +11,7 @@ export default {
 	name: 'UserInfo',
 	computed: {
 		...mapState({
-			username: state => state.user.name
+			username: state => state.authorization.user.name
 		})
 	}
 }

@@ -31,7 +31,7 @@ export default {
 	},
 	computed: {
 		...mapState({
-			status: state => state.user.isLoggedIn
+			status: state => state.authorization.user.isLoggedIn
 		}),
 		...mapGetters(['getLocale'])
 	}

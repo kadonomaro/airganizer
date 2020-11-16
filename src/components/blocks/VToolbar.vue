@@ -43,7 +43,7 @@ export default {
 	},
 	computed: {
 		...mapState({
-			component: state => state.component
+			component: state => state.component.component
 		}),
 		...mapGetters(['getLocale'])
 	}
