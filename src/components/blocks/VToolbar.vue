@@ -2,7 +2,7 @@
 	<div class="toolbar">
 		<v-button
 			class="toolbar__button"
-			:class="{'toolbar__button--active': getActiveComponent === 'calendar'}"
+			:class="{'toolbar__button--active': component === 'calendar'}"
 			:icon="'calendar'"
 			:title="getLocale.components.calendar"
 			:width="40"
@@ -10,7 +10,7 @@
 		/>
 		<v-button
 			class="toolbar__button"
-			:class="{'toolbar__button--active': getActiveComponent === 'task-list'}"
+			:class="{'toolbar__button--active': component === 'task-list'}"
 			:icon="'list'"
 			:title="getLocale.components.list"
 			:width="40"
@@ -18,7 +18,7 @@
 		/>
 		<v-button
 			class="toolbar__button"
-			:class="{'toolbar__button--active': getActiveComponent === 'settings'}"
+			:class="{'toolbar__button--active': component === 'settings'}"
 			:icon="'settings'"
 			:title="getLocale.components.settings"
 			:width="40"
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import VButton from '@/components/blocks/VButton.vue';
 
 export default {
@@ -42,7 +42,10 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters(['getActiveComponent', 'getLocale'])
+		...mapState({
+			component: state => state.component
+		}),
+		...mapGetters(['getLocale'])
 	}
 }
 </script>

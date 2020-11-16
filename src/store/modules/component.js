@@ -11,10 +11,5 @@ export default {
 		setActiveComponent({ commit }, name) {
 			commit('SET_COMPONENT', name);
 		}
-	},
-	getters: {
-		getActiveComponent(state) {
-			return state.component;
-		}
 	}
 };

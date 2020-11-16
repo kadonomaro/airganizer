@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import CalendarComponent from '@/components/Calendar/CalendarComponent.vue';
 import TaskListComponent from '@/components/TaskList/TaskListComponent.vue';
 import SettingsComponent from '@/components/Settings/SettingsComponent.vue';
@@ -35,9 +35,12 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters(['getActiveComponent', 'getLocale']),
+		...mapState({
+			component: state => state.component
+		}),
+		...mapGetters(['getLocale']),
 		component() {
-			return this.getActiveComponent + '-component';
+			return this.component + '-component';
 		}
 	}
 }
