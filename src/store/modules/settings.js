@@ -27,10 +27,5 @@ export default {
 			commit('SET_SETTINGS', type);
 			settings.save(state.settings);
 		}
-	},
-	getters: {
-		getSettings(state) {
-			return state.settings;
-		}
 	}
 };

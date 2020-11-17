@@ -8,7 +8,7 @@
 					<calendar-tasks-item
 						:day="day"
 						:task="task"
-						v-if="!task.completed || getSettings.showCompletedTasks"
+						v-if="!task.completed || settings.showCompletedTasks"
 					/>
 				</li>
 		</ul>
@@ -20,7 +20,7 @@
 
 <script>
 import moment from 'moment';
-import { mapGetters } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import CalendarForm from './CalendarForm';
 import CalendarTasksItem from './CalendarTasksItem';
 
@@ -37,10 +37,10 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters([
-			'getDateByDay',
-			'getSettings'
-		]),
+		...mapState({
+			settings: state => state.settings.settings
+		}),
+		...mapGetters(['getDateByDay']),
 		tasks() {
 			return this.getDateByDay(this.day.value);
 		},

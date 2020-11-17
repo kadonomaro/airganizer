@@ -18,7 +18,7 @@
 						class="calendar-item__button"
 						:title="getLocale.controls.edit"
 						:icon="'edit'"
-						v-if="day.editable || getSettings.еditingExpiredTasks"
+						v-if="day.editable || settings.еditingExpiredTasks"
 						@on-click="openModalHandler('edit')"
 					/>
 					<v-button
@@ -32,13 +32,13 @@
 						:title="getLocale.controls.priority"
 						:icon="task.priority === 'high' ? 'high-priority' : 'low-priority'"
 						@on-click="changePriority(task)"
-						v-if="day.editable || getSettings.еditingExpiredTasks"
+						v-if="day.editable || settings.еditingExpiredTasks"
 					/>
 					<v-button
 						class="calendar-item__button"
 						:title="getLocale.controls.delete"
 						:icon="'close'"
-						@on-click="getSettings.removeTaskConfirm ? openModalHandler('delete') : removeTask(task)"
+						@on-click="settings.removeTaskConfirm ? openModalHandler('delete') : removeTask(task)"
 					/>
 				</div>
 			</transition>
@@ -97,7 +97,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 import VButton from '../blocks/VButton.vue';
 import VModal from '../blocks/VModal';
 import VTimepicker from '../blocks/VTimepicker';
@@ -192,7 +192,10 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters(['getSettings', 'getLocale']),
+		...mapState({
+			settings: state => state.settings.settings
+		}),
+		...mapGetters(['getLocale']),
 		time() {
 			return {
 				hour: this.task.time.hour,
