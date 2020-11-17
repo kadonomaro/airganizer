@@ -6,7 +6,7 @@
 				name="language"
 				type="radio"
 				value="ru"
-				:checked="getLanguage === 'ru'"
+				:checked="language === 'ru'"
 				@change="changeHandler"
 			>
 			<span class="language-switcher__input-custom language-switcher__input-custom--ru"></span>
@@ -17,7 +17,7 @@
 				name="language"
 				type="radio"
 				value="en"
-				:checked="getLanguage === 'en'"
+				:checked="language === 'en'"
 				@change="changeHandler"
 			>
 			<span class="language-switcher__input-custom language-switcher__input-custom--en"></span>
@@ -26,7 +26,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapState } from 'vuex';
 
 export default {
 	name: 'LanguageSwitcher',
@@ -36,7 +36,9 @@ export default {
 		}
 	},
 	computed: {
-		...mapGetters(['getLanguage'])
+		...mapState({
+			language: state => state.localization.language
+		})
 	}
 }
 </script>

@@ -29,10 +29,6 @@ export default {
 		}
 	},
 	getters: {
-		getLanguage(state) {
-			return state.language;
-		},
-
 		getLocale(state) {
 			return locales[state.language];
 		}
