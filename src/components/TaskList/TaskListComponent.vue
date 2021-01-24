@@ -1,6 +1,10 @@
 <template>
 	<div class="task-list">
-		<span class="task-list__title" @click="toggleAllExpand">{{ computeTitle }}</span>
+		<span
+			class="task-list__title"
+			v-if="Object.keys(getDateByAllDays).length"
+			@click="toggleAllExpand"
+		>{{ computeTitle }}</span>
 		<div class="task-list__day" v-for="(day, key) in getDateByAllDays" :key="key">
 			<task-list-day :day="day" :title="key" :all-expanded="isAllExpanded" />
 		</div>
@@ -29,6 +33,9 @@ export default {
 			} else {
 			return 'Показать все'
 			}
+		},
+		isHidden() {
+			return !!Object.keys(this.getDateByAllDays).length
 		}
 	},
 	methods: {
@@ -42,14 +49,12 @@ export default {
 <style lang="scss">
 .task-list {
 	padding: 30px 0;
+	user-select: none;
 	&__title {
 		display: inline-block;
 		margin-bottom: 10px;
 		font-size: 18px;
 		cursor: pointer;
-	}
-	&__day {
-		margin-bottom: 5px;
 	}
 }
 </style>

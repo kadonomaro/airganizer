@@ -1,5 +1,5 @@
 <template>
-	<div class="task-list-day">
+	<div class="task-list-day" v-if="!isHidden">
 		<span
 			class="task-list-day__title"
 			:class="{ 'task-list-day__title--opened': isExpanded }"
@@ -43,13 +43,16 @@ export default {
 	},
 	data() {
 		return {
-			isExpanded: true
+			isExpanded: true //TODO добавить анимацию
 		}
 	},
 	computed: {
 		...mapState({
 			settings: state => state.settings.settings
-		})
+		}),
+		isHidden() {
+			return (this.day.data.every(task => task.completed) && !this.settings.showCompletedTasks);
+		}
 	},
 	methods: {
 		toggleExpand() {
@@ -73,6 +76,7 @@ export default {
 		font-weight: bold;
 		cursor: pointer;
 		transition: color 0.1s ease-in;
+		user-select: none;
 		&::before {
 			content: '';
 			position: absolute;
@@ -93,7 +97,7 @@ export default {
 	}
 
 	&__list {
-		margin: 0;
+		margin: 0 0 10px;
 		padding: 20px 10px 15px;
 		background-color: #ffffff;
 		list-style: none;
