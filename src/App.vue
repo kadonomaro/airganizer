@@ -8,7 +8,7 @@
 
 <script>
 import moment from 'moment';
-import { mapState } from 'vuex';
+import { mapState, mapActions } from 'vuex';
 import MainLayout from '@/layouts/MainLayout.vue';
 import AuthLayout from '@/layouts/AuthLayout.vue';
 
@@ -18,9 +18,7 @@ export default {
 		AuthLayout
 	},
 	created() {
-		this.$store.dispatch('fetchData');
-		this.$store.dispatch('fetchSettings');
-		this.$store.dispatch('fetchLocalization');
+		this.init();
 		moment.updateLocale(this.language, { week: { dow: 1 } });
 	},
 	computed: {
@@ -29,6 +27,14 @@ export default {
 		}),
 		layout() {
 			return (this.$route.meta.layout || 'Main') + 'Layout';
+		}
+	},
+	methods: {
+		...mapActions(['fetchData', 'fetchSettings', 'fetchLocalization']),
+		init() {
+			this.fetchData();
+			this.fetchSettings;
+			this.fetchLocalization();
 		}
 	}
 }

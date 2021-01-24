@@ -22,8 +22,8 @@
 			<li class="settings__item">
 				<v-checkbox
 					:text="getLocale.settings.edit"
-					:checked="settings.еditingExpiredTasks"
-					@on-change="updateSettings('еditingExpiredTasks')"
+					:checked="settings.editingExpiredTasks"
+					@on-change="updateSettings('editingExpiredTasks')"
 				/>
 			</li>
 		</ul>

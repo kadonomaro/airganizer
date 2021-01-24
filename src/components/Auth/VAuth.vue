@@ -133,7 +133,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 import VLogo from '@/components/blocks/VLogo.vue';
 import { required, email, minLength, sameAs } from 'vuelidate/lib/validators';
 
@@ -177,18 +177,19 @@ export default {
 		}
 	},
 	methods: {
+		...mapActions(['login', 'registration']),
 		submitHandler() {
 			if (this.type === 'login') {
-				this.$store.dispatch('login', {
+				this.login({
 					email: this.user.email,
 					password: this.user.password
-				});
+				})
 			} else if (this.type === 'registration')
-			this.$store.dispatch('registration', {
+			this.registration({
 				name: this.user.name,
 				email: this.user.email,
 				password: this.user.password
-			});
+			})
 		}
 	},
 	computed: {

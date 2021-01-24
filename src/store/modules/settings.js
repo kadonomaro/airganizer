@@ -6,7 +6,7 @@ export default {
 		settings: {
 			removeTaskConfirm: true,
 			showCompletedTasks: true,
-			еditingExpiredTasks: false
+			editingExpiredTasks: false
 		}
 	},
 	mutations: {

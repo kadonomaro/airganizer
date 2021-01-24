@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import {mapState, mapGetters, mapActions} from 'vuex';
 import VButton from '@/components/blocks/VButton.vue';
 
 export default {
@@ -37,9 +37,7 @@ export default {
 		VButton
 	},
 	methods: {
-		setActiveComponent(name) {
-			this.$store.dispatch('setActiveComponent', name);
-		}
+		...mapActions(["setActiveComponent"]),
 	},
 	computed: {
 		...mapState({

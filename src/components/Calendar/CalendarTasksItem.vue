@@ -18,7 +18,7 @@
 						class="calendar-item__button"
 						:title="getLocale.controls.edit"
 						:icon="'edit'"
-						v-if="day.editable || settings.еditingExpiredTasks"
+						v-if="day.editable || settings.editingExpiredTasks"
 						@on-click="openModalHandler('edit')"
 					/>
 					<v-button
@@ -32,7 +32,7 @@
 						:title="getLocale.controls.priority"
 						:icon="task.priority === 'high' ? 'high-priority' : 'low-priority'"
 						@on-click="changePriority(task)"
-						v-if="day.editable || settings.еditingExpiredTasks"
+						v-if="day.editable || settings.editingExpiredTasks"
 					/>
 					<v-button
 						class="calendar-item__button"
