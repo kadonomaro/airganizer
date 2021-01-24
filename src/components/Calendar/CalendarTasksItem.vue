@@ -13,7 +13,7 @@
 			<span class="calendar-item__title">{{ task.title }}</span>
 			<span class="calendar-item__time" v-if="task.time">{{ formattedTime }}</span>
 			<transition name="fade">
-				<div class="calendar-item__controls" v-if="isControlsVisible">
+				<div class="calendar-item__controls" v-if="isControlsVisible || !isMobile">
 					<v-button
 						class="calendar-item__button"
 						:title="getLocale.controls.edit"
@@ -42,7 +42,7 @@
 					/>
 				</div>
 			</transition>
-			<v-button class="calendar-item__controls-toggle" :icon="'menu'" @on-click="toggleControls" />
+			<v-button class="calendar-item__controls-toggle" :icon="'menu'" @on-click="toggleControls" v-if="isMobile" />
 		</div>
 		<div class="calendar-item__desc" v-if="task.desc && isOpened">
 			<p>{{ task.desc }}</p>
@@ -101,6 +101,7 @@ import {mapState, mapGetters, mapActions} from 'vuex';
 import VButton from '../blocks/VButton.vue';
 import VModal from '../blocks/VModal';
 import VTimepicker from '../blocks/VTimepicker';
+import { isMobile } from '@/helpers';
 
 export default {
 	name: 'CalendarTasksItem',
@@ -127,7 +128,8 @@ export default {
 				visible: false,
 				type: ''
 			},
-			isControlsVisible: false
+			isControlsVisible: false,
+			isMobile: isMobile()
 		}
 	},
 	created() {
