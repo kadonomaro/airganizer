@@ -22,7 +22,7 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import {mapActions, mapGetters} from 'vuex';
 import VButton from '../blocks/VButton';
 import VTimepicker from '../blocks/VTimepicker';
 
@@ -51,6 +51,7 @@ export default {
 		}
 	},
 	methods: {
+		...mapActions(['addTask']),
 		onSubmit() {
 			if (this.form.title) {
 				const task = {
@@ -64,10 +65,7 @@ export default {
 					priority: 'low',
 					completed: false
 				}
-				this.$store.dispatch('addTask', {
-					day: this.day.value,
-					value: task
-				});
+				this.addTask({ day: this.day.value, value: task });
 				this.clear();
 			}
 		},

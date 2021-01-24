@@ -25,20 +25,20 @@
 						class="calendar-item__button"
 						:title="getLocale.controls.complete"
 						:icon="'check'"
-						@on-click="completeTask(task)"
+						@on-click="completeTaskHandler"
 					/>
 					<v-button
 						class="calendar-item__button"
 						:title="getLocale.controls.priority"
 						:icon="task.priority === 'high' ? 'high-priority' : 'low-priority'"
-						@on-click="changePriority(task)"
+						@on-click="changePriorityHandler"
 						v-if="day.editable || settings.editingExpiredTasks"
 					/>
 					<v-button
 						class="calendar-item__button"
 						:title="getLocale.controls.delete"
 						:icon="'close'"
-						@on-click="settings.removeTaskConfirm ? openModalHandler('delete') : removeTask(task)"
+						@on-click="settings.removeTaskConfirm ? openModalHandler('delete') : removeTaskHandler(task)"
 					/>
 				</div>
 			</transition>
@@ -83,13 +83,13 @@
 				<v-button
 					v-if="modal.type === 'delete'"
 					:type="'success'"
-					@on-click="removeTask(task)"
+					@on-click="removeTaskHandler(task)"
 				>{{ getLocale.controls.delete }}</v-button>
 				<v-button
 					v-else-if="modal.type === 'edit'"
 					:type="'success'"
-					@on-click="changeTask(task)"
-				>{{ getLocale.controls.edit }}</v-button>
+					@on-click="changeTaskHandler"
+				>{{ getLocale.controls.save }}</v-button>
       </template>
     </v-modal>
 
@@ -97,7 +97,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import {mapState, mapGetters, mapActions} from 'vuex';
 import VButton from '../blocks/VButton.vue';
 import VModal from '../blocks/VModal';
 import VTimepicker from '../blocks/VTimepicker';
@@ -134,6 +134,7 @@ export default {
 		this.currentTask = { ...this.task };
 	},
 	methods: {
+		...mapActions(['changeTask', 'removeTask']),
 		toggle(state) {
 			if (state) this.isOpened = !this.isOpened;
 		},
@@ -146,39 +147,26 @@ export default {
 			this.currentTask.time = payload;
 		},
 
-		completeTask(task) {
+		completeTaskHandler() {
 			this.currentTask.completed = !this.currentTask.completed;
-
-			this.$store.dispatch('changeTask', {
-				day: this.day.value,
-				task: this.currentTask
-			});
+			this.changeTask({ day: this.day.value, task: this.currentTask });
 		},
 
-		changeTask(task) {
+		changeTaskHandler() {
 			this.modal.visible = false;
-			this.$store.dispatch('changeTask', {
-				day: this.day.value,
-				task: this.currentTask
-			});
+			this.changeTask({ day: this.day.value, task: this.currentTask });
 		},
 
-		removeTask(task) {
-			this.$store.dispatch('removeTask', {
-				day: this.day.value,
-				task
-			});
+		removeTaskHandler(task) {
+			this.removeTask({ day: this.day.value, task });
 		},
 
-		changePriority(task) {
+		changePriorityHandler() {
 			this.currentTask.priority === 'high'
 				? this.currentTask.priority = 'low'
 				: this.currentTask.priority = 'high';
 
-			this.$store.dispatch('changeTask', {
-				day: this.day.value,
-				task: this.currentTask
-			});
+			this.changeTask({ day: this.day.value, task: this.currentTask });
 		},
 
 		openModalHandler(type) {

@@ -37,7 +37,7 @@ export default {
 		VButton
 	},
 	methods: {
-		...mapActions(["setActiveComponent"]),
+		...mapActions(['setActiveComponent']),
 	},
 	computed: {
 		...mapState({

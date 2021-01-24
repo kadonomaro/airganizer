@@ -33,7 +33,7 @@ export default {
 		...mapActions(['fetchData', 'fetchSettings', 'fetchLocalization']),
 		init() {
 			this.fetchData();
-			this.fetchSettings;
+			this.fetchSettings();
 			this.fetchLocalization();
 		}
 	}

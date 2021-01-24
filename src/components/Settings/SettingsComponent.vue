@@ -9,21 +9,21 @@
 				<v-checkbox
 					:text="getLocale.settings.confirm"
 					:checked="settings.removeTaskConfirm"
-					@on-change="updateSettings('removeTaskConfirm')"
+					@on-change="updateSettingsHandler('removeTaskConfirm')"
 				/>
 			</li>
 			<li class="settings__item">
 				<v-checkbox
 					:text="getLocale.settings.complete"
 					:checked="settings.showCompletedTasks"
-					@on-change="updateSettings('showCompletedTasks')"
+					@on-change="updateSettingsHandler('showCompletedTasks')"
 				/>
 			</li>
 			<li class="settings__item">
 				<v-checkbox
 					:text="getLocale.settings.edit"
 					:checked="settings.editingExpiredTasks"
-					@on-change="updateSettings('editingExpiredTasks')"
+					@on-change="updateSettingsHandler('editingExpiredTasks')"
 				/>
 			</li>
 		</ul>
@@ -31,7 +31,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import {mapState, mapGetters, mapActions} from 'vuex';
 import VCheckbox from '../blocks/VCheckbox.vue';
 import LanguageSwitcher from '../blocks/LanguageSwitcher.vue';
 
@@ -42,8 +42,9 @@ export default {
 		LanguageSwitcher
 	},
 	methods: {
-		updateSettings(type) {
-			this.$store.dispatch('updateSettings', type);
+		...mapActions(['updateSettings']),
+		updateSettingsHandler(type) {
+			this.updateSettings(type);
 		}
 	},
 	computed: {

@@ -26,13 +26,14 @@
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import {mapActions, mapState} from 'vuex';
 
 export default {
 	name: 'LanguageSwitcher',
 	methods: {
-		changeHandler(event) {
-			this.$store.dispatch('changeLanguage', event.target.value);
+		...mapActions(['changeLanguage']),
+		changeHandler({ target }) {
+			this.changeLanguage(target.value);
 		}
 	},
 	computed: {

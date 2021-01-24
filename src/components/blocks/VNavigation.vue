@@ -12,7 +12,7 @@
 				<a
 					href=""
 					class="navigation__link navigation__link--icon navigation__link--logout"
-					@click.prevent="clickHandler"
+					@click.prevent="logout"
 				>{{ getLocale.header.logout }}</a>
 			</li>
 		</ul>
@@ -20,14 +20,12 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import {mapState, mapGetters, mapActions} from 'vuex';
 
 export default {
 	name: 'VNavigation',
 	methods: {
-		clickHandler() {
-			this.$store.dispatch('logout');
-		}
+		...mapActions(['logout']),
 	},
 	computed: {
 		...mapState({
