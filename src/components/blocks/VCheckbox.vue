@@ -49,7 +49,7 @@ export default {
 			&:checked ~ .checkbox__custom {
 				background-color: $color-success;
 				&::before {
-					transform: translate(20px, -50%);
+					transform: translate(22px, -50%);
 				}
 			}
 		}
@@ -57,11 +57,10 @@ export default {
 			position: relative;
 			flex-shrink: 0;
 			display: block;
-			width: 40px;
-			height: 20px;
+			width: 44px;
+			height: 24px;
 			padding: 2px;
 			background-color: $color-danger;
-			border: 1px solid $color-border;
 			border-radius: 100px;
 			box-sizing: border-box;
 			cursor: pointer;
@@ -69,8 +68,8 @@ export default {
 				content: '';
 				position: absolute;
 				top: 50%;
-				width: 14px;
-				height: 14px;
+				width: 18px;
+				height: 18px;
 				background-color: $color-border;
 				border-radius: 50%;
 				box-shadow: 0 0 2px rgba($color: #000000, $alpha: 0.5);
@@ -80,27 +79,6 @@ export default {
 		}
 		&__text {
 			margin-left: 5px;
-		}
-	}
-
-
-	@media (max-width: $size-mobile) {
-		.checkbox {
-			&__custom {
-				width: 60px;
-				height: 30px;
-				&::before {
-					width: 24px;
-					height: 24px;
-				}
-			}
-			&__input {
-				&:checked ~ .checkbox__custom {
-					&::before {
-						transform: translate(30px, -50%);
-					}
-				}
-			}
 		}
 	}
 </style>

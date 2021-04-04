@@ -42,7 +42,11 @@
 					/>
 				</div>
 			</transition>
-			<v-button class="calendar-item__controls-toggle" :icon="'menu'" @on-click="toggleControls" v-if="isMobile" />
+			<v-button
+				class="calendar-item__controls-toggle"
+				:icon="'menu'"
+				@on-click="toggleControls"
+			/>
 		</div>
 		<div class="calendar-item__desc" v-if="task.desc && isOpened">
 			<p>{{ task.desc }}</p>
@@ -272,6 +276,7 @@ export default {
 			display: flex;
 		}
 		&__controls-toggle {
+			flex-shrink: 0;
 			margin-left: 3px;
 		}
 		&__desc {

@@ -1,18 +1,24 @@
 <template>
 	<div class="calendar-form" v-if="day.editable">
 		<form action="" class="calendar-form__form" @submit.prevent="onSubmit">
-			<input
-				type="text"
-				class="calendar-form__field input"
-				v-model="form.title"
-				:placeholder="getLocale.form.title"
-			>
-			<textarea
-				type="text"
-				class="calendar-form__field input"
-				v-model="form.desc"
-				:placeholder="getLocale.form.description"
-			></textarea>
+			<label class="calendar-form__label">
+				<input
+					type="text"
+					class="calendar-form__field input"
+					v-model="form.title"
+					:placeholder="getLocale.form.title"
+				>
+			</label>
+
+			<label class="calendar-form__label">
+				<textarea
+					type="text"
+					class="calendar-form__field input"
+					v-model="form.desc"
+					:placeholder="getLocale.form.description"
+				></textarea>
+			</label>
+
 			<div class="calendar-form__field">
 				<v-timepicker @on-select-time="selectTime" :time="form.time"/>
 			</div>
@@ -92,6 +98,10 @@ export default {
 		width: 400px;
 		max-width: 100%;
 		&__form {
+			width: 100%;
+		}
+		&__label {
+			display: block;
 			width: 100%;
 		}
 		&__field {
