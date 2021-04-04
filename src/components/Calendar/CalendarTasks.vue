@@ -3,7 +3,7 @@
 		<div class="calendar-tasks__head">
 			<span class="calendar-tasks__title">{{ title }}</span>
 		</div>
-		<ul class="calendar-tasks__list" v-if="!isHidden">
+		<ul class="calendar-tasks__list" v-if="isVisible">
 				<li class="calendar-tasks__item" v-for="task in tasks.data" :key="task.id">
 					<calendar-tasks-item
 						:day="day"
@@ -44,8 +44,16 @@ export default {
 		tasks() {
 			return this.getDateByDay(this.day.value);
 		},
-		isHidden() {
-			return (this.tasks.data.every(task => task.completed) && !this.settings.showCompletedTasks);
+		isVisible() {
+			if (this.tasks?.data?.length) {
+				const isAllCompleted = this.tasks.data.every(task => task.completed);
+				if (isAllCompleted && this.settings.showCompletedTasks) {
+					return true;
+				} else if (!isAllCompleted) {
+					return true;
+				}
+			}
+			return false;
 		},
 		title() {
 			return moment(this.day.value, 'DD-MM-YYYY').format('DD MMMM YYYY');
